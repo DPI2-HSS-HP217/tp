@@ -1,6 +1,6 @@
 ---
-layout: default.md
-  title: "Kai Jun's Project Portfolio Page"
+  layout: default.md
+  title: "Valerie's Project Portfolio Page"
 ---
 ### Project: OfferFlow
 
