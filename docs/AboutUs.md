@@ -50,12 +50,12 @@ You can reach us at the email `e1398129@u.nus.edu`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Valerie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dpi2-hss-hp217.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/DPI2-HSS-HP217)]
+[[portfolio](team/dpi2-hss-hp217.md)]
 
 * Role: Developer
 * Responsibilities: UI
