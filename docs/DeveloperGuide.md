@@ -274,11 +274,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number internship applications
+* Applies to many companies simultaneously and needs to track different application stages
+* Prefers desktop apps over other types
+* Can type fast and prefers typing over mouse interactions
+* Is comfortable using CLI applications
+* Wants to quickly update internship application statuses
+* Needs to track deadlines, interviews, and follow-ups
+* Values fast and efficient workflows with minimal steps
 
 **Value proposition**: help students manage and track all their internship/job applications all under one application
 
