@@ -303,32 +303,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `OfferFlow` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Edit a company contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to edit a particular contact
+2.  OfferFlow shows the company's current contact details
+3.  User edits contact details such as changing the email and/or phone number
+4.  User confirms all changes made to the company contact details
+5.  OfferFlow updates the company contact details to reflect the new changes if any
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The company contact cannot be found.
+
+   * 1a1. OfferFlow shows an error message.
+
+      Use case ends.
+
+* 3a. The given phone number is invalid.
+
+    * 3a1. OfferFlow shows an error message.
+
+      Use case resumes at step 3.
+
+* 3b. The given email address is invalid.
+
+    * 3b1. OfferFlow shows an error message.
+
+      Use case resumes at step 3.
+
+**Use case: Edit application**
+
+**MSS**
+
+1.  User requests to edit a particular company application
+2.  OfferFlow shows the company's current application details
+3.  User edits application details such as adding upcoming interviews and/or update application date
+4.  User confirms all changes made to the application
+5.  OfferFlow updates the application details to reflect the new changes if any
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The company application cannot be found.
+
+   * 1a1. OfferFlow shows an error message.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given interview date/time is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. OfferFlow shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-*{More to be added}*
+* 3b. The given application date is invalid.
+
+    * 3b1. OfferFlow shows an error message.
+
+      Use case resumes at step 3.
+
 
 
 **MSS**
