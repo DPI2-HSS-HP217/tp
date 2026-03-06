@@ -327,6 +327,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+
+**MSS**
+
+1. Main Success Scenario (MSS)
+2. User requests to view the list of job applications.
+3. OfferFlow displays the list of saved job applications.
+4. User selects a specific job application.
+5. OfferFlow displays the details of the selected application, including its current status.
+6. User requests to update the application status.
+7. OfferFlow requests the new status value.
+8. User specifies a new status (e.g., plan to apply, applied, interviewing, rejected, offered).
+9. OfferFlow updates the application status.
+10. OfferFlow displays the updated application information.
+
+      Use case ends.
+
+   **Extensions**
+
+   * 3a. Application not found
+
+      * 3a1. OfferFlow informs the user that the application cannot be located.
+      * 3a2. User returns to the application list.
+
+      Use case resumes from step 2.
+
+   * 7a. Invalid status entered
+      * 7a1. OfferFlow informs the user that the status is invalid.
+      * 7a2. OfferFlow requests the user to specify a valid status.
+      
+      Use case resumes from step 7.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
