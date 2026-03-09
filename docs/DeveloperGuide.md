@@ -371,8 +371,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Update status**
 
-**Use case: Update status**
-
 **MSS**
 
 1. User requests to update the application status.
@@ -447,6 +445,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. OfferFlow shows an error message.
 
       Use case resumes at step 1.
+
+**Use case: Add filter to contact list**
+
+**MSS**
+
+1. User requests to add a filter to application list.
+2. OfferFlow prompts user to input the details of the new filter.
+3. User inputs the details of the filter to add to the application list. 
+4. OfferFlow updates the application list view with the new filter.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The user enters details in an invalid format.
+
+    * 3a1. OfferFlow shows an error message.
+
+    * 3a2. User re-enters the details.
+
+      Use case resumes at step 4.
+
+**Use case: Remove filter from contact list**
+
+**MSS**
+
+1. User requests to remove a filter to application list.
+2. OfferFlow prompts user to input the details of the filter to be removed.
+3. User inputs the details of the filter to remove from the contact list.
+4. OfferFlow updates the application list to reflect the deletion of the filter.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No filters have been applied on application list. 
+
+    * 1a1. OfferFlow shows an error message.
+
+      Use case resumes at step 1.
+
+* 3a. The user specifies a non-existent filter.
+
+    * 2a1. OfferFlow shows an error message.
+  
+    * 2a2. User re-enters the details.
+
+      Use case resumes at step 4.
 
 ### Non-Functional Requirements
 
