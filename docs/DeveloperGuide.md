@@ -290,14 +290,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                               | So that I can…​                                                       |
+|----------|-------------------|-------------------------------------------------------------------|----------------------------------------------------------------------|
+| `* * *`  | student           | add contacts with names, roles, company                                            | keep track of my applications                                        |
+| `* * *`  | user              | update or remove contact                                          | update my application status                                         |
+| `* * *`  | careless user     | look for specific contacts                                        | avoid applying twice to the same job.                                |
+| `* * *`  | impatient user    | filter the contacts by features                                   | view only the relevant information easily                            |
+| `* *`    | user              | enable and customise notification settings                        | be reminded of the relevant task nearing the date                    |
+| `*`      | user              | buttons, tabs, and statuses to look consistent throughout the app | avoid getting confused while navigating                              |
 
 *{More to be added}*
 
@@ -391,11 +391,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-* 7a. Invalid status entered
-
-   * 7a1. OfferFlow informs the user that the status is invalid.
-
-   * 7a2. OfferFlow requests the user to specify a valid status.
+   * 7a. Invalid status entered
+      * 7a1. OfferFlow informs the user that the status is invalid.
+      * 7a2. OfferFlow requests the user to specify a valid status.
 
       Use case resumes from step 7.
 
