@@ -14,12 +14,13 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Application {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
+    //private final Role role;
 
     // Data fields
     private final Address address;
@@ -28,9 +29,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Application(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
+        //this.role = role;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -65,13 +67,13 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameApplication(Application otherApplication) {
+        if (otherApplication == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherApplication != null
+                && otherApplication.getName().equals(getName());
     }
 
     /**
@@ -85,11 +87,11 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Application)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
+        Application otherPerson = (Application) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)

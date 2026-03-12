@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Application;
 
 /**
  * Adds a person to the address book.
@@ -41,12 +41,12 @@ public class AddCommand extends Command {
     public static final String INVALID_DATE = "OOPS! Invalid date format, use the format (YYYY-MM-DD)";
 
 
-    private final Person toAdd;
+    private final Application toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddCommand(Application person) {
         requireNonNull(person);
         toAdd = person;
     }
