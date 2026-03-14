@@ -12,7 +12,7 @@ import seedu.address.model.person.Status;
 public class StatusCommandParser implements Parser<StatusCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the StatusCommand
+     * Parses the given {@code String} of arguments in the context of StatusCommand
      * and returns a StatusCommand object for execution.
      *
      * @param args user input arguments
