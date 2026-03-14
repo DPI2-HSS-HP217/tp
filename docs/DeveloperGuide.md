@@ -450,7 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to add a filter to application list.
 2. OfferFlow prompts user to input the details of the new filter.
-3. User inputs the details of the filter to add to the application list. 
+3. User inputs the details of the filter to add to the application list.
 4. OfferFlow updates the application list view with the new filter.
 
    Use case ends.
@@ -478,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. No filters have been applied on application list. 
+* 1a. No filters have been applied on application list.
 
     * 1a1. OfferFlow shows an error message.
 
@@ -487,7 +487,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The user specifies a non-existent filter.
 
     * 2a1. OfferFlow shows an error message.
-  
+
     * 2a2. User re-enters the details.
 
       Use case resumes at step 4.
