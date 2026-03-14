@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookEditingParser;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -31,7 +32,9 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final AddressBookParser normalParser;
+    private final AddressBookEditingParser editingParser;
+    private AddressBookParser currentParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,15 +42,26 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        normalParser = new AddressBookParser();
+        editingParser = new AddressBookEditingParser();
+        currentParser = normalParser;
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+
+        if (commandText.equals("/edit")) {
+            currentParser = editingParser;
+            return new CommandResult("Entered editing mode.");
+        }
+
+        if (commandText.equals("/exit")) {
+            currentParser = normalParser;
+            return new CommandResult("Exited editing mode.");
+        }
+        Command command = currentParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
