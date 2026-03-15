@@ -24,32 +24,31 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
+//    public DeleteCommand parse(String args) throws ParseException {
+//        try {
+//            Index index = ParserUtil.parseIndex(args);
+//            return new DeleteCommand(index);
+//        } catch (ParseException pe) {
+//            throw new ParseException(
+//                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+//        }
+//    }
+
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            System.out.println(args);
-            return new DeleteCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
-        }
-    }
+            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE);
 
-    public DeleteCommand parse2(String args) throws ParseException {
-        try {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE);
-
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE) || !argMultimap.getPreamble().isEmpty()) {
+                Index index = ParserUtil.parseIndex(args);
+                return new DeleteCommand(index);
             }
 
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ROLE);
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Role address = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
+            Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
 
-            return new DeleteCommand(name, address);
+            System.out.println("2");
+            return new DeleteCommand(name, role);
 
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
