@@ -54,7 +54,7 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(nameWithRole);
+        name.setText(person.getName().fullName);
         role.setText(" - " + person.getRole().value);
         date.setText(person.getDate().toString());
         phone.setText(person.getPhone().value);
