@@ -99,8 +99,8 @@ public class Application {
             return false;
         }
 
-        return Objects.equals(this.getName(), otherApplication.getName())
-                && Objects.equals(this.getRole(), otherApplication.getRole());
+        return this.getName().fullName.equalsIgnoreCase(otherApplication.getName().fullName)
+            && this.getRole().value.equalsIgnoreCase(otherApplication.getRole().value);
     }
 
     public void setBeingEdited(boolean isEdit) {
@@ -123,7 +123,7 @@ public class Application {
         }
 
         Application otherApplication = (Application) other;
-        return name.equals(otherApplication.name)
+        return name.fullName.equalsIgnoreCase(otherApplication.name.fullName)
                 && phone.equals(otherApplication.phone)
                 && email.equals(otherApplication.email)
                 && address.equals(otherApplication.address)

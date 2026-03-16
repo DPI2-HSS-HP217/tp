@@ -54,11 +54,11 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withRole(VALID_ROLE_BOB).build();
         assertFalse(ALICE.isSameApplication(editedAlice));
 
-        // name differs in case, same role -> returns false
+        // name differs in case, same role -> returns true
         Application editedBob = new PersonBuilder(BOB)
                 .withName(VALID_NAME_BOB.toLowerCase())
                 .build();
-        assertFalse(BOB.isSameApplication(editedBob));
+        assertTrue(BOB.isSameApplication(editedBob));
 
         // name has trailing spaces, same role -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
