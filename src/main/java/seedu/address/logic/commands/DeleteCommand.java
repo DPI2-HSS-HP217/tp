@@ -9,7 +9,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Application;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.SameCompanySameRolePredicate;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -34,6 +37,10 @@ public class DeleteCommand extends Command {
     private final Name name;
     private final Role role;
 
+    /**
+     * Constructor for a Delete via Index command.
+     * @param targetIndex
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.name = null;
@@ -41,11 +48,17 @@ public class DeleteCommand extends Command {
         isIndexDelete = true;
     }
 
+    /**
+     * Constructor for a Delete via Application command.
+     *
+     * @param name
+     * @param role
+     */
     public DeleteCommand(Name name, Role role) {
         this.targetIndex = null;
         this.name = name;
         this.role = role;
-        isIndexDelete =  false;
+        isIndexDelete = false;
     }
 
     @Override
@@ -57,6 +70,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Execute a delete via Index command.
+     *
+     * @param model current model.
+     * @return result of the command execution.
+     * @throws CommandException if command is invalid.
+     */
     public CommandResult executeDeleteByIndex(Model model) throws CommandException {
         requireNonNull(model);
         List<Application> lastShownList = model.getFilteredPersonList();
@@ -69,6 +89,13 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_APPLICATION_SUCCESS, Messages.format(personToDelete)));
     }
 
+    /**
+     * Execute a delete via Application command.
+     *
+     * @param model current model.
+     * @return result of the command execution.
+     * @throws CommandException if command is invalid.
+     */
     public CommandResult executeDeleteByApplication(Model model) throws CommandException {
         requireNonNull(model);
         List<Application> lastShownList = model.getFilteredPersonList();

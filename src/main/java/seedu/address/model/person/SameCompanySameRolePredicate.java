@@ -1,15 +1,20 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-
-import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
+
+
+/**
+ * Tests that an Application matches Both Name and Role provided.
+ */
 public class SameCompanySameRolePredicate implements Predicate<Application> {
     private final Name name;
     private final Role role;
 
+    /**
+     * Constructor a Predicate to check for same Applications.
+     */
     public SameCompanySameRolePredicate(Name name, Role role) {
         this.name = name;
         this.role = role;

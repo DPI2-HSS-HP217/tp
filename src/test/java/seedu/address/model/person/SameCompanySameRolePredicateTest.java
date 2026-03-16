@@ -10,18 +10,18 @@ import seedu.address.testutil.PersonBuilder;
 
 public class SameCompanySameRolePredicateTest {
 
-    Name name1 = new Name("name1");
-    Role role1 = new Role("roleOne");
+    private final Name name1 = new Name("name1");
+    private final Role role1 = new Role("roleOne");
 
-    Name name2 = new Name("name1");
-    Role role2 = new Role("roleOne");
+    private final Name name2 = new Name("name1");
+    private final Role role2 = new Role("roleOne");
 
-    Name name3 = new Name("Amy Bee");
-    Role role3 = new Role("CEO");
+    private final Name name3 = new Name("Amy Bee");
+    private final Role role3 = new Role("CEO");
 
-    SameCompanySameRolePredicate firstPredicate = new SameCompanySameRolePredicate(name1, role1);
-    SameCompanySameRolePredicate secondPredicate = new SameCompanySameRolePredicate(name2, role2);
-    SameCompanySameRolePredicate thirdPredicate = new SameCompanySameRolePredicate(name3, role3);
+    private final SameCompanySameRolePredicate firstPredicate = new SameCompanySameRolePredicate(name1, role1);
+    private final SameCompanySameRolePredicate secondPredicate = new SameCompanySameRolePredicate(name2, role2);
+    private final SameCompanySameRolePredicate thirdPredicate = new SameCompanySameRolePredicate(name3, role3);
 
     @Test
     public void equals() {
