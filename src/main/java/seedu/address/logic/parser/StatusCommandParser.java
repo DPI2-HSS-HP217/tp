@@ -12,25 +12,28 @@ import seedu.address.model.person.Status;
 public class StatusCommandParser implements Parser<StatusCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of StatusCommand
+     * Parses the given {@code String} of arguments in the context of the StatusCommand
      * and returns a StatusCommand object for execution.
-     *
-     * @param args user input arguments
-     * @return StatusCommand object
-     * @throws ParseException if the user input does not conform to the expected format
      */
     public StatusCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        String[] parts = args.trim().split("s/");
+        String name = null;
+        String role = null;
+        String status = null;
 
-        if (parts.length != 2) {
+        int nameIndex = args.indexOf("n/");
+        int roleIndex = args.indexOf("r/");
+        int statusIndex = args.indexOf("s/");
+
+        if (nameIndex == -1 || roleIndex == -1 || statusIndex == -1) {
             throw new ParseException(StatusCommand.MESSAGE_USAGE);
         }
 
-        String namePart = parts[0].replace("n/", "").trim();
-        String statusPart = parts[1].trim();
+        name = args.substring(nameIndex + 2, roleIndex).trim();
+        role = args.substring(roleIndex + 2, statusIndex).trim();
+        status = args.substring(statusIndex + 2).trim();
 
-        return new StatusCommand(namePart, new Status(statusPart));
+        return new StatusCommand(name, role, new Status(status));
     }
 }

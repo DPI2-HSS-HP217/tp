@@ -24,20 +24,26 @@ public class StatusCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Updated status: %1$s";
 
     private final String name;
+    private final String role;
     private final Status status;
 
     /**
      * Creates a StatusCommand to update the status.
      */
-    public StatusCommand(String name, Status status) {
+    public StatusCommand(String name, String role, Status status) {
         requireNonNull(name);
         requireNonNull(status);
         this.name = name;
+        this.role = role;
         this.status = status;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public Status getStatus() {
@@ -53,7 +59,7 @@ public class StatusCommand extends Command {
         Application target = null;
 
         for (Application app : applicationList) {
-            if (app.getName().fullName.equalsIgnoreCase(name)) {
+            if (app.getName().fullName.equalsIgnoreCase(name) && app.getRole().value.equalsIgnoreCase(role)) {
                 target = app;
                 break;
             }

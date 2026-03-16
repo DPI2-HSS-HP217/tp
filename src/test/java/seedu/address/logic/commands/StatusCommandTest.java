@@ -11,9 +11,10 @@ public class StatusCommandTest {
     @Test
     public void constructor_validInput_success() {
         Status status = new Status("Applied");
-        StatusCommand command = new StatusCommand("Alex Yeoh", status);
+        StatusCommand command = new StatusCommand("Alex Yeoh", "Software Engineer", status);
 
         assertEquals("Alex Yeoh", command.getName());
+        assertEquals("Software Engineer", command.getRole());
         assertEquals(status, command.getStatus());
     }
 }
