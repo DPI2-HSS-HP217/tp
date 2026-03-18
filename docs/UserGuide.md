@@ -134,17 +134,23 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes a specified application from the address book via index or reference via Company name and Role.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the Application at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+Format: `delete n/<Company_Name> r/<Role>`
+
+* Deletes the specific Name and Role Application
+* Role must consist of only letters.
+
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd Application in the address book.
+* `find Google` followed by `delete 1` deletes the 1st Application in the results of the `find` command.
+* `delete n/google r/CEO` deletes the Application for Google as CEO.
 
 ### Clearing all entries : `clear`
 
