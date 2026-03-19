@@ -35,6 +35,7 @@ public class LogicManager implements Logic {
     private final AddressBookParser normalParser;
     private final AddressBookEditingParser editingParser;
     private AddressBookParser currentParser;
+    private ParserMode currentMode;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -52,17 +53,24 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         CommandResult commandResult;
 
-        if (commandText.equals("/edit")) {
-            currentParser = editingParser;
-            return new CommandResult("Entered editing mode.");
-        }
-
-        if (commandText.equals("/exit")) {
-            currentParser = normalParser;
-            return new CommandResult("Exited editing mode.");
-        }
         Command command = currentParser.parseCommand(commandText);
         commandResult = command.execute(model);
+
+        // check if editing mode or normal mode
+        switch (commandResult.getParserMode()) {
+        case EDITING:
+            currentParser = editingParser;
+            currentMode = ParserMode.EDITING;
+            break;
+        case NORMAL:
+            currentParser = normalParser;
+            currentMode = ParserMode.NORMAL;
+            break;
+        case NO_CHANGE:
+            break;
+        default:
+            break;
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());

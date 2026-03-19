@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.EditExitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -18,7 +19,7 @@ public class AddressBookEditingParser extends AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
@@ -38,13 +39,19 @@ public class AddressBookEditingParser extends AddressBookParser {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
+        final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
-        logger.fine("Arguments: " + arguments);
-        return new EditCommandParser().parse(arguments);
+        logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+
+        if (commandWord.equals(EditExitCommand.COMMAND_WORD)) {
+            return new EditExitCommand();
+        }
+
+        return new EditCommandParser().parse(userInput.trim());
     }
 
 }

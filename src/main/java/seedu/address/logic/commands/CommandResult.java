@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.ParserMode;
 
 /**
  * Represents the result of a command execution.
@@ -19,12 +20,15 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The editing mode status */
+    private final ParserMode parserMode;
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, ParserMode parserMode, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
+        this.parserMode = parserMode;
         this.exit = exit;
     }
 
@@ -33,7 +37,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, ParserMode.NORMAL, false);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +50,9 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+    public ParserMode getParserMode() {
+        return parserMode;
     }
 
     @Override
