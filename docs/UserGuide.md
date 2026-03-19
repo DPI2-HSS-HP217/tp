@@ -114,6 +114,52 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Updating application status: `status`
+
+Updates the status of an application.
+
+Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
+
+<box type="tip" seamless>
+
+**Tip:** Status is case-insensitive (e.g. `applied`, `Applied`, `APPLIED` all work)
+
+</box>
+
+#### Parameters
+- `n/COMPANY_NAME` → Name of the company
+- `r/JOB_ROLE` → Role applied for (must match exactly)
+- `s/STATUS` → New status
+
+#### Valid Status Values
+- Interested
+- Applied
+- Interviewing
+- Rejected
+- Offered
+
+#### Examples
+* `status n/Tiktok r/Data Analyst s/Applied`
+* `status n/Google r/Software Engineer s/Interviewing`
+* `status n/Meta r/ML Engineer s/Rejected`
+
+#### Expected Outcome
+- If application exists → status is updated
+- If not found → error shown
+
+Example success:
+Updated status: Tiktok - Data Analyst
+
+Example error:
+Application not found.
+
+#### Notes
+- Both **company name and role must match exactly**
+- Command will fail if:
+  - missing parameters
+  - invalid format
+  - application does not exist
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
