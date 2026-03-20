@@ -19,7 +19,8 @@ public class StatusCommand extends Command {
     public static final String COMMAND_WORD = "status";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates an application's status.\n"
-                                    + "Parameters: n/NAME s/STATUS\n" + "Example: status n/Google s/Interviewing";
+                                    + "Parameters: n/NAME r/ROLE s/STATUS\n"
+                                    + "Example: status n/Google r/CEO s/Interviewing";
 
     public static final String MESSAGE_SUCCESS = "Updated status: %1$s";
 
