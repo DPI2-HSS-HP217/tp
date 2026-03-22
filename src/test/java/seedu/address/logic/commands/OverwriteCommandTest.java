@@ -28,13 +28,9 @@ public class OverwriteCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        alice = model.getFilteredPersonList().stream()
-                .filter(p -> p.getName().fullName.equals(ALICE.getName().fullName))
-                .findFirst()
-                .orElse(null);
+         alice = new PersonBuilder(ALICE).build();
 
-        if (alice == null) {
-            alice = new PersonBuilder(ALICE).build();
+        if (!model.hasPerson(alice)) {
             model.addPerson(alice);
         }
 
