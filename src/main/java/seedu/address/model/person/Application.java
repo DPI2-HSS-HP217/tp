@@ -24,13 +24,14 @@ public class Application {
     private final Date date;
     private final Address address;
     private final Status status;
-    //private final Role role;
+    private final Event event;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
     //Internal field
     private boolean isBeingEdited = false;
+    private boolean hasUpcomingEvent = false;
 
     /**
      * Every field must be present and not null.
@@ -46,7 +47,7 @@ public class Application {
         this.tags.addAll(tags);
         this.address = address;
         this.status = status;
-
+        this.event = null;
     }
 
     public Name getName() {
@@ -146,7 +147,7 @@ public class Application {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder sb = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
@@ -154,8 +155,12 @@ public class Application {
                 .add("date", date)
                 .add("tags", tags)
                 .add("address", address)
-                .add("status", status)
-                .toString();
+                .add("status", status);
+
+        if (hasUpcomingEvent) {
+            sb.add("event" , event);
+        }
+        return sb.toString();
     }
 
 }
