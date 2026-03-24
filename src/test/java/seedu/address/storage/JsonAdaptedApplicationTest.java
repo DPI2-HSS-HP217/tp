@@ -51,7 +51,7 @@ public class JsonAdaptedApplicationTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(INVALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS,
-                VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS);
+                VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -59,7 +59,7 @@ public class JsonAdaptedApplicationTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(null, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -68,7 +68,7 @@ public class JsonAdaptedApplicationTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, INVALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS,
-                VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS);
+                VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -76,7 +76,7 @@ public class JsonAdaptedApplicationTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, null, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS);
+                VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -85,7 +85,7 @@ public class JsonAdaptedApplicationTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE, INVALID_EMAIL,
                 VALID_ADDRESS,
-                VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS);
+                VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -93,7 +93,7 @@ public class JsonAdaptedApplicationTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE, null,
-                VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS);
+                VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -102,7 +102,7 @@ public class JsonAdaptedApplicationTest {
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 INVALID_ADDRESS,
-                VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS);
+                VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -110,7 +110,7 @@ public class JsonAdaptedApplicationTest {
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
-                VALID_EMAIL, null, VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS);
+                VALID_EMAIL, null, VALID_TAGS, VALID_DATE, VALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -120,14 +120,14 @@ public class JsonAdaptedApplicationTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                invalidTags, VALID_DATE, VALID_ROLE, VALID_STATUS);
+                invalidTags, VALID_DATE, VALID_ROLE, VALID_STATUS, null, null);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
     @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, null, VALID_ROLE, VALID_STATUS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, null, VALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -135,7 +135,7 @@ public class JsonAdaptedApplicationTest {
     @Test
     public void toModelType_invalidRole_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, VALID_DATE, INVALID_ROLE, VALID_STATUS);
+                VALID_ADDRESS, VALID_TAGS, VALID_DATE, INVALID_ROLE, VALID_STATUS, null, null);
         String expectedMessage = Role.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -143,7 +143,7 @@ public class JsonAdaptedApplicationTest {
     @Test
     public void toModelType_nullRole_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -151,7 +151,7 @@ public class JsonAdaptedApplicationTest {
     @Test
     public void toModelType_invalidStatus_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, INVALID_STATUS);
+                VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, INVALID_STATUS, null, null);
         String expectedMessage = Status.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -159,7 +159,7 @@ public class JsonAdaptedApplicationTest {
     @Test
     public void toModelType_nullStatus_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, null);
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, null, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

@@ -27,13 +27,42 @@ class JsonAdaptedApplication {
     private final String status;
     private final String role;
     private final String date;
-//    private final String upcomingEvent;
-//    private final String upcomingDate;
-//    private Boolean hasUpcoming;
+    private final String upcomingEvent;
+    private final String upcomingDate;
+    private Boolean hasUpcoming = false;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+
+
+
+
+//    /**
+//     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+//     */
+//    @JsonCreator
+//    public JsonAdaptedApplication(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+//                                  @JsonProperty("email") String email, @JsonProperty("address") String address,
+//                                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
+//                                  @JsonProperty("date") String date,
+//                                  @JsonProperty("role") String role,
+//                                  @JsonProperty("status") String status) {
+//        this.name = name;
+//        this.phone = phone;
+//        this.email = email;
+//        this.address = address;
+//        if (tags != null) {
+//            this.tags.addAll(tags);
+//        }
+//        this.date = date;
+//        this.role = role;
+//        this.status = status;
+//        this.upcomingEvent = null;
+//        this.upcomingDate = null;
+//    }
+//
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Overloaded version of the constructor to support upcoming and not require much refactoring.
      */
     @JsonCreator
     public JsonAdaptedApplication(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -41,10 +70,9 @@ class JsonAdaptedApplication {
                                   @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                   @JsonProperty("date") String date,
                                   @JsonProperty("role") String role,
-                                  @JsonProperty("status") String status)
-//                                  @JsonProperty("upcomingEvent") String upcomingEvent,
-//                                  @JsonProperty("upcomingDate") String upcomingDate)
-{
+                                  @JsonProperty("status") String status,
+                                  @JsonProperty("upcomingEvent") String upcomingEvent,
+                                  @JsonProperty("upcomingDate") String upcomingDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,9 +83,10 @@ class JsonAdaptedApplication {
         this.date = date;
         this.role = role;
         this.status = status;
-//        this.hasUpcoming = false;
-//        this.upcomingEvent = upcomingEvent;
-//        this.upcomingDate = upcomingDate;
+
+
+        this.upcomingEvent = upcomingEvent;
+        this.upcomingDate = upcomingDate;
     }
 
     /**
@@ -74,9 +103,10 @@ class JsonAdaptedApplication {
         date = source.getDate().value;
         status = source.getStatus().value;
         role = source.getRole().value;
-//        hasUpcoming = source.hasUpcoming();
-//        upcomingEvent = source.hasUpcoming() ? source.getUpcoming().getEventName() : null;
-//        upcomingDate = source.hasUpcoming() ? source.getUpcoming().getEventDate().value : null;
+
+        hasUpcoming = source.hasUpcoming();
+        upcomingEvent = hasUpcoming ? source.getUpcoming().getEventName() : null;
+        upcomingDate = hasUpcoming ? source.getUpcoming().getEventDate().value : null;
     }
 
     /**
@@ -147,19 +177,26 @@ class JsonAdaptedApplication {
         final Role modelRole = new Role(role);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-//
+
+        //Discard
 //        if (upcomingEvent == null || upcomingDate == null) {
 //            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Upcoming.class.getSimpleName()));
 //        }
-//        if (!Date.isValidDate(upcomingDate)) {
-//            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
-//        }
-//        final Upcoming modelUpcoming = new Upcoming(upcomingEvent, upcomingDate);
-//
-//        if (hasUpcoming) {
-//            return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-//                    modelDate, modelRole, modelStatus, modelUpcoming);
-//        }
+
+        if (hasUpcoming) {
+            if (upcomingEvent == null || upcomingDate == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Upcoming.class.getSimpleName()));
+            }
+
+            if (!Date.isValidDate(upcomingDate)) {
+                throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+            }
+
+            final Upcoming modelUpcoming = new Upcoming(upcomingEvent, upcomingDate);
+
+            return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                    modelDate, modelRole, modelStatus, modelUpcoming);
+        }
 
         return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 modelDate, modelRole, modelStatus);

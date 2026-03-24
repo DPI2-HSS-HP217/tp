@@ -71,11 +71,15 @@ public class PersonCard extends UiPart<Region> {
             text += " - " + u.getEventDate().value;
 
             this.upcoming.setText(text);
-        } else {
-            this.upcoming.setVisible(false);
         }
+//        } else {
+////            this.upcoming.setVisible(false);
+//        }
 
         person.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                                         .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        person.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
