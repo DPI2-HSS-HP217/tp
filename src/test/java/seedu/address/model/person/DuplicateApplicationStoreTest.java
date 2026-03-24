@@ -7,11 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import seedu.address.logic.commands.AddCommand;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.testutil.PersonBuilder;
 
 public class DuplicateApplicationStoreTest {
