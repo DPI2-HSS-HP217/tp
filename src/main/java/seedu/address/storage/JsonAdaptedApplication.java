@@ -10,7 +10,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Application;
+import seedu.address.model.person.Date;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.Status;
+import seedu.address.model.person.Upcoming;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,34 +39,6 @@ class JsonAdaptedApplication {
     private final String upcomingDate;
     private Boolean hasUpcoming = false;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-
-
-
-
-//    /**
-//     * Constructs a {@code JsonAdaptedPerson} with the given person details.
-//     */
-//    @JsonCreator
-//    public JsonAdaptedApplication(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-//                                  @JsonProperty("email") String email, @JsonProperty("address") String address,
-//                                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
-//                                  @JsonProperty("date") String date,
-//                                  @JsonProperty("role") String role,
-//                                  @JsonProperty("status") String status) {
-//        this.name = name;
-//        this.phone = phone;
-//        this.email = email;
-//        this.address = address;
-//        if (tags != null) {
-//            this.tags.addAll(tags);
-//        }
-//        this.date = date;
-//        this.role = role;
-//        this.status = status;
-//        this.upcomingEvent = null;
-//        this.upcomingDate = null;
-//    }
-//
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -178,14 +158,10 @@ class JsonAdaptedApplication {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        //Discard
-//        if (upcomingEvent == null || upcomingDate == null) {
-//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Upcoming.class.getSimpleName()));
-//        }
-
         if (hasUpcoming) {
             if (upcomingEvent == null || upcomingDate == null) {
-                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Upcoming.class.getSimpleName()));
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Upcoming.class.getSimpleName()));
             }
 
             if (!Date.isValidDate(upcomingDate)) {

@@ -173,6 +173,12 @@ public class ParserUtil {
         return new Status(trimmedStatus);
     }
 
+    /**
+     * Parses a {@code String upcomingEventName and upcomingEventDate} into a {@code Upcoming}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code upcomingEventName and upcomingEventDate} is invalid.
+     */
     public static Upcoming parseUpcoming(String upcomingEventName, String upcomingEventDate) throws ParseException {
         requireNonNull(upcomingEventName);
         requireNonNull(upcomingEventDate);

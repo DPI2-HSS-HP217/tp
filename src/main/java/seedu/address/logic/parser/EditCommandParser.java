@@ -73,7 +73,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             String upcomingDateString = argMultimap.getValue(PREFIX_UPCOMING_DATE).get();
             editPersonDescriptor.setUpcoming(ParserUtil.parseUpcoming(upcomingEventString, upcomingDateString));
         }
-        if (arePrefixesPresent(argMultimap, PREFIX_UPCOMING, PREFIX_UPCOMING_DATE )) {
+        if (arePrefixesPresent(argMultimap, PREFIX_UPCOMING, PREFIX_UPCOMING_DATE)) {
             String upcomingEventString = argMultimap.getValue(PREFIX_UPCOMING).get();
             String upcomingDateString = argMultimap.getValue(PREFIX_UPCOMING_DATE).get();
             editPersonDescriptor.setUpcoming(ParserUtil.parseUpcoming(upcomingEventString, upcomingDateString));

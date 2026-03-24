@@ -76,7 +76,7 @@ public class StatusCommand extends Command {
                     target.getAddress(), target.getTags(), target.getDate(), target.getRole(),
                     status, target.getUpcoming());
         } else {
-             updatedApplication = new Application(target.getName(), target.getPhone(), target.getEmail(),
+            updatedApplication = new Application(target.getName(), target.getPhone(), target.getEmail(),
                     target.getAddress(), target.getTags(), target.getDate(), target.getRole(),
                     status);
         }
