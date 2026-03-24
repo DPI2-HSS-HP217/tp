@@ -5,7 +5,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Event class to represent upcoming tasks of an application.
+ * Event class to represent reminder tasks of an application.
  */
 public class Reminder {
     private final String reminderName;

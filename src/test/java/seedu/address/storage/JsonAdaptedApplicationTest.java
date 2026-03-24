@@ -30,7 +30,7 @@ public class JsonAdaptedApplicationTest {
     private static final String INVALID_DATE = "2025-02-31";
     private static final String INVALID_ROLE = "";
     private static final String INVALID_STATUS = " ";
-    private static final String INVALID_UPCOMING_NAME = "";
+    private static final String INVALID_REMINDER_NAME = "";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -177,16 +177,16 @@ public class JsonAdaptedApplicationTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
-    //for upcoming class
+    //for reminder class
     @Test
-    public void toModelType_validPersonWithUpcomingDetails_returnsPersonWithUpcoming() throws Exception {
+    public void toModelType_validPersonWithReminderDetails_returnsPersonWithReminder() throws Exception {
         JsonAdaptedApplication person = new JsonAdaptedApplication(BENSON_WITH_REMINDER_INTERVIEW);
         assertEquals(BENSON_WITH_REMINDER_INTERVIEW, person.toModelType());
     }
 
 
     @Test
-    public void toModelType_nullUpcomingEventName_throwsIllegalValueException() {
+    public void toModelType_nullReminderEventName_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
                 VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS,
                 VALID_EVENT_NAME, null);
@@ -195,16 +195,16 @@ public class JsonAdaptedApplicationTest {
     }
 
     @Test
-    public void toModelType_invalidUpcomingEventName_throwsIllegalValueException() {
+    public void toModelType_invalidReminderEventName_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
                 VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS,
-                INVALID_UPCOMING_NAME, VALID_EVENT_DATE);
+                INVALID_REMINDER_NAME, VALID_EVENT_DATE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
-    public void toModelType_nullUpcomingEventDate_throwsIllegalValueException() {
+    public void toModelType_nullReminderEventDate_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
                 VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS,
                 null, VALID_EVENT_DATE);
@@ -213,7 +213,7 @@ public class JsonAdaptedApplicationTest {
     }
 
     @Test
-    public void toModelType_invalidUpcomingEventDate_throwsIllegalValueException() {
+    public void toModelType_invalidReminderEventDate_throwsIllegalValueException() {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
                 VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS,
                 VALID_EVENT_NAME, INVALID_DATE);
