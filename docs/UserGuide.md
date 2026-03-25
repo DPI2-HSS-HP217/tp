@@ -5,7 +5,7 @@ layout: default.md
 ---
 # AB-3 User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Application List Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 
@@ -63,7 +63,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the application list.
 
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...`
 
@@ -197,37 +197,37 @@ Examples:
 
 ### Creating a new folder : `folder`
 
-Creates a new empty address book saved under `data/<FOLDER_NAME>.json` and switches to it.
+Creates a new empty application list saved under `data/<FOLDER_NAME>.json` and switches to it.
 
 Format: `folder FOLDER_NAME`
 
 * `FOLDER_NAME` must be a valid filename (no spaces or special characters).
-* A new empty address book is created at `data/<FOLDER_NAME>.json`.
+* A new empty application list is created at `data/<FOLDER_NAME>.json`.
 * Any existing data in the current folder is unaffected.
 
 Examples:
 
-* `folder Y1S2` creates a new empty address book at `data/Y1S2.json` and switches to it.
-* `folder Internships2025` creates a new address book for internship applications.
+* `folder Y1S2` creates a new empty application list at `data/Y1S2.json` and switches to it.
+* `folder Internships2025` creates a new application list for internship applications.
 
 ### Switching to an existing folder : `toggle`
 
-Switches the active address book to an existing folder (JSON file) at `data/<FOLDER_NAME>.json`.
+Switches the active application list to an existing folder (JSON file) at `data/<FOLDER_NAME>.json`.
 
 Format: `toggle FOLDER_NAME`
 
 * `FOLDER_NAME` must correspond to an existing file at `data/<FOLDER_NAME>.json`.
 * All previously saved data in that folder will be loaded.
-* Use `folder` instead if you want to create a new empty address book.
+* Use `folder` instead if you want to create a new empty application list.
 
 Examples:
 
-* `toggle Y1S2` switches to the address book stored at `data/Y1S2.json`.
+* `toggle Y1S2` switches to the application list stored at `data/Y1S2.json`.
 * `toggle Internships2025` loads your saved internship applications from `data/Internships2025.json`.
 
 ### Deleting a person : `delete`
 
-Deletes a specified application from the address book via index or reference via Company name and Role.
+Deletes a specified application from the application list via index or reference via Company name and Role.
 
 Format: `delete INDEX`
 
@@ -242,13 +242,13 @@ Format: `delete n/<Company_Name> r/<Role>`
 
 Examples:
 
-* `list` followed by `delete 2` deletes the 2nd Application in the address book.
+* `list` followed by `delete 2` deletes the 2nd Application in the application list.
 * `find Google` followed by `delete 1` deletes the 1st Application in the results of the `find` command.
 * `delete n/google r/CEO` deletes the Application for Google as CEO.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the application list.
 
 Format: `clear`
 
@@ -260,17 +260,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Application List data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Application List data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.`<br>`
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, Application List will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.`<br>`
+Furthermore, certain edits can cause the Application List to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 `</box>`
 
 ### Archiving data files `[coming in v2.0]`
@@ -282,7 +282,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?`<br>`
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Application List home folder.
 
 ---
 
