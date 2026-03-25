@@ -11,6 +11,7 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
@@ -43,6 +44,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setDate(person.getDate());
         descriptor.setRole(person.getRole());
         descriptor.setStatus(person.getStatus());
+        descriptor.setReminder(person.getReminder());
     }
 
     /**
@@ -111,6 +113,16 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     * BUT with reminder attributes.
+     */
+    public EditPersonDescriptorBuilder withReminder(String reminderName, String reminderDate) {
+        descriptor.setReminder(new Reminder(reminderName, reminderDate));
         return this;
     }
 

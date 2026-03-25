@@ -14,6 +14,7 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
@@ -170,6 +171,25 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return new Status(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String reminderReminderName and reminderReminderDate} into a {@code reminder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reminderReminderName and reminderReminderDate} is invalid.
+     */
+    public static Reminder parseReminder(String reminderReminderName, String reminderReminderDate)
+            throws ParseException {
+        requireNonNull(reminderReminderName);
+        requireNonNull(reminderReminderDate);
+        String trimmedReminderName = reminderReminderName.trim();
+        String trimmedReminderDate = reminderReminderDate.trim();
+
+        if (!Date.isValidDate(trimmedReminderDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Reminder(trimmedReminderName, trimmedReminderDate);
     }
 
 

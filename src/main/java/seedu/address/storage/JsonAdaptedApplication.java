@@ -16,6 +16,7 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
@@ -34,10 +35,14 @@ class JsonAdaptedApplication {
     private final String status;
     private final String role;
     private final String date;
+    private final String reminderEvent;
+    private final String reminderDate;
+    private Boolean hasReminder = false;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Overloaded version of the constructor to support reminder and not require much refactoring.
      */
     @JsonCreator
     public JsonAdaptedApplication(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -45,7 +50,9 @@ class JsonAdaptedApplication {
                                   @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                   @JsonProperty("date") String date,
                                   @JsonProperty("role") String role,
-                                  @JsonProperty("status") String status) {
+                                  @JsonProperty("status") String status,
+                                  @JsonProperty("reminderEvent") String reminderEvent,
+                                  @JsonProperty("reminderDate") String reminderDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,6 +63,10 @@ class JsonAdaptedApplication {
         this.date = date;
         this.role = role;
         this.status = status;
+
+
+        this.reminderEvent = reminderEvent;
+        this.reminderDate = reminderDate;
     }
 
     /**
@@ -72,6 +83,10 @@ class JsonAdaptedApplication {
         date = source.getDate().value;
         status = source.getStatus().value;
         role = source.getRole().value;
+
+        hasReminder = source.hasReminder();
+        reminderEvent = hasReminder ? source.getReminder().getReminderName() : null;
+        reminderDate = hasReminder ? source.getReminder().getReminderDate().value : null;
     }
 
     /**
@@ -142,6 +157,23 @@ class JsonAdaptedApplication {
         final Role modelRole = new Role(role);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        if (hasReminder) {
+            if (reminderEvent == null || reminderDate == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Reminder.class.getSimpleName()));
+            }
+
+            if (!Date.isValidDate(reminderDate)) {
+                throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+            }
+
+            final Reminder modelReminder = new Reminder(reminderEvent, reminderDate);
+
+            return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                    modelDate, modelRole, modelStatus, modelReminder);
+        }
+
         return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 modelDate, modelRole, modelStatus);
     }

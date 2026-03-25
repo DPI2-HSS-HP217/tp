@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Application;
+import seedu.address.model.person.DuplicateApplicationStore;
 import seedu.address.model.person.exceptions.DuplicateApplicationException;
 import seedu.address.testutil.PersonBuilder;
 

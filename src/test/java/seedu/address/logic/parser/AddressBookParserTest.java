@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
@@ -20,8 +22,10 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.OverwriteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Application;
+import seedu.address.model.person.DuplicateApplicationStore;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -29,6 +33,11 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    @BeforeEach
+    public void setUp() {
+        DuplicateApplicationStore.clear();
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -77,6 +86,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_overwrite() throws Exception {
+        assertTrue(parser.parseCommand(OverwriteCommand.COMMAND_WORD) instanceof OverwriteCommand);
+        assertTrue(parser.parseCommand(OverwriteCommand.COMMAND_WORD + " 3") instanceof OverwriteCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -85,5 +100,46 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_notOverwriteCommand_clearDuplicateStore() throws Exception {
+        Application application = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(application);
+        DuplicateApplicationStore.setLastDuplicateApplication(addCommand);
+
+        assertTrue(DuplicateApplicationStore.hasLastDuplicateApplication());
+
+        parser.parseCommand(ListCommand.COMMAND_WORD);
+
+        assertFalse(DuplicateApplicationStore.hasLastDuplicateApplication());
+    }
+
+    @Test
+    public void parseCommand_allNonOverwriteCommand_clearDuplicateStore() throws Exception {
+        Application application = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(application);
+
+        String possibleAddCommand = "add n/Meta p/6505434800 e/facebook.careers@meta.com "
+                + "a/1 Hacker Way, Menlo Park, CA d/2024-03-19 r/Frontend Engineer s/interviewed t/tech";
+
+        String[] nonOverwriteCommand = {
+            ListCommand.COMMAND_WORD,
+            ClearCommand.COMMAND_WORD,
+            ExitCommand.COMMAND_WORD,
+            HelpCommand.COMMAND_WORD,
+            FindCommand.COMMAND_WORD + " test",
+            DeleteCommand.COMMAND_WORD + " 1",
+            possibleAddCommand
+        };
+
+        for (int i = 0; i < nonOverwriteCommand.length; i++) {
+            DuplicateApplicationStore.setLastDuplicateApplication(addCommand);
+            assertTrue(DuplicateApplicationStore.hasLastDuplicateApplication());
+
+            parser.parseCommand(nonOverwriteCommand[i]);
+
+            assertFalse(DuplicateApplicationStore.hasLastDuplicateApplication());
+        }
     }
 }

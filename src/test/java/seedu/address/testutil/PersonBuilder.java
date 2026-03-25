@@ -9,6 +9,7 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
@@ -35,6 +36,8 @@ public class PersonBuilder {
     private Role role;
     private Date date;
     private Status status;
+    private Reminder reminder;
+    private boolean hasReminder = false;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -128,8 +131,23 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withReminder(String reminderName, String reminderDate) {
+        this.reminder = new Reminder(reminderName, reminderDate);
+        this.hasReminder = true;
+        return this;
+    }
+
     public Application build() {
         return new Application(name, phone, email, address, tags, date, role, status);
     }
+
+    // Not checking for Reminder since used in test cases only.
+    public Application buildWithReminder() {
+        return new Application(name, phone, email, address, tags, date, role, status, reminder);
+    }
+
 
 }

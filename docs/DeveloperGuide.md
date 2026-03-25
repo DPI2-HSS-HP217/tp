@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to edit a particular company application
 2. OfferFlow shows the company's current application details
-3. User edits application details such as adding upcoming interviews and/or update application date
+3. User edits application details such as adding reminder interviews and/or update application date
 4. User confirms all changes made to the application
 5. OfferFlow updates the application details to reflect the new changes if any
 
@@ -527,7 +527,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Duplicate**:  A repeated Application with the same <Company_Name> and <Job_Role>.
 * **Contact**: A record containing information about a company or recruiter, including name, role, and company.
 * **Application Status**:  The current stage of a job application (e.g., Plan to Apply, Applied, Interviewing, Rejected, Offered).
-* **Notification**:  A reminder sent by OfferFlow to alert the user about upcoming deadlines or interview dates.
+* **Notification**:  A reminder sent by OfferFlow to alert the user about reminder deadlines or interview dates.
 * **Folder**:  A storage group that allows users to archive past job search sessions.
 * **Interaction**:   Any recorded communication or follow-up with a recruiter or company (e.g., email reply or interview invitation).
 * **Sample Data**:   Preloaded example entries that allow new users to explore the app before adding their own information.

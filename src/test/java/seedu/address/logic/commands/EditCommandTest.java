@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.BENSON_WITH_REMINDER_INTERVIEW;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -20,11 +21,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Application;
+import seedu.address.model.person.SameCompanySameRolePredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -140,6 +143,55 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
         otherApplicant.setBeingEdited(false);
+    }
+
+    @Test
+    public void execute_setReminderEvent_success() {
+        Application personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        personToEdit.setBeingEdited(true);
+
+        Application editedPerson = new PersonBuilder(personToEdit)
+                .withReminder("Technical Interview", "2024-06-01")
+                .buildWithReminder();
+
+        EditCommand editCommand = new EditCommand(new EditPersonDescriptorBuilder()
+                .withReminder("Technical Interview", "2024-06-01")
+                .build());
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        personToEdit.setBeingEdited(false);
+    }
+
+    @Test
+    public void execute_editReminderEvent_success() throws CommandException {
+        SameCompanySameRolePredicate predicate = new SameCompanySameRolePredicate(
+                BENSON_WITH_REMINDER_INTERVIEW.getName(), BENSON_WITH_REMINDER_INTERVIEW.getRole());
+
+        Application personToEdit = model.getFilteredPersonList().stream().filter(predicate).findFirst()
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_APPLICATION_IDENTIFIER));
+
+        personToEdit.setBeingEdited(true);
+
+        Application editedPerson = new PersonBuilder(personToEdit)
+                .withReminder("Accept Offer", "2024-12-01")
+                .buildWithReminder();
+
+        EditCommand editCommand = new EditCommand(new EditPersonDescriptorBuilder()
+                .withReminder("Accept Offer", "2024-12-01")
+                .build());
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        personToEdit.setBeingEdited(false);
     }
 
     @Test

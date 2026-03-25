@@ -24,7 +24,7 @@ public class Application {
     private final Date date;
     private final Address address;
     private final Status status;
-    //private final Role role;
+    private final Reminder reminder;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -46,7 +46,24 @@ public class Application {
         this.tags.addAll(tags);
         this.address = address;
         this.status = status;
+        this.reminder = null;
+    }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Application(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                       Date date, Role role, Status status, Reminder reminder) {
+        requireAllNonNull(name, phone, email, role, tags, status, date, address);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.date = date;
+        this.tags.addAll(tags);
+        this.address = address;
+        this.status = status;
+        this.reminder = reminder;
     }
 
     public Name getName() {
@@ -75,6 +92,14 @@ public class Application {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Reminder getReminder() {
+        return reminder;
+    }
+
+    public boolean hasReminder() {
+        return !(reminder == null);
     }
 
     public boolean getEditingStatus() {
@@ -146,7 +171,7 @@ public class Application {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder sb = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
@@ -154,8 +179,12 @@ public class Application {
                 .add("date", date)
                 .add("tags", tags)
                 .add("address", address)
-                .add("status", status)
-                .toString();
+                .add("status", status);
+
+        if (reminder != null) {
+            sb.add("event" , reminder);
+        }
+        return sb.toString();
     }
 
 }

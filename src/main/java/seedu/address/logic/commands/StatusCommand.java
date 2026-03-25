@@ -58,6 +58,7 @@ public class StatusCommand extends Command {
         List<Application> applicationList = model.getFilteredPersonList();
 
         Application target = null;
+        Application updatedApplication = null;
 
         for (Application app : applicationList) {
             if (app.getName().fullName.equalsIgnoreCase(name) && app.getRole().value.equalsIgnoreCase(role)) {
@@ -70,9 +71,16 @@ public class StatusCommand extends Command {
             throw new CommandException("Application not found.");
         }
 
-        Application updatedApplication = new Application(target.getName(), target.getPhone(), target.getEmail(),
-                                        target.getAddress(), target.getTags(), target.getDate(), target.getRole(),
-                                        status);
+        if (target.hasReminder()) {
+            updatedApplication = new Application(target.getName(), target.getPhone(), target.getEmail(),
+                    target.getAddress(), target.getTags(), target.getDate(), target.getRole(),
+                    status, target.getReminder());
+        } else {
+            updatedApplication = new Application(target.getName(), target.getPhone(), target.getEmail(),
+                    target.getAddress(), target.getTags(), target.getDate(), target.getRole(),
+                    status);
+        }
+
 
         model.setPerson(target, updatedApplication);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

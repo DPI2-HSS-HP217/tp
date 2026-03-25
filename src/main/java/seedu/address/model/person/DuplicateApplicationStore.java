@@ -1,4 +1,6 @@
-package seedu.address.logic.commands;
+package seedu.address.model.person;
+
+import seedu.address.logic.commands.AddCommand;
 
 /**
  * Stores the last duplicate application

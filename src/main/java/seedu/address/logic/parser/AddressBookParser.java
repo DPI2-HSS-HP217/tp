@@ -18,8 +18,10 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FolderCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.OverwriteCommand;
 import seedu.address.logic.commands.StatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.DuplicateApplicationStore;
 
 /**
  * Parses user input.
@@ -55,34 +57,49 @@ public class AddressBookParser {
         // code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
+        Command command;
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            command = new AddCommandParser().parse(arguments);
+            break;
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            command = new DeleteCommandParser().parse(arguments);
+            break;
 
         case StatusCommand.COMMAND_WORD:
-            return new StatusCommandParser().parse(arguments);
+            command = new StatusCommandParser().parse(arguments);
+            break;
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            command = new ClearCommand();
+            break;
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            command = new FindCommandParser().parse(arguments);
+            break;
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            command = new ListCommand();
+            break;
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            command = new ExitCommand();
+            break;
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            command = new HelpCommand();
+            break;
 
         case EditEnterCommand.COMMAND_WORD:
-            return new EditEnterCommandParser().parse(arguments);
+            command = new EditEnterCommandParser().parse(arguments);
+            break;
+
+        case OverwriteCommand.COMMAND_WORD:
+            command = new OverwriteCommand();
+            break;
 
         case FolderCommand.COMMAND_WORD_FOLDER:
             return new FolderCommandParser(true).parse(arguments);
@@ -94,5 +111,12 @@ public class AddressBookParser {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+
+        if (!(command instanceof OverwriteCommand)) {
+            if (DuplicateApplicationStore.hasLastDuplicateApplication()) {
+                DuplicateApplicationStore.clear();
+            }
+        }
+        return command;
     }
 }

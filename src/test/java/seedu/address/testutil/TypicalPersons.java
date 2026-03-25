@@ -49,6 +49,17 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .build();
 
+    public static final Application BENSON_WITH_REMINDER_INTERVIEW = new PersonBuilder().withName("Benson Meier")
+            .withAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("johnd@example.com")
+            .withPhone("98765432")
+            .withDate("2024-02-20")
+            .withRole("Project Manager")
+            .withStatus("interviewed")
+            .withTags("owesMoney", "friends")
+            .withReminder("second interview", "2026-12-12")
+            .buildWithReminder();
+
     public static final Application CARL = new PersonBuilder().withName("Carl Kurz")
             .withPhone("95352563")
             .withEmail("heinz@example.com")
@@ -153,6 +164,6 @@ public class TypicalPersons {
     }
 
     public static List<Application> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON_WITH_REMINDER_INTERVIEW, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
