@@ -137,6 +137,15 @@ public class Application {
     }
 
     /**
+     * Checks if this Application has a Reminder due by the provided date
+     * @param date The date to check Application's Reminder against
+     * @return if the Application has a Reminder due by provided date
+     */
+    public boolean hasReminderByDate(Date date) {
+        return this.hasReminder() && this.getReminder().isByDate(date);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
