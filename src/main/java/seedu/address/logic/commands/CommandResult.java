@@ -22,6 +22,13 @@ public class CommandResult {
 
     /** The editing mode status */
     private final ParserMode parserMode;
+
+    /** The folder name to switch to, or null if no folder switch is requested. */
+    private final String folderName;
+
+    /** True = start with empty address book (folder command), false = load existing data (toggle command). */
+    private final boolean createNew;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -30,6 +37,23 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.parserMode = parserMode;
         this.exit = exit;
+        this.folderName = null;
+        this.createNew = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} that signals a folder switch to {@code LogicManager}.
+     *
+     * @param folderName the name of the folder to switch to
+     * @param createNew  true to start with an empty address book (folder), false to load existing data (toggle)
+     */
+    public CommandResult(String feedbackToUser, String folderName, boolean createNew) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.parserMode = ParserMode.NO_CHANGE;
+        this.exit = false;
+        this.folderName = requireNonNull(folderName);
+        this.createNew = createNew;
     }
 
     /**
@@ -51,8 +75,17 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
+
     public ParserMode getParserMode() {
         return parserMode;
+    }
+
+    public String getFolderName() {
+        return folderName;
+    }
+
+    public boolean isCreateNew() {
+        return createNew;
     }
 
     @Override

@@ -2,11 +2,13 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -54,6 +56,11 @@ public class StorageManager implements Storage {
     }
 
     @Override
+    public void setAddressBookFilePath(Path filePath) {
+        addressBookStorage.setAddressBookFilePath(filePath);
+    }
+
+    @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
@@ -73,6 +80,26 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    // ================ Folder methods ==============================
+
+    @Override
+    public ReadOnlyAddressBook toggleFolder(String folderName) throws IOException, DataLoadingException {
+        Path newPath = Paths.get("data", folderName + ".json");
+        if (!newPath.toFile().exists()) {
+            throw new IOException("Folder '" + folderName + "' not found. Use 'folder' to create a new one.");
+        }
+        addressBookStorage.setAddressBookFilePath(newPath);
+        Optional<ReadOnlyAddressBook> loaded = addressBookStorage.readAddressBook();
+        return loaded.orElse(new AddressBook());
+    }
+
+    @Override
+    public void createFolder(String folderName) throws IOException {
+        Path newPath = Paths.get("data", folderName + ".json");
+        addressBookStorage.setAddressBookFilePath(newPath);
+        addressBookStorage.saveAddressBook(new AddressBook());
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -80,6 +81,11 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
+        String folderName = commandResult.getFolderName();
+        if (folderName != null) {
+            handleFolderSwitch(folderName, commandResult.isCreateNew());
+        }
+
         return commandResult;
     }
 
@@ -106,5 +112,26 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    /**
+     * Handles switching the active address book to a different folder.
+     * Storage is responsible for the file-level operations;
+     * this method updates the model to reflect the new data.
+     */
+    private void handleFolderSwitch(String folderName, boolean createNew) throws CommandException {
+        try {
+            if (createNew) {
+                storage.createFolder(folderName);
+                model.setAddressBook(storage.readAddressBook().orElseThrow());
+            } else {
+                ReadOnlyAddressBook loaded = storage.toggleFolder(folderName);
+                model.setAddressBook(loaded);
+            }
+            model.setAddressBookFilePath(storage.getAddressBookFilePath());
+            storage.saveUserPrefs(model.getUserPrefs());
+        } catch (IOException | DataLoadingException e) {
+            throw new CommandException(e.getMessage(), e);
+        }
     }
 }

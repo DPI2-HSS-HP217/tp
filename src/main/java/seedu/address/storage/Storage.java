@@ -24,9 +24,23 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     Path getAddressBookFilePath();
 
     @Override
+    void setAddressBookFilePath(Path filePath);
+
+    @Override
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+
+    /**
+     * Switches to an existing folder and returns its address book data.
+     * Throws IOException if the folder does not exist.
+     */
+    ReadOnlyAddressBook toggleFolder(String folderName) throws IOException, DataLoadingException;
+
+    /**
+     * Creates a new empty address book at data/{@code folderName}.json and switches to it.
+     */
+    void createFolder(String folderName) throws IOException;
 
 }
