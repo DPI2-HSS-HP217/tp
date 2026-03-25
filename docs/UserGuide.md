@@ -8,7 +8,7 @@
 
 ## 🎯 For the Internship-Hunting CS Student
 
-Let's be honest applying for internships can be a nightmare. Between grinding LeetCode questions, projects and actually attending classes, tracking applications can itself become a full-time job.
+Let's be honest applying for internships can be a nightmare. Between grinding LeetCode questions, projects and actually attending classes, tracking internship applications can itself become a full-time job.
 
 Hence, **OfferFlow** was built by CS students by CS students as we understand the struggle. OfferFlow is a desktop app that helps you:
 - Track every internship application without the spreadsheet and calender reminder chaos
@@ -219,7 +219,7 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 
 ### Locating applications by the company name: `find`
 
-Helps you find applications with the same company name if contain any of the given keywords.
+Helps you finds applications whose company names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
