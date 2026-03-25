@@ -13,13 +13,13 @@ import seedu.address.model.person.Application;
  */
 public class FilterCommand extends Command {
 
-    public static final String COMMAND_WORD = "filter";
-    public static final String COMMAND_WORD_WITH_SLASH = "/filter";
+    public static final String COMMAND_WORD = "f";
+    public static final String COMMAND_WORD_WITH_SLASH = "/f";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_WITH_SLASH + " /company /<keyword>\n"
-            + COMMAND_WORD_WITH_SLASH + " /applied /<YYYY-MM-DD>\n"
-            + COMMAND_WORD_WITH_SLASH + " /status /<status>\n"
-            + COMMAND_WORD_WITH_SLASH + " /tag /<tag>";
+    public static final String MESSAGE_USAGE = COMMAND_WORD_WITH_SLASH + " /c /<keyword>\n"
+            + COMMAND_WORD_WITH_SLASH + " /a /<YYYY-MM-DD>\n"
+            + COMMAND_WORD_WITH_SLASH + " /s /<status>\n"
+            + COMMAND_WORD_WITH_SLASH + " /t /<tag>";
     public static final String MESSAGE_NO_MATCHES = "No matching applications found.";
     public static final String MESSAGE_MATCHES_FOUND = "Found %d matching application(s)";
 

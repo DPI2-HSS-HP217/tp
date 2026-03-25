@@ -77,7 +77,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        FilterCommand command = (FilterCommand) parser.parseCommand("/FILTER /COMPANY /Amy");
+        FilterCommand command = (FilterCommand) parser.parseCommand("/F /C /Amy");
         assertEquals(new FilterCommand(new CompanyContainsKeywordPredicate("Amy")), command);
     }
 
@@ -137,7 +137,7 @@ public class AddressBookParserTest {
             ExitCommand.COMMAND_WORD,
             HelpCommand.COMMAND_WORD,
             FindCommand.COMMAND_WORD + " test",
-            FilterCommand.COMMAND_WORD_WITH_SLASH + " /company /test",
+            FilterCommand.COMMAND_WORD_WITH_SLASH + " /c /test",
             DeleteCommand.COMMAND_WORD + " 1",
             possibleAddCommand
         };

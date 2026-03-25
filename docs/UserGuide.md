@@ -178,15 +178,15 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Filtering applications: `/filter`
+### Filtering applications: `/f`
 
 Filters applications by company, applied date, status, or tag.
 
 Format:
-* `/filter /company /KEYWORD`
-* `/filter /applied /YYYY-MM-DD`
-* `/filter /status /STATUS`
-* `/filter /tag /TAG`
+* `/f /c /KEYWORD`
+* `/f /a /YYYY-MM-DD`
+* `/f /s /STATUS`
+* `/f /t /TAG`
 
 Notes:
 * Filter matching is case-insensitive.
@@ -195,10 +195,10 @@ Notes:
 * Applied dates must use `YYYY-MM-DD`.
 
 Examples:
-* `/filter /company /Google`
-* `/filter /applied /2025-11-11`
-* `/filter /status /Applied`
-* `/filter /tag /java`
+* `/f /c /Google`
+* `/f /a /2025-11-11`
+* `/f /s /Applied`
+* `/f /t /java`
 
 ### Deleting a person : `delete`
 
@@ -277,6 +277,6 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Status** | `status n/COMPANY r/ROLE s/STATUS`<br> e.g., `status n/Tiktok r/Data Analyst s/Rejected`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `/filter /company /KEYWORD` or `/filter /applied /YYYY-MM-DD` or `/filter /status /STATUS` or `/filter /tag /TAG`
+**Filter** | `/f /c /KEYWORD` or `/f /a /YYYY-MM-DD` or `/f /s /STATUS` or `/f /t /TAG`
 **List**   | `list`
 **Help**   | `help`

@@ -18,25 +18,25 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_companyFilter_success() {
-        assertParseSuccess(parser, " /company /Google ",
+        assertParseSuccess(parser, " /c /Google ",
                 new FilterCommand(new CompanyContainsKeywordPredicate("Google")));
     }
 
     @Test
     public void parse_appliedFilter_success() {
-        assertParseSuccess(parser, " /applied /2025-11-11 ",
+        assertParseSuccess(parser, " /a /2025-11-11 ",
                 new FilterCommand(new DateMatchesPredicate("2025-11-11")));
     }
 
     @Test
     public void parse_statusFilter_success() {
-        assertParseSuccess(parser, " /status /Applied ",
+        assertParseSuccess(parser, " /s /Applied ",
                 new FilterCommand(new StatusMatchesPredicate("Applied")));
     }
 
     @Test
     public void parse_tagFilter_success() {
-        assertParseSuccess(parser, " /tag /friends ",
+        assertParseSuccess(parser, " /t /friends ",
                 new FilterCommand(new TagMatchesPredicate("friends")));
     }
 
@@ -52,31 +52,31 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_missingCompanyValue_failure() {
-        assertParseFailure(parser, " /company ", FilterCommandParser.MESSAGE_INVALID_COMPANY_FORMAT);
+        assertParseFailure(parser, " /c ", FilterCommandParser.MESSAGE_INVALID_COMPANY_FORMAT);
     }
 
     @Test
     public void parse_missingAppliedValue_failure() {
-        assertParseFailure(parser, " /applied ", FilterCommandParser.MESSAGE_INVALID_APPLIED_FORMAT);
+        assertParseFailure(parser, " /a ", FilterCommandParser.MESSAGE_INVALID_APPLIED_FORMAT);
     }
 
     @Test
     public void parse_missingStatusValue_failure() {
-        assertParseFailure(parser, " /status ", FilterCommandParser.MESSAGE_INVALID_STATUS_FORMAT);
+        assertParseFailure(parser, " /s ", FilterCommandParser.MESSAGE_INVALID_STATUS_FORMAT);
     }
 
     @Test
     public void parse_missingTagValue_failure() {
-        assertParseFailure(parser, " /tag ", FilterCommandParser.MESSAGE_INVALID_TAG_FORMAT);
+        assertParseFailure(parser, " /t ", FilterCommandParser.MESSAGE_INVALID_TAG_FORMAT);
     }
 
     @Test
     public void parse_invalidAppliedDate_failure() {
-        assertParseFailure(parser, " /applied /11-11-2025 ", FilterCommandParser.MESSAGE_INVALID_DATE_FORMAT);
+        assertParseFailure(parser, " /a /11-11-2025 ", FilterCommandParser.MESSAGE_INVALID_DATE_FORMAT);
     }
 
     @Test
     public void parse_invalidTag_failure() {
-        assertParseFailure(parser, " /tag /friends* ", Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " /t /friends* ", Tag.MESSAGE_CONSTRAINTS);
     }
 }
