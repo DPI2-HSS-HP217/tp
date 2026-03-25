@@ -11,6 +11,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CompanyContainsKeywordPredicate;
 import seedu.address.model.person.DateMatchesPredicate;
 import seedu.address.model.person.StatusMatchesPredicate;
+import seedu.address.model.person.TagMatchesPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new {@code FilterCommand}.
@@ -19,7 +21,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
     public static final String MESSAGE_UNKNOWN_FILTER_COMMAND = "Sorry I don't understand";
     public static final String MESSAGE_UNKNOWN_FILTER_TYPE =
-            "OOPS! Unknown filter type. Use company, deadline, applied, or status.";
+            "OOPS! Unknown filter type. Use company, deadline, applied, status, or tag.";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Use YYYY-MM-DD.";
     public static final String MESSAGE_INVALID_COMPANY_FORMAT =
             "OOPS! Invalid format, use format: /filter /company /<keyword>";
@@ -27,6 +29,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             "OOPS! Invalid format, use format: /filter /applied /<YYYY-MM-DD>";
     public static final String MESSAGE_INVALID_STATUS_FORMAT =
             "OOPS! Invalid format, use format: /filter /status /<status>";
+    public static final String MESSAGE_INVALID_TAG_FORMAT =
+            "OOPS! Invalid format, use format: /filter /tag /<tag>";
 
     private static final Pattern FILTER_ARGUMENTS_FORMAT = Pattern.compile("^/(?<type>\\S+)(?<value>.*)$");
 
@@ -54,6 +58,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             return parseAppliedFilter(rawValue);
         case "status":
             return parseStatusFilter(rawValue);
+        case "tag":
+            return parseTagFilter(rawValue);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_FILTER_TYPE);
         }
@@ -84,6 +90,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(MESSAGE_INVALID_STATUS_FORMAT);
         }
         return new FilterCommand(new StatusMatchesPredicate(status));
+    }
+
+    private FilterCommand parseTagFilter(String rawValue) throws ParseException {
+        String tag = extractValue(rawValue);
+        if (tag.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_TAG_FORMAT);
+        }
+        if (!Tag.isValidTagName(tag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        return new FilterCommand(new TagMatchesPredicate(tag));
     }
 
     private String extractValue(String rawValue) {

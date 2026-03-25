@@ -9,6 +9,8 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.person.CompanyContainsKeywordPredicate;
 import seedu.address.model.person.DateMatchesPredicate;
 import seedu.address.model.person.StatusMatchesPredicate;
+import seedu.address.model.person.TagMatchesPredicate;
+import seedu.address.model.tag.Tag;
 
 public class FilterCommandParserTest {
 
@@ -30,6 +32,12 @@ public class FilterCommandParserTest {
     public void parse_statusFilter_success() {
         assertParseSuccess(parser, " /status /Applied ",
                 new FilterCommand(new StatusMatchesPredicate("Applied")));
+    }
+
+    @Test
+    public void parse_tagFilter_success() {
+        assertParseSuccess(parser, " /tag /friends ",
+                new FilterCommand(new TagMatchesPredicate("friends")));
     }
 
     @Test
@@ -58,7 +66,17 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_missingTagValue_failure() {
+        assertParseFailure(parser, " /tag ", FilterCommandParser.MESSAGE_INVALID_TAG_FORMAT);
+    }
+
+    @Test
     public void parse_invalidAppliedDate_failure() {
         assertParseFailure(parser, " /applied /11-11-2025 ", FilterCommandParser.MESSAGE_INVALID_DATE_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidTag_failure() {
+        assertParseFailure(parser, " /tag /friends* ", Tag.MESSAGE_CONSTRAINTS);
     }
 }

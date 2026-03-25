@@ -18,7 +18,8 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD_WITH_SLASH + " /company /<keyword>\n"
             + COMMAND_WORD_WITH_SLASH + " /applied /<YYYY-MM-DD>\n"
-            + COMMAND_WORD_WITH_SLASH + " /status /<status>";
+            + COMMAND_WORD_WITH_SLASH + " /status /<status>\n"
+            + COMMAND_WORD_WITH_SLASH + " /tag /<tag>";
     public static final String MESSAGE_NO_MATCHES = "No matching applications found.";
     public static final String MESSAGE_MATCHES_FOUND = "Found %d matching application(s)";
 

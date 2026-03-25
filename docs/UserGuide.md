@@ -180,12 +180,13 @@ Examples:
 
 ### Filtering applications: `/filter`
 
-Filters applications by company, applied date, or status.
+Filters applications by company, applied date, status, or tag.
 
 Format:
 * `/filter /company /KEYWORD`
 * `/filter /applied /YYYY-MM-DD`
 * `/filter /status /STATUS`
+* `/filter /tag /TAG`
 
 Notes:
 * Filter matching is case-insensitive.
@@ -197,6 +198,7 @@ Examples:
 * `/filter /company /Google`
 * `/filter /applied /2025-11-11`
 * `/filter /status /Applied`
+* `/filter /tag /java`
 
 ### Deleting a person : `delete`
 
@@ -275,6 +277,6 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Status** | `status n/COMPANY r/ROLE s/STATUS`<br> e.g., `status n/Tiktok r/Data Analyst s/Rejected`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `/filter /company /KEYWORD` or `/filter /applied /YYYY-MM-DD` or `/filter /status /STATUS`
+**Filter** | `/filter /company /KEYWORD` or `/filter /applied /YYYY-MM-DD` or `/filter /status /STATUS` or `/filter /tag /TAG`
 **List**   | `list`
 **Help**   | `help`
