@@ -52,11 +52,11 @@ public class Messages {
                 .append(person.getDate())
                 .append("; Status: ")
                 .append(person.getStatus())
-                .append("; Tags: ")
-                .append(person.getTags())
-                .append(person.getReminder())
-                .append("; Reminder: ");
+                .append("; Tags: ");
         person.getTags().forEach(builder::append);
+
+        builder.append("; Reminder: ")
+                .append(person.getReminder());
         return builder.toString();
     }
 

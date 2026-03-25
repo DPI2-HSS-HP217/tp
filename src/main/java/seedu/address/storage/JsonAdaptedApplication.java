@@ -164,6 +164,10 @@ class JsonAdaptedApplication {
                         Reminder.class.getSimpleName()));
             }
 
+            if (!Reminder.isValidReminder(reminderEvent)) {
+                throw new IllegalValueException(Reminder.MESSAGE_CONSTRAINTS);
+            }
+
             if (!Date.isValidDate(reminderDate)) {
                 throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
             }
