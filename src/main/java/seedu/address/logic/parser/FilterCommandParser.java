@@ -21,16 +21,16 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
     public static final String MESSAGE_UNKNOWN_FILTER_COMMAND = "Sorry I don't understand";
     public static final String MESSAGE_UNKNOWN_FILTER_TYPE =
-            "OOPS! Unknown filter type. Use company, deadline, applied, status, or tag.";
+            "OOPS! Unknown filter type. Use c, a, s, or t.";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Use YYYY-MM-DD.";
     public static final String MESSAGE_INVALID_COMPANY_FORMAT =
-            "OOPS! Invalid format, use format: /filter /company /<keyword>";
+            "OOPS! Invalid format, use format: /f /c /<keyword>";
     public static final String MESSAGE_INVALID_APPLIED_FORMAT =
-            "OOPS! Invalid format, use format: /filter /applied /<YYYY-MM-DD>";
+            "OOPS! Invalid format, use format: /f /a /<YYYY-MM-DD>";
     public static final String MESSAGE_INVALID_STATUS_FORMAT =
-            "OOPS! Invalid format, use format: /filter /status /<status>";
+            "OOPS! Invalid format, use format: /f /s /<status>";
     public static final String MESSAGE_INVALID_TAG_FORMAT =
-            "OOPS! Invalid format, use format: /filter /tag /<tag>";
+            "OOPS! Invalid format, use format: /f /t /<tag>";
 
     private static final Pattern FILTER_ARGUMENTS_FORMAT = Pattern.compile("^/(?<type>\\S+)(?<value>.*)$");
 
@@ -52,13 +52,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String rawValue = matcher.group("value").trim();
 
         switch (filterType) {
-        case "company":
+        case "c":
             return parseCompanyFilter(rawValue);
-        case "applied":
+        case "a":
             return parseAppliedFilter(rawValue);
-        case "status":
+        case "s":
             return parseStatusFilter(rawValue);
-        case "tag":
+        case "t":
             return parseTagFilter(rawValue);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_FILTER_TYPE);
