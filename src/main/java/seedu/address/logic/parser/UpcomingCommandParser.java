@@ -1,18 +1,21 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.time.LocalDate;
+
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.ReminderWithinOffsetPredicate;
 
-import java.time.LocalDate;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 /**
  * Parses input arguments and creates a new UpcomingCommand object
  */
 public class UpcomingCommandParser {
+
+    private static final int MAX_OFFSET = 9;
+    private static final int MIN_OFFSET = 0;
 
     /**
      * Parses the given {@code String} of arguments in the context of the UpcomingCommand
@@ -26,7 +29,7 @@ public class UpcomingCommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpcomingCommand.MESSAGE_USAGE));
         }
         long daysOffset = Long.parseLong(trimmedArgs);
-        if (daysOffset < 0 || daysOffset > 9) {
+        if (daysOffset < MIN_OFFSET || daysOffset > MAX_OFFSET) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UpcomingCommand.MESSAGE_DAYS_OUT_OF_RANGE));
         }

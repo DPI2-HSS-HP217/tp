@@ -14,7 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private int reminderOffset = 0;
+    private int reminderOffset = 9;
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
     /**

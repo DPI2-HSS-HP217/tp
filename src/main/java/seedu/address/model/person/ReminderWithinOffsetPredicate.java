@@ -1,9 +1,13 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * Checks if an application has a reminder, and if that reminders falls within the
+ * range of dates specified by an offset in terms of days from today's date
+ */
 public class ReminderWithinOffsetPredicate implements Predicate<Application> {
     private Date date;
 

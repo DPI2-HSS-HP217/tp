@@ -15,8 +15,6 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.UpcomingCommandParser;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -70,14 +68,13 @@ public class MainApp extends Application {
         ui = new UiManager(logic);
 
         /* This is for the purposes of forcing application to send a reminder on start-up.
-           Not *perfect*, but I'm not sure how to reduce coupling - if sending a notification
-           is the equivalent of running an upcoming command with the saved offset, *someone*
-           has to call the parser - and LogicManager/AddressBookParser can ONLY do so via
-           String input (or just repeat this same line of code),  which requires knowing format
-           of the command - arguably worse than MainApp just calling it directly
-           and asking it parse the int we saved */
+          Not *perfect*, but I'm not sure how to reduce coupling - if sending a notification
+          is the equivalent of running an upcoming command with the saved offset, *someone*
+          has to call the parser - and LogicManager/AddressBookParser can ONLY do so via
+          String input (or just repeat this same line of code),  which requires knowing format
+          of the command - arguably worse than MainApp just calling it directly
+          and asking it parse the int we saved */
         new UpcomingCommandParser().parse(Integer.toString(model.getReminderOffset())).execute(model);
-
     }
 
     /**

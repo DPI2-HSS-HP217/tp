@@ -19,12 +19,18 @@ public class UpcomingCommand extends Command {
             + "Parameters: [DAYS_OFFSET]...\n"
             + "Example: " + COMMAND_WORD_WITH_SLASH + " 9";
     public static final String MESSAGE_NO_MATCHES = "No upcoming applications in %d days";
-    public static final String MESSAGE_MATCHES_FOUND = "Found %d matching application(s)";
+    public static final String MESSAGE_MATCHES_FOUND = "There are %d application(s) due in %d days.";
     public static final String MESSAGE_DAYS_OUT_OF_RANGE = "Days parameter must be between 0 and 9 inclusive.";
 
     private final int daysOffset;
     private final ReminderWithinOffsetPredicate predicate;
 
+    /**
+     *  Constructs an upcomingcommand.
+     * @param predicate ReminderWithinOffset predicate
+     * @param days Denotes a range of dates for applications with reminders which the above predicate
+     *             filters for, with the range being [today's date, today's date + days]
+     */
     public UpcomingCommand(ReminderWithinOffsetPredicate predicate, int days) {
         this.predicate = predicate;
         this.daysOffset = days;
@@ -39,7 +45,7 @@ public class UpcomingCommand extends Command {
         if (matchCount == 0) {
             return new CommandResult(String.format(MESSAGE_NO_MATCHES, daysOffset));
         }
-        return new CommandResult(String.format(MESSAGE_MATCHES_FOUND, matchCount));
+        return new CommandResult(String.format(MESSAGE_MATCHES_FOUND, matchCount, daysOffset));
     }
 
     @Override
