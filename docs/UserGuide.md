@@ -169,6 +169,22 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Modifying Reminders: `Reminder`
+
+Use `editmode` command to modify or create new Reminders.
+
+Format: `u/upcoming interview ud/2026-12-12`
+
+* Creates a new upcoming interview Reminder on 12 December 2026.
+
+Use `rmr` command **outside** of `editmode` to remove Reminder of specified Applciation.
+
+Format: `rmr <INDEX>` or `rmr n/<Company_Name> r/<Role>`
+
+* Removes reminder associated to the specified Application.
+* `INDEX`: Application index reflected on list.
+* `<Company_Name> <Role>`: Application that represents an Application to `<Company>` for `<Role>`.
+
 ### Updating application status: `status`
 
 Updates the status of an **existing** application.
