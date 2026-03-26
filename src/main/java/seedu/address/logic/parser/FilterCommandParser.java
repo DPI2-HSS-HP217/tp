@@ -31,6 +31,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             "OOPS! Invalid format, use format: filter /s /<status>";
     public static final String MESSAGE_INVALID_TAG_FORMAT =
             "OOPS! Invalid format, use format: filter /t /<tag>";
+    public static final String MESSAGE_MULTIPLE_TAGS =
+            "Please filter by only 1 tag.";
 
     private static final Pattern FILTER_ARGUMENTS_FORMAT = Pattern.compile("^/(?<type>\\S+)(?<value>.*)$");
 
@@ -96,6 +98,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String tag = extractValue(rawValue);
         if (tag.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_TAG_FORMAT);
+        }
+        if (tag.contains(" ")) {
+            throw new ParseException(MESSAGE_MULTIPLE_TAGS);
         }
         if (!Tag.isValidTagName(tag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);

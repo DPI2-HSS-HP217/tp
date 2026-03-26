@@ -79,4 +79,9 @@ public class FilterCommandParserTest {
     public void parse_invalidTag_failure() {
         assertParseFailure(parser, " /t /friends* ", Tag.MESSAGE_CONSTRAINTS);
     }
+
+    @Test
+    public void parse_multipleTags_failure() {
+        assertParseFailure(parser, " /t tech priority ", FilterCommandParser.MESSAGE_MULTIPLE_TAGS);
+    }
 }
