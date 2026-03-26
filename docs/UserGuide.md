@@ -290,15 +290,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
   ![result for 'find Google Meta'](images/Find.png)
 
-### Filtering applications: `/f`
+### Filtering applications: `filter`
 
 Filters applications by company, applied date, status, or tag.
 
 Format:
-* `/f /c /KEYWORD`
-* `/f /a /YYYY-MM-DD`
-* `/f /s /STATUS`
-* `/f /t /TAG`
+* `filter /n /KEYWORD`
+* `filter /d /YYYY-MM-DD`
+* `filter /s /STATUS`
+* `filter /t /TAG`
 
 #### Parameters
 - `KEYWORD` → Name of the company
@@ -312,11 +312,11 @@ Notes:
 * Internal spacing still matters.
 * Applied dates must use `YYYY-MM-DD`.
 
-### Examples
-* `/f /c /Amazon`
-* `/f /a /2025-11-11`
-* `/f /s /Applied`
-* `/f /t /java`
+Examples:
+* `filter /n /Google`
+* `filter /d /2025-11-11`
+* `filter /s /Applied`
+* `filter /t /java`
 
 #### Expected Outcome
 
@@ -478,7 +478,7 @@ Export past applications into different folder to declutter your active list.
 | **Edit** | `editmode INDEX` or `editmode n/NAME r/ROLE` | `editmode 1` then `a/Mapletree Business City II, Pasir Panjang area` then `exitedit`  |
 | **Status** | `status n/COMPANY r/ROLE s/STATUS` | `status n/Tiktok r/Data Analyst s/Rejected` |
 | **Find** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` |
-| **Filter** | `/f /c /KEYWORD` or `/f /a /YYYY-MM-DD` or `/f /s /STATUS` or `/f /t /TAG` | `/f /c /Tiktok` or `/f /a /2024-06-18` or `/f /s /Rejected` or `/f /t /priority`|
+| **Filter** | `filter /n /KEYWORD` or `filter /d /YYYY-MM-DD` or `filter /s /STATUS` or `filter /t /TAG` | `filter /n /Tiktok` or `filter /d /2024-06-18` or `filter /s /Rejected` or `filter /t /java` |
 | **Folder** | `folder FOLDER_NAME` | `folder Y1S2` |
 | **Toggle** | `toggle FOLDER_NAME` | `toggle Y1S2` |
 | **List** | `list` | `list` |

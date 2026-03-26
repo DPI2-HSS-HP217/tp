@@ -18,13 +18,13 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_companyFilter_success() {
-        assertParseSuccess(parser, " /c /Google ",
+        assertParseSuccess(parser, " /n /Google ",
                 new FilterCommand(new CompanyContainsKeywordPredicate("Google")));
     }
 
     @Test
     public void parse_appliedFilter_success() {
-        assertParseSuccess(parser, " /a /2025-11-11 ",
+        assertParseSuccess(parser, " /d /2025-11-11 ",
                 new FilterCommand(new DateMatchesPredicate("2025-11-11")));
     }
 
@@ -52,12 +52,12 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_missingCompanyValue_failure() {
-        assertParseFailure(parser, " /c ", FilterCommandParser.MESSAGE_INVALID_COMPANY_FORMAT);
+        assertParseFailure(parser, " /n ", FilterCommandParser.MESSAGE_INVALID_COMPANY_FORMAT);
     }
 
     @Test
     public void parse_missingAppliedValue_failure() {
-        assertParseFailure(parser, " /a ", FilterCommandParser.MESSAGE_INVALID_APPLIED_FORMAT);
+        assertParseFailure(parser, " /d ", FilterCommandParser.MESSAGE_INVALID_APPLIED_FORMAT);
     }
 
     @Test
@@ -72,11 +72,16 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_invalidAppliedDate_failure() {
-        assertParseFailure(parser, " /a /11-11-2025 ", FilterCommandParser.MESSAGE_INVALID_DATE_FORMAT);
+        assertParseFailure(parser, " /d /11-11-2025 ", FilterCommandParser.MESSAGE_INVALID_DATE_FORMAT);
     }
 
     @Test
     public void parse_invalidTag_failure() {
         assertParseFailure(parser, " /t /friends* ", Tag.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_multipleTags_failure() {
+        assertParseFailure(parser, " /t tech priority ", FilterCommandParser.MESSAGE_MULTIPLE_TAGS);
     }
 }

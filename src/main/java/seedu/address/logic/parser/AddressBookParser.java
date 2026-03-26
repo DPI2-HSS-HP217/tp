@@ -85,7 +85,6 @@ public class AddressBookParser {
             break;
 
         case FilterCommand.COMMAND_WORD:
-        case FilterCommand.COMMAND_WORD_WITH_SLASH:
             command = new FilterCommandParser().parse(arguments);
             break;
 

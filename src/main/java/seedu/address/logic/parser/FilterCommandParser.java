@@ -21,16 +21,18 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
     public static final String MESSAGE_UNKNOWN_FILTER_COMMAND = "Sorry I don't understand";
     public static final String MESSAGE_UNKNOWN_FILTER_TYPE =
-            "OOPS! Unknown filter type. Use c, a, s, or t.";
+            "OOPS! Unknown filter type. Use n, d, s, or t.";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Use YYYY-MM-DD.";
     public static final String MESSAGE_INVALID_COMPANY_FORMAT =
-            "OOPS! Invalid format, use format: /f /c /<keyword>";
+            "OOPS! Invalid format, use format: filter /n /<keyword>";
     public static final String MESSAGE_INVALID_APPLIED_FORMAT =
-            "OOPS! Invalid format, use format: /f /a /<YYYY-MM-DD>";
+            "OOPS! Invalid format, use format: filter /d /<YYYY-MM-DD>";
     public static final String MESSAGE_INVALID_STATUS_FORMAT =
-            "OOPS! Invalid format, use format: /f /s /<status>";
+            "OOPS! Invalid format, use format: filter /s /<status>";
     public static final String MESSAGE_INVALID_TAG_FORMAT =
-            "OOPS! Invalid format, use format: /f /t /<tag>";
+            "OOPS! Invalid format, use format: filter /t /<tag>";
+    public static final String MESSAGE_MULTIPLE_TAGS =
+            "Please filter by only 1 tag.";
 
     private static final Pattern FILTER_ARGUMENTS_FORMAT = Pattern.compile("^/(?<type>\\S+)(?<value>.*)$");
 
@@ -52,9 +54,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String rawValue = matcher.group("value").trim();
 
         switch (filterType) {
-        case "c":
+        case "n":
             return parseCompanyFilter(rawValue);
-        case "a":
+        case "d":
             return parseAppliedFilter(rawValue);
         case "s":
             return parseStatusFilter(rawValue);
@@ -96,6 +98,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String tag = extractValue(rawValue);
         if (tag.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_TAG_FORMAT);
+        }
+        if (tag.contains(" ")) {
+            throw new ParseException(MESSAGE_MULTIPLE_TAGS);
         }
         if (!Tag.isValidTagName(tag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);

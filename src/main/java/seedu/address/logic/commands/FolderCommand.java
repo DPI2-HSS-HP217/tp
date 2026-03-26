@@ -14,12 +14,12 @@ public class FolderCommand extends Command {
     public static final String COMMAND_WORD_TOGGLE = "toggle";
 
     public static final String MESSAGE_USAGE_FOLDER = COMMAND_WORD_FOLDER
-            + ": Creates a new empty address book saved under data/<FOLDER_NAME>.json.\n"
-            + "Example: " + COMMAND_WORD_FOLDER + " Y1S2";
+                                    + ": Creates a new empty address book saved under data/<FOLDER_NAME>.json.\n"
+                                    + "Example: " + COMMAND_WORD_FOLDER + " Y1S2";
 
     public static final String MESSAGE_USAGE_TOGGLE = COMMAND_WORD_TOGGLE
-            + ": Switches to an existing address book at data/<FOLDER_NAME>.json.\n"
-            + "Example: " + COMMAND_WORD_TOGGLE + " Y1S2";
+                                    + ": Switches to an existing address book at data/<FOLDER_NAME>.json.\n"
+                                    + "Example: " + COMMAND_WORD_TOGGLE + " Y1S2";
 
     private final String folderName;
     private final boolean createNew;
@@ -43,8 +43,12 @@ public class FolderCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (this == other) return true;
-        if (!(other instanceof FolderCommand)) return false;
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof FolderCommand)) {
+            return false;
+        }
         FolderCommand o = (FolderCommand) other;
         return createNew == o.createNew && folderName.equals(o.folderName);
     }
