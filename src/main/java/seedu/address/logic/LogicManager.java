@@ -14,6 +14,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookEditingParser;
 import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.UpcomingCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -47,6 +48,14 @@ public class LogicManager implements Logic {
         normalParser = new AddressBookParser();
         editingParser = new AddressBookEditingParser();
         currentParser = normalParser;
+
+        /* This is for the purposes of forcing application to send a reminder on start-up.
+          Not *perfect*, but I'm not sure how to reduce coupling. */
+        try {
+            new UpcomingCommandParser().parse(Integer.toString(model.getReminderOffset())).execute(model);
+        } catch (ParseException e) {
+            logger.info("Internal Error: Unable to send reminder notification on bootup.");
+        }
     }
 
     @Override
