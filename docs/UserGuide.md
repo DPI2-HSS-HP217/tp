@@ -478,7 +478,7 @@ Export past applications into different folder to declutter your active list.
 | **Edit** | `editmode INDEX` or `editmode n/NAME r/ROLE` | `editmode 1` then `a/Mapletree Business City II, Pasir Panjang area` then `exitedit`  |
 | **Status** | `status n/COMPANY r/ROLE s/STATUS` | `status n/Tiktok r/Data Analyst s/Rejected` |
 | **Find** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` |
-| **Filter** | `/f /c /KEYWORD` or `/f /a /YYYY-MM-DD` or `/f /s /STATUS` or `/f /t /TAG` | `/f /c /Tiktok` or `/f /a /2024-06-18` or `/f /s /Rejected` or `/f /t /priority`|
+| **Filter** | `filter /c /KEYWORD` or `filter /a /YYYY-MM-DD` or `filter /s /STATUS` or `filter /t /TAG` | `filter /c /Tiktok` or `filter /a /2024-06-18` or `filter /s /Rejected` or `filter /t /priority`|
 | **Folder** | `folder FOLDER_NAME` | `folder Y1S2` |
 | **Toggle** | `toggle FOLDER_NAME` | `toggle Y1S2` |
 | **List** | `list` | `list` |
