@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.OverwriteCommand;
 import seedu.address.logic.commands.RemoveReminderCommand;
 import seedu.address.logic.commands.StatusCommand;
+import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.DuplicateApplicationStore;
 
@@ -106,6 +107,10 @@ public class AddressBookParser {
 
         case OverwriteCommand.COMMAND_WORD:
             command = new OverwriteCommand();
+            break;
+
+        case UpcomingCommand.COMMAND_WORD:
+            command = new UpcomingCommandParser().parse(arguments);
             break;
 
         case RemoveReminderCommand.COMMAND_WORD:

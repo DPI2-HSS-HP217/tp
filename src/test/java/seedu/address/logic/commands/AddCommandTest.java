@@ -94,6 +94,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public int getReminderOffset() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setReminderOffset(int i) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }

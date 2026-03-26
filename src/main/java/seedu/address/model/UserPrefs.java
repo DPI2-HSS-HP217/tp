@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
+    private int reminderOffset = 9;
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
     /**
@@ -35,8 +36,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
+        setReminderOffset(newUserPrefs.getReminderOffset());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
+
+    public int getReminderOffset() {
+        return reminderOffset;
+    }
+
+    public void setReminderOffset(int reminderOffset) {
+        this.reminderOffset = reminderOffset;
+    }
+
 
     public GuiSettings getGuiSettings() {
         return guiSettings;
@@ -69,12 +80,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && reminderOffset == otherUserPrefs.reminderOffset;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, reminderOffset);
     }
 
     @Override
@@ -82,6 +94,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("Reminder offset : " + reminderOffset);
         return sb.toString();
     }
 
