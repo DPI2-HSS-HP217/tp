@@ -149,9 +149,10 @@ Format: `list`
 
 ### Editing an application : `editmode`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+Format: `edit INDEX`
+OR `edit [n/NAME] [r/ROLE]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
+* Enters editing mode for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -280,15 +281,28 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 #### Expected Outcome:
 
-  ![result for 'find Google Meta'](images/Find.png)
+  ![result for 'upcoming 3'](images/Find.png)
+
+### Locating applications with upcoming deadlines: `upcoming`
+
+Helps you finds applications with upcoming reminders. Also sets OfferFlow to automatically
+filter for applications with reminders due within the specified number of days on start-up.
+
+Format: `upcoming [DAYS]`
+
+#### Parameters
+- `[DAYS]` → An integer X from 0 to 9, such that applications with reminders due within X days from today are returned. 
+
+* Applications with no reminders at all will not be returned.
 
 #### Examples
-* `find Meta` returns all applications applied to `Meta`
-* `find Meta Google` returns all applications applied to `Meta` and `Google`<br>
+* `upcoming 0` returns all applications with reminders due within 0 days of today, ergo by today.
+* `upcoming 9` returns all applications with reminders due within 7 days of today, ergo within a week.
 
 #### Expected Outcome:
 
-  ![result for 'find Google Meta'](images/Find.png)
+![result for 'find Google Meta'](images/Upcoming.png)
+
 
 ### Filtering applications: `/f`
 
