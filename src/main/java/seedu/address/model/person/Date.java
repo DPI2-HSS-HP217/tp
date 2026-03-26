@@ -39,6 +39,17 @@ public class Date {
     }
 
     /**
+     * Constructs a {@code Date}.
+     *
+     * @param date A LocalDate object.
+     */
+    public Date(LocalDate date) {
+        requireNonNull(date);
+        this.localDate = date;
+        value = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    /**
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {

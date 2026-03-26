@@ -65,6 +65,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getReminderOffset() {
+        return userPrefs.getReminderOffset();
+    }
+
+    @Override
+    public void setReminderOffset(int offset) {
+        userPrefs.setReminderOffset(offset);
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }

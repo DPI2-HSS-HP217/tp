@@ -25,6 +25,17 @@ public interface Model {
     ReadOnlyUserPrefs getUserPrefs();
 
     /**
+     * Sets reminderoffset in userprefs.
+     */
+    void setReminderOffset(int offset);
+
+    /**
+     * Gets reminderoffset in userprefs.
+     */
+    int getReminderOffset();
+
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();

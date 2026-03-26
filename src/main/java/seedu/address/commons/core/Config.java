@@ -16,6 +16,7 @@ public class Config {
 
     // Config values customizable through config file
     private Level logLevel = Level.INFO;
+
     private Path userPrefsFilePath = Paths.get("preferences.json");
 
     public Level getLogLevel() {

@@ -41,6 +41,17 @@ public class Reminder {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if this Reminder's date is due by the other date provided - meaning
+     * it is before, or equal to the date provided
+     * @param otherDate other Date to compare to
+     * @return if this reminder's date is due by the other date
+     */
+    public boolean isByDate(Date otherDate) {
+        return reminderDate.getLocalDate().isBefore(otherDate.getLocalDate())
+                || reminderDate.getLocalDate().isEqual(otherDate.getLocalDate());
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
