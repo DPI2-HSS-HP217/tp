@@ -355,29 +355,29 @@
 .list-cell .label.status-applied {
     -fx-background-color: yellow;
     -fx-text-fill: black;
-    -fx-padding: 2 6 2 6;
+    -fx-padding: .1 6 .1 6;
 }
 
 .list-cell .label.status-interested {
     -fx-background-color: white;
     -fx-text-fill: black;
-    -fx-padding: 2 6 2 6;
+    -fx-padding: .1 6 .1 6;
 }
 
 .list-cell .label.status-interviewing {
     -fx-background-color: orange;
     -fx-text-fill: white;
-    -fx-padding: 2 6 2 6;
+    -fx-padding: .1 6 .1 6;
 }
 
 .list-cell .label.status-rejected {
     -fx-background-color: red;
     -fx-text-fill: white;
-    -fx-padding: 2 6 2 6;
+    -fx-padding: .1 6 .1 6;
 }
 
 .list-cell .label.status-offered {
     -fx-background-color: green;
     -fx-text-fill: white;
-    -fx-padding: 2 6 2 6;
+    -fx-padding: .1 6 .1 6;
 }
