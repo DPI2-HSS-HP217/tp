@@ -10,33 +10,31 @@ public class RoleTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Role(null));
+        assertThrows(NullPointerException.class, () -> new Role(null)); // (equivalence partitioning)
     }
 
     @Test
     public void constructor_invalidRole_throwsIllegalArgumentException() {
-        String invalidRole = "";
+        String invalidRole = " "; // (equivalence partitioning)
         assertThrows(IllegalArgumentException.class, () -> new Role(invalidRole));
     }
 
     @Test
     public void isValidRole() {
-        // null email
+        // null input
         assertThrows(NullPointerException.class, () -> Role.isValidJobRole(null));
 
-        // blank email
-        assertFalse(Role.isValidJobRole("")); // empty string
-        assertFalse(Role.isValidJobRole(" ")); // spaces only
+        // blank role
+        assertFalse(Role.isValidJobRole("")); // empty string (equivalence partitioning)
+        assertFalse(Role.isValidJobRole(" ")); // spaces only (equivalence partitioning)
 
-        // missing parts
-        assertFalse(Role.isValidJobRole("@example.com")); // missing local part
-        assertFalse(Role.isValidJobRole("peterjackexample.com")); // missing '@' symbol
-        assertFalse(Role.isValidJobRole("peterjack@")); // missing domain name
-
-        // invalid parts
-        assertFalse(Role.isValidJobRole("job1"));
-        assertFalse(Role.isValidJobRole("1job"));
-        assertTrue(Role.isValidJobRole("peterjack"));
+        // invalid characters
+        assertFalse(Role.isValidJobRole("@backend")); // symbols not allowed (equivalence partitioning)
+        assertFalse(Role.isValidJobRole("software.engineer")); // symbols not allowed (equivalence partitioning)
+        assertFalse(Role.isValidJobRole("backend-developer")); // symbols not allowed (equivalence partitioning)
+        assertFalse(Role.isValidJobRole("job1")); // numeric not allowed (equivalence partitioning)
+        assertFalse(Role.isValidJobRole("1job")); // numeric not allowed (equivalence partitioning)
+        assertTrue(Role.isValidJobRole("software engineering")); // spaces allowed (equivalence partitioning)
     }
 
     @Test
