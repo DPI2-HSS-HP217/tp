@@ -48,6 +48,9 @@ public class NameTest {
         // same object -> returns true
         assertTrue(name.equals(name));
 
+        assertTrue(name.equals(new Name("valid name")));
+        assertTrue(name.equals(new Name("VALID NAME")));
+
         // null -> returns false
         assertFalse(name.equals(null));
 
