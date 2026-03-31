@@ -22,7 +22,7 @@ import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
 
 public class JsonAdaptedApplicationTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "Google-";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
