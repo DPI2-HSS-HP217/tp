@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.person.Date.isValidDate;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -50,6 +51,11 @@ public class Reminder {
     public boolean isByDate(Date otherDate) {
         return reminderDate.getLocalDate().isBefore(otherDate.getLocalDate())
                 || reminderDate.getLocalDate().isEqual(otherDate.getLocalDate());
+    }
+
+    public String getStyleClass() {
+        boolean isDue = isByDate(new Date(LocalDate.now()));
+        return isDue ? "due" : "notDue";
     }
 
     @Override

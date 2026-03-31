@@ -36,8 +36,13 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-<!--      <Label fx:id="status" styleClass="cell_small_label" text="\$status" />-->
-      <Label fx:id="reminder" styleClass="cell_small_label" text="\$reminder"/>
     </VBox>
+    <VBox fx:id = "reminderBox"  alignment="CENTER_RIGHT" minHeight="105" GridPane.columnIndex="1">
+      <padding>
+        <Insets right="20"  left="20" />
+      </padding>
+      <Label fx:id="reminder" styleClass="cell_big_label" text="\$reminder"/>
+    </VBox>
+
   </GridPane>
 </HBox>
