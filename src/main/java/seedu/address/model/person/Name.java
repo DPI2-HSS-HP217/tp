@@ -10,14 +10,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should start with an alphanumeric character, contain only letters, numbers, "
-            + "single spaces, and the symbols (& . ' - , ( )), and must not end with a space or hyphen.";
+            "Company names must start with a letter or number and cannot be blank.\n"
+            + "Allowed characters: letters, numbers, spaces, and "
+            + "symbols: & . ' , ( ) ! @ # $ % * + - / = ? _ "
+            + "Note: Company names cannot end with any symbols except . ! "
+            + "and cannot have consecutive spaces or be a single character.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}](?!.*[ ]{2})[\\p{Alnum} &.'\\-,()]*[\\p{Alnum}.)$]$";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}](?!.*[ ]{2})[\\p{Alnum} &.'(),!@#_$%*+\\-\\/=?]*[\\p{Alnum}.!]$";
 
     public final String fullName;
 
