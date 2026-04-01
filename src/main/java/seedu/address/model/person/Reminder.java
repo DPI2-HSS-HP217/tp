@@ -49,8 +49,11 @@ public class Reminder {
      * @return if this reminder's date is due by the other date
      */
     public boolean isByDate(Date otherDate) {
-        return reminderDate.getLocalDate().isBefore(otherDate.getLocalDate())
+        boolean isNotOverdue = reminderDate.getLocalDate().isAfter(LocalDate.now())
+                || reminderDate.getLocalDate().isEqual(LocalDate.now());
+        boolean isWithinRange = reminderDate.getLocalDate().isBefore(otherDate.getLocalDate())
                 || reminderDate.getLocalDate().isEqual(otherDate.getLocalDate());
+        return isNotOverdue && isWithinRange;
     }
 
     public String getStyleClass() {

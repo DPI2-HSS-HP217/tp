@@ -17,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,6 +59,17 @@ public class TypicalPersons {
             .withStatus("interviewed")
             .withTags("owesMoney", "friends")
             .withReminder("second interview", "2026-12-12")
+            .buildWithReminder();
+
+    public static final Application HENSON_WITH_REMINDER_INTERVIEW_TODAY = new PersonBuilder().withName("Henson Meier")
+            .withAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("johnd@example.com")
+            .withPhone("98765432")
+            .withDate("2024-02-20")
+            .withRole("Project Manager")
+            .withStatus("interviewed")
+            .withTags("owesMoney", "friends")
+            .withReminder("second interview", LocalDate.now().toString())
             .buildWithReminder();
 
     public static final Application CARL = new PersonBuilder().withName("Carl Kurz")

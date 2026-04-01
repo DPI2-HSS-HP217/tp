@@ -43,6 +43,8 @@ public class UiManager implements Ui {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
+            mainWindow.displayText("The UI automatically filters for all applications with upcoming deadlines on"
+                + " startup. Type \"list\" to display all applications.");
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));

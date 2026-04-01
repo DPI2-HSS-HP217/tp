@@ -22,11 +22,21 @@ public class ReminderWithinOffsetPredicate implements Predicate<Application> {
 
     @Override
     public boolean equals(Object other) {
-        return other instanceof ReminderWithinOffsetPredicate;
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ReminderWithinOffsetPredicate)) {
+            return false;
+        }
+
+        ReminderWithinOffsetPredicate otherReminderWithinOffsetPredicate = (ReminderWithinOffsetPredicate) other;
+        return date.equals(otherReminderWithinOffsetPredicate.date);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).toString();
+        return new ToStringBuilder(this).add("date", date).toString();
     }
 }

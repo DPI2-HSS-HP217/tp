@@ -198,4 +198,8 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    void displayText(String text) {
+        resultDisplay.setFeedbackToUser(text);
+    }
 }

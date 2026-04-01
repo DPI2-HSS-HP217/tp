@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDate;
@@ -12,10 +13,10 @@ import seedu.address.model.person.ReminderWithinOffsetPredicate;
 /**
  * Parses input arguments and creates a new UpcomingCommand object
  */
-public class UpcomingCommandParser {
+public class UpcomingCommandParser implements Parser<UpcomingCommand> {
 
-    private static final int MAX_OFFSET = 9;
-    private static final int MIN_OFFSET = 0;
+    private static final int MIN_OFFSET = UpcomingCommand.MIN_OFFSET;
+    private static final int MAX_OFFSET = UpcomingCommand.MAX_OFFSET;
 
     /**
      * Parses the given {@code String} of arguments in the context of the UpcomingCommand
@@ -28,14 +29,26 @@ public class UpcomingCommandParser {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpcomingCommand.MESSAGE_USAGE));
         }
-        long daysOffset = Long.parseLong(trimmedArgs);
-        if (daysOffset < MIN_OFFSET || daysOffset > MAX_OFFSET) {
+        if (!isValidInteger(trimmedArgs)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UpcomingCommand.MESSAGE_DAYS_OUT_OF_RANGE));
+                    UpcomingCommand.MESSAGE_INVALID_ARGS));
         }
+        long daysOffset = Long.parseLong(trimmedArgs);
         Date date = new Date(LocalDate.now().plusDays(daysOffset));
         int days = (int) daysOffset;
 
         return new UpcomingCommand(new ReminderWithinOffsetPredicate(date), days);
+    }
+
+    private static boolean isValidInteger(String s) {
+        requireNonNull(s);
+
+        try {
+            int value = Integer.parseInt(s);
+            return value >= MIN_OFFSET && value <= MAX_OFFSET && !s.startsWith("+");
+            // "+1" is successfully parsed by Integer#parseInt(String)
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 }

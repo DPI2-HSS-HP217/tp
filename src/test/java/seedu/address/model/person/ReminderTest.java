@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
+
 
 public class ReminderTest {
 
@@ -54,6 +57,44 @@ public class ReminderTest {
         // different types -> returns false
         assertFalse(reminder.equals(5.0f));
 
+    }
+
+    @Test
+    public void isByDate_withinRange_success() {
+        //Reminder due today
+        String validReminderName = "test";
+        String firstValidReminderDate = LocalDate.now().toString();
+        Reminder firstReminder = new Reminder(validReminderName, firstValidReminderDate);
+        //other date equals reminder date
+        assertTrue(firstReminder.isByDate(new Date(LocalDate.now())));
+        //other date ahead of reminder date
+        assertTrue(firstReminder.isByDate(new Date(LocalDate.now().plusDays(1))));
+
+        //Reminder due in future
+        String secondValidReminderDate = LocalDate.now().plusDays(2).toString();
+        Reminder secondReminder = new Reminder(validReminderName, secondValidReminderDate);
+        //other date equals reminder date
+        assertTrue(secondReminder.isByDate(new Date(LocalDate.now().plusDays(2))));
+        //other date ahead of reminder date
+        assertTrue(secondReminder.isByDate(new Date(LocalDate.now().plusDays(3))));
+    }
+
+    @Test
+    public void isByDate_outsideRange_failure() {
+        //Reminder overdue
+        String validReminderName = "test";
+        String firstValidReminderDate = LocalDate.now().minusDays(1).toString();
+        Reminder firstReminder = new Reminder(validReminderName, firstValidReminderDate);
+        //other date equals reminder date
+        assertFalse(firstReminder.isByDate(new Date(LocalDate.now())));
+        //other date ahead of reminder date
+        assertFalse(firstReminder.isByDate(new Date(LocalDate.now().plusDays(1))));
+
+        //Reminder due in future
+        String secondValidReminderDate = LocalDate.now().plusDays(2).toString();
+        Reminder secondReminder = new Reminder(validReminderName, secondValidReminderDate);
+        //other date behind reminder date
+        assertFalse(secondReminder.isByDate(new Date(LocalDate.now().plusDays(1))));
     }
 }
 

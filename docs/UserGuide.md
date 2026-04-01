@@ -281,7 +281,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 #### Expected Outcome:
 
-  ![result for 'upcoming 3'](images/Find.png)
+  ![result for 'find Google Meta'](images/Find.png)
 
 ### Locating applications with upcoming deadlines: `upcoming`
 
@@ -291,17 +291,18 @@ filter for applications with reminders due within the specified number of days o
 Format: `upcoming [DAYS]`
 
 #### Parameters
-- `[DAYS]` → An integer X from 0 to 9, such that applications with reminders due within X days from today are returned. 
+- `[DAYS]` → An integer X from 0 to 7 inclusive, such that applications with reminders due within X days from today are returned. 
 
 * Applications with no reminders at all will not be returned.
+* Applications with reminders that are overdue (e.g due prior to the current date) will not be returned.
 
 #### Examples
 * `upcoming 0` returns all applications with reminders due within 0 days of today, ergo by today.
-* `upcoming 9` returns all applications with reminders due within 7 days of today, ergo within a week.
+* `upcoming 7` returns all applications with reminders due within 7 days of today, ergo within a week.
 
 #### Expected Outcome:
 
-![result for 'find Google Meta'](images/Upcoming.png)
+![result for 'upcoming 3'](images/Upcoming.png)
 
 
 ### Filtering applications: `filter`
