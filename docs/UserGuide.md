@@ -390,6 +390,7 @@ Format: `folder FOLDER_NAME`
 **Caution:**
 - Folder name cannot be empty
 - Folder name cannot contain spaces or special characters (e.g. `@`, `.`)
+- If a folder with the same name already exists, the command will fail. Use `toggle FOLDER_NAME` to switch to it instead.
 </box>
 
 #### Examples
@@ -398,6 +399,7 @@ Format: `folder FOLDER_NAME`
 
 #### Expected Outcome:
 - A new empty address book is created and you are switched to it immediately.
+- The status bar at the bottom of the window updates to show the current file path (e.g. `./data/Y1S2.json`).
 
 ---
 
@@ -424,6 +426,27 @@ Format: `toggle FOLDER_NAME`
 
 #### Expected Outcome:
 - You are switched to the specified address book and its applications are loaded.
+- The status bar at the bottom of the window updates to show the current file path (e.g. `./data/Y1S2.json`).
+
+---
+
+### Listing all address books : `folders`
+
+Lists all existing address books saved in the `data` directory.
+
+Format: `folders`
+
+#### Expected Outcome:
+- All available address book names are displayed (one per line), sorted alphabetically.
+- If no address books exist yet, a message is shown indicating the data directory is empty.
+
+#### Examples
+```
+Folders available:
+internships-2025
+Y1S2
+Y2S1
+```
 
 ---
 
@@ -496,5 +519,6 @@ Export past applications into different folder to declutter your active list.
 | **Filter** | `filter /n /KEYWORD` or `filter /d /YYYY-MM-DD` or `filter /s /STATUS` or `filter /t /TAG` | `filter /n /Tiktok` or `filter /d /2024-06-18` or `filter /s /Rejected` or `filter /t /java` |
 | **Folder** | `folder FOLDER_NAME` | `folder Y1S2` |
 | **Toggle** | `toggle FOLDER_NAME` | `toggle Y1S2` |
+| **List Folders** | `folders` | `folders` |
 | **List** | `list` | `list` |
 | **Help** | `help` | `help` |
