@@ -1,12 +1,12 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.function.Function;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.function.Predicate;
-import java.util.function.Function;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,7 +29,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedApplication {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    public static final String NONESTRING = "None";
+    public static final String NONESTRING = "";
 
     private final String name;
     private final String phone;
@@ -71,39 +71,18 @@ class JsonAdaptedApplication {
         this.reminderDate = reminderDate;
     }
 
-    /**
-     * Converts a given {@code Person} into this class for Jackson use.
-     */
-//    public JsonAdaptedApplication(Application source) {
-//        name = source.getName().fullName;
-//        phone = source.getPhone().value;
-//        email = source.getEmail().value;
-//        address = source.getAddress().value;
-//        tags.addAll(source.getTags().stream()
-//                .map(JsonAdaptedTag::new)
-//                .collect(Collectors.toList()));
-//        date = source.getDate().value;
-//        status = source.getStatus().value;
-//        role = source.getRole().value;
-//
-//        hasReminder = source.hasReminder();
-//        reminderEvent = hasReminder ? source.getReminder().getReminderName() : null;
-//        reminderDate = hasReminder ? source.getReminder().getReminderDate().value : null;
-//    }
-
     public JsonAdaptedApplication(Application source) {
-        name = source.getName() != null ? source.getName().fullName : NONESTRING;
+        name = source.getName().fullName;
+        role = source.getRole().value;
         phone = source.getPhone() != null ? source.getPhone().value : NONESTRING;
         email = source.getEmail() != null ? source.getEmail().value : NONESTRING;
         address = source.getAddress() != null ? source.getAddress().value : NONESTRING;
+        date = source.getDate() != null ? source.getDate().value : NONESTRING;
+        status = source.getStatus() != null ? source.getStatus().value : NONESTRING;
 
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-
-        date = source.getDate() != null ? source.getDate().value : NONESTRING;
-        status = source.getStatus() != null ? source.getStatus().value : NONESTRING;
-        role = source.getRole() != null ? source.getRole().value : NONESTRING;
 
         hasReminder = source.hasReminder();
         reminderEvent = hasReminder ? source.getReminder().getReminderName() : null;
@@ -121,58 +100,54 @@ class JsonAdaptedApplication {
             personTags.add(tag.toModelType());
         }
 
+        checkMandatoryFields();
+        final Name modelName = new Name(name);
+        final Role modelRole = new Role(role);
+
+        final Phone modelPhone = parseOptional(phone, Phone::isValidPhone, Phone.MESSAGE_CONSTRAINTS, Phone::new);
+        final Email modelEmail = parseOptional(email, Email::isValidEmail, Email.MESSAGE_CONSTRAINTS, Email::new);
+        final Date modelDate = parseOptional(date, Date::isValidDate, Date.MESSAGE_CONSTRAINTS, Date::new);
+        final Address modelAddress = parseOptional(address, Address::isValidAddress,
+                    Address.MESSAGE_CONSTRAINTS, Address::new);
+        final Status modelStatus = parseOptional(status, Status::isValidStatus,
+                    Status.MESSAGE_CONSTRAINTS, Status::new);
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Reminder modelReminder = parseOptionalReminder();
+
+        return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                modelDate, modelRole, modelStatus, modelReminder);
+    }
+
+    private void checkMandatoryFields() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
-
         if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
         if (!Role.isValidJobRole(role)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
-        final Role modelRole = new Role(role);
+    }
 
-        final Phone modelPhone = parseOptional(phone, Phone::isValidPhone, Phone.MESSAGE_CONSTRAINTS, Phone::new);
-
-        final Email modelEmail = parseOptional(email, Email::isValidEmail, Email.MESSAGE_CONSTRAINTS, Email::new);
-
-        final Address modelAddress = parseOptional(address, Address::isValidAddress,
-                                                Address.MESSAGE_CONSTRAINTS, Address::new);
-
-        final Date modelDate = parseOptional(date, Date::isValidDate, Date.MESSAGE_CONSTRAINTS, Date::new);
-
-        final Status modelStatus = parseOptional(status, Status::isValidStatus,
-                Status.MESSAGE_CONSTRAINTS, Status::new);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
+    private Reminder parseOptionalReminder() throws IllegalValueException {
         if (hasReminder) {
             if (reminderEvent == null || reminderDate == null) {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                         Reminder.class.getSimpleName()));
             }
-
             if (!Reminder.isValidReminder(reminderEvent)) {
                 throw new IllegalValueException(Reminder.MESSAGE_CONSTRAINTS);
             }
-
             if (!Date.isValidDate(reminderDate)) {
                 throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
             }
-
-            final Reminder modelReminder = new Reminder(reminderEvent, reminderDate);
-
-            return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelDate, modelRole, modelStatus, modelReminder);
+            return new Reminder(reminderEvent, reminderDate);
         }
-
-        return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelDate, modelRole, modelStatus);
+        return null;
     }
 
     private <T> T parseOptional(

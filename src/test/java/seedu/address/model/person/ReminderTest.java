@@ -43,7 +43,7 @@ public class ReminderTest {
         Reminder reminder = new Reminder(validReminderName, validReminderDate);
 
         // same values -> returns False
-        assertFalse(reminder.equals(new Reminder("test", "2026-12-12")));
+        assertTrue(reminder.equals(new Reminder("test", "2026-12-12")));
 
         // same object -> returns true
         assertTrue(reminder.equals(reminder));

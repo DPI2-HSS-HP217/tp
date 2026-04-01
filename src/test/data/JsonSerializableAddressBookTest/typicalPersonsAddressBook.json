@@ -17,7 +17,10 @@
     "date" : "2024-02-20",
     "role" : "Project Manager",
     "status" : "interviewed",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "hasReminder" : true,
+    "reminderEvent" : "second interview",
+    "reminderDate" : "2026-12-12"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",

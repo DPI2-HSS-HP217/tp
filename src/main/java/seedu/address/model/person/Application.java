@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -37,16 +35,8 @@ public class Application {
      */
     public Application(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                 Date date, Role role, Status status) {
-//        requireAllNonNull(name, phone, email, role, tags, status, date, address);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.role = role;
-        this.date = date;
-        this.tags.addAll(tags);
-        this.address = address;
-        this.status = status;
-        this.reminder = null;
+        //requireAllNonNull(name, phone, email, role, tags, status, date, address);
+        this(name, phone, email, address, tags, date, role, status, null);
     }
 
     /**
@@ -54,7 +44,7 @@ public class Application {
      */
     public Application(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                        Date date, Role role, Status status, Reminder reminder) {
-//        requireAllNonNull(name, phone, email, role, tags, status, date, address);
+        //requireAllNonNull(name, phone, email, role, tags, status, date, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -161,14 +151,16 @@ public class Application {
         }
 
         Application otherApplication = (Application) other;
+        //Object.equals to prevent NPE
         return name.fullName.equalsIgnoreCase(otherApplication.name.fullName)
-                && phone.equals(otherApplication.phone)
-                && email.equals(otherApplication.email)
-                && address.equals(otherApplication.address)
-                && date.equals(otherApplication.date)
-                && role.equals(otherApplication.role)
-                && status.equals(otherApplication.status)
-                && tags.equals(otherApplication.tags);
+                && Objects.equals(phone, otherApplication.phone)
+                && Objects.equals(email, otherApplication.email)
+                && Objects.equals(address, otherApplication.address)
+                && Objects.equals(date, otherApplication.date)
+                && Objects.equals(role, otherApplication.role)
+                && Objects.equals(status, otherApplication.status)
+                && Objects.equals(tags, otherApplication.tags)
+                && Objects.equals(reminder, otherApplication.reminder);
     }
 
 

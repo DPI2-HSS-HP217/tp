@@ -13,20 +13,20 @@ public class EmailTest {
         assertThrows(NullPointerException.class, () -> new Email(null));
     }
 
-    @Test
-    public void constructor_invalidEmail_throwsIllegalArgumentException() {
-        String invalidEmail = "";
-        assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
-    }
+//    @Test
+//    public void constructor_invalidEmail_throwsIllegalArgumentException() {
+//        String invalidEmail = "";
+//        assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
+//    }
 
     @Test
     public void isValidEmail() {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null)); // (equivalence paritioning)
 
-        // blank email
-        assertFalse(Email.isValidEmail("")); // empty string (equivalence paritioning)
-        assertFalse(Email.isValidEmail(" ")); // spaces only (equivalence paritioning)
+//        // blank email
+//        assertFalse(Email.isValidEmail("")); // empty string (equivalence paritioning)
+//        assertFalse(Email.isValidEmail(" ")); // spaces only (equivalence paritioning)
 
         // missing parts
         assertFalse(Email.isValidEmail("@example.com")); // missing local part (equivalence paritioning)

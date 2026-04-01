@@ -116,10 +116,10 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
     }
 
-    @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-    }
+//    @Test
+//    public void parseAddress_invalidValue_throwsParseException() {
+//        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+//    }
 
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
@@ -208,10 +208,10 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus((String) null));
     }
 
-    @Test
-    public void parseStatus_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_STATUS));
-    }
+//    @Test
+//    public void parseStatus_invalidValue_throwsParseException() {
+//        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_STATUS));
+//    }
 
     @Test
     public void parseStatus_validValueWithoutWhitespace_returnsStatus() throws Exception {

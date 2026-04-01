@@ -53,6 +53,19 @@ public class Reminder {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Reminder)) {
+            return false;
+        }
+        Reminder otherReminder = (Reminder) other;
+        return reminderName.equals(otherReminder.reminderName)
+                && reminderDate.equals(otherReminder.reminderDate);
+    }
+
+    @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(reminderName, reminderDate);
