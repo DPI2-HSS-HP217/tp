@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 /**
  * A Class to represent the date applied for a job application.
  */
@@ -15,6 +17,8 @@ public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should follow the format YYYY-MM-DD (e.g., 2024-12-25), and it should be a valid date.";
+
+    public static final String MESSAGE_FUTURE_DATE = "OOPS! The date cannot be in the future.";
 
     /*
      * Date validation regex for YYYY-MM-DD format
@@ -77,6 +81,24 @@ public class Date {
     private LocalDate parseToLocalDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(date, formatter);
+    }
+
+    /**
+     * Returns true if this date is not after today's date.
+     *
+     * @return true if the date is not in the future
+     * @throws CommandException if the date is in the future
+     */
+    public boolean checkNotFutureDate() throws CommandException {
+        if (localDate == null) {
+            return true;
+        }
+
+        LocalDate today = LocalDate.now();
+        if (localDate.isAfter(today)) {
+            throw new CommandException(MESSAGE_FUTURE_DATE);
+        }
+        return true;
     }
 
     /**
