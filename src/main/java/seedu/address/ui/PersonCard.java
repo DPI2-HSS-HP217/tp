@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Application;
 import seedu.address.model.person.Reminder;
 
@@ -49,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label reminder;
+    @FXML
+    private VBox reminderBox;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -70,9 +73,9 @@ public class PersonCard extends UiPart<Region> {
         if (person.hasReminder()) {
             Reminder u = person.getReminder();
             this.reminder.setVisible(true);
-            String text = u.getReminderName();
-            text += " - " + u.getReminderDate().value;
-
+            String text = "Reminder\n" + u.getReminderName() + "\n" + u.getReminderDate().value;
+            reminderBox.getStyleClass().removeIf(s -> s.startsWith("reminder-"));
+            reminderBox.getStyleClass().add("reminder-" + person.getReminder().getStyleClass());
             this.reminder.setText(text);
         } else {
             this.reminder.setVisible(false);
