@@ -28,28 +28,52 @@ public class OverwriteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        checkDuplicateExist();
+        AddCommand duplicateApplication = getStoredDuplicate();
+        Application replacementApplication = duplicateApplication.getApplication();
+
+        Application existingApplication = findExistingApplication(model, replacementApplication);
+
+        if (existingApplication == null) {
+            handleNoExistingApplication();
+        }
+
+        overwriteApplication(model, existingApplication, replacementApplication);
+
+        return successResult(replacementApplication);
+
+    }
+
+    private void checkDuplicateExist() throws DuplicateApplicationException {
         if (!DuplicateApplicationStore.hasLastDuplicateApplication()) {
             throw new DuplicateApplicationException(MESSAGE_NO_DUPLICATE);
         }
+    }
 
-        AddCommand duplicateApplication = DuplicateApplicationStore.getLastDuplicateApplication();
-        Application replacementApplication = duplicateApplication.getApplication();
+    private AddCommand getStoredDuplicate() {
+        return DuplicateApplicationStore.getLastDuplicateApplication();
+    }
 
+    private Application findExistingApplication(Model model, Application newApplication) {
         List<Application> currentList = model.getFilteredPersonList();
-        Application existingApplication = currentList.stream()
-                .filter(application -> application.isSameApplication(replacementApplication))
+        return currentList.stream()
+                .filter(application -> application.isSameApplication(newApplication))
                 .findAny()
                 .orElse(null);
+    }
 
-        if (existingApplication == null) {
-            DuplicateApplicationStore.clear();
-            throw new DuplicateApplicationException("No duplicate application found.");
-        }
-
-        model.deletePerson(existingApplication);
-        model.addPerson(replacementApplication);
+    private void handleNoExistingApplication() throws DuplicateApplicationException {
         DuplicateApplicationStore.clear();
+        throw new DuplicateApplicationException("No duplicate application found.");
+    }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(replacementApplication)));
+    private void overwriteApplication(Model model, Application oldApplication, Application newApplication) {
+        model.deletePerson(oldApplication);
+        model.addPerson(newApplication);
+        DuplicateApplicationStore.clear();
+    }
+
+    private CommandResult successResult(Application newApplication) {
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newApplication)));
     }
 }

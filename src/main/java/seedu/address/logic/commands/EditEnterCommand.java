@@ -22,12 +22,12 @@ public class EditEnterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ":\n"
             + "Edit via INDEX (Enter editing mode for the Application identified by the index number in "
-            + "the displayed person list)\n"
+            + "the displayed application list)\n"
             + "Edit via Name and Role (Enter editing mode for the Application with the exact Name and Role) \n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1\n"
             + "Parameters: Name (String), Role (String with no numbers) \n"
-            + "Example: " + COMMAND_WORD + " n/Goog r/CEO";
+            + "Example: " + COMMAND_WORD + " n/Google r/CEO";
 
     private final Index targetIndex;
     private final Name name;

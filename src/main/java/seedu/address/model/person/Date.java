@@ -46,21 +46,20 @@ public class Date {
     public Date(LocalDate date) {
         requireNonNull(date);
         this.localDate = date;
-        value = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        value = date.format(DateTimeFormatter.ofPattern("uuuu-MM-dd"));
     }
 
     /**
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
+        test = test.trim();
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
 
-        // Additional validation using LocalDate to catch invalid dates like 2024-02-31
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate.parse(test, formatter);
+            LocalDate.parse(test, DateTimeFormatter.ISO_LOCAL_DATE);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -82,16 +81,9 @@ public class Date {
         return localDate;
     }
 
-    /**
-     * Returns the date in YYYY-MM-DD format.
-     */
-    public String toStorageFormat() {
-        return localDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
-    }
-
     @Override
     public String toString() {
-        return value; // Returns in YYYY-MM-DD format
+        return value;
     }
 
     @Override
@@ -112,5 +104,4 @@ public class Date {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

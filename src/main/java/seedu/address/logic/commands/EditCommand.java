@@ -39,7 +39,7 @@ import seedu.address.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = "Edits the details of the application identified "
-            + "by the index number used in the displayed person list / combination of Company Name and Job Role. "
+            + "by the index number used in the displayed application list / combination of Company Name and Job Role. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: [" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "

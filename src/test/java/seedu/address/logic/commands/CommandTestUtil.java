@@ -69,7 +69,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2024-13-45"; // invalid month and day
-    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + ""; // empty role
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + " "; // empty role
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + " "; // invalid status
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -82,12 +82,12 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND)
-                .withDate(VALID_DATE_AMY).withRole(VALID_ROLE_AMY).withStatus(VALID_STATUS_AMY) // Added new fields
+                .withDate(VALID_DATE_AMY).withRole(VALID_ROLE_AMY).withStatus(VALID_STATUS_AMY)
                 .build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-                .withDate(VALID_DATE_BOB).withRole(VALID_ROLE_BOB).withStatus(VALID_STATUS_BOB) // Added new fields
+                .withDate(VALID_DATE_BOB).withRole(VALID_ROLE_BOB).withStatus(VALID_STATUS_BOB)
                 .build();
     }
 

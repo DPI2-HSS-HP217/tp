@@ -31,12 +31,12 @@ public class RemoveReminderCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ":\n"
             + "Remove Reminder via INDEX (Remove the reminder of the Application identified "
-            + "by the index number in the displayed person list)\n"
+            + "by the index number in the displayed application list)\n"
             + "Remove Reminder via Name and Role (Deletes the reminder of Application with the exact Name and Role) \n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1\n"
             + "Parameters: Name (String), Role (String with no numbers) \n"
-            + "Example: " + COMMAND_WORD + " n/Goog r/CEO";
+            + "Example: " + COMMAND_WORD + " n/Google r/CEO";
 
 
     public static final String MESSAGE_REMOVE_REMINDER_SUCCESS = "Removed Reminder: %1$s";

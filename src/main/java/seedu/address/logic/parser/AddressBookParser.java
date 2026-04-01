@@ -114,13 +114,16 @@ public class AddressBookParser {
             break;
 
         case FolderCommand.COMMAND_WORD_FOLDER:
-            return new FolderCommandParser(true).parse(arguments);
+            command = new FolderCommandParser(true).parse(arguments);
+            break;
 
         case FolderCommand.COMMAND_WORD_TOGGLE:
-            return new FolderCommandParser(false).parse(arguments);
+            command = new FolderCommandParser(false).parse(arguments);
+            break;
 
         case RemoveReminderCommand.COMMAND_WORD:
-            return new RemoveReminderCommandParser().parse(arguments);
+            command = new RemoveReminderCommandParser().parse(arguments);
+            break;
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

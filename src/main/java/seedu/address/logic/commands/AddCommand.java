@@ -41,7 +41,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New application added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON =
-            "This application already exists. Use `overwrite` to replace existing application";
+            "This application already exists. \nExisting application: %1$s\n"
+            + "Use `overwrite` to replace existing application";
     public static final String INVALID_DATE = "OOPS! Invalid date format, use the format (YYYY-MM-DD)";
 
 
@@ -59,18 +60,43 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            DuplicateApplicationStore.setLastDuplicateApplication(this);
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
+        checkForDuplicate(model);
         model.addPerson(toAdd);
+        clearStoredDuplicate();
+
+        return successResult();
+    }
+
+    private void checkForDuplicate(Model model) throws CommandException {
+        if (model.hasPerson(toAdd)) {
+            Application existingApplication = model.getFilteredPersonList().stream()
+                    .filter(application -> application.isSameApplication(toAdd))
+                    .findAny()
+                    .orElse(null);
+            DuplicateApplicationStore.setLastDuplicateApplication(this);
+
+            String existingMessage = String.format(MESSAGE_DUPLICATE_PERSON, formatApplication(existingApplication));
+            throw new CommandException(existingMessage);
+        }
+    }
+
+    private void clearStoredDuplicate() {
         DuplicateApplicationStore.clear();
+    }
+
+    private CommandResult successResult() {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     public Application getApplication() {
         return toAdd;
+    }
+
+    private String formatApplication(Application existingApplication) {
+        if (existingApplication == null) {
+            return "No existing application found.";
+        }
+        return Messages.format(existingApplication);
     }
 
     @Override

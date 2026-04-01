@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
@@ -50,7 +50,11 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        CommandException exception = assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+
+        assertTrue(exception.getMessage().contains("This application already exists"));
+        assertTrue(exception.getMessage().contains(validPerson.getName().fullName));
+        assertTrue(exception.getMessage().contains(validPerson.getRole().value));
     }
 
     @Test
@@ -185,6 +189,13 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSameApplication(person);
         }
+
+        @Override
+        public ObservableList<Application> getFilteredPersonList() {
+            ArrayList<Application> list = new ArrayList<>();
+            list.add(person);
+            return javafx.collections.FXCollections.observableArrayList(list);
+        }
     }
 
     /**
@@ -208,6 +219,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public ObservableList<Application> getFilteredPersonList() {
+            return javafx.collections.FXCollections.observableArrayList(personsAdded);
         }
     }
 

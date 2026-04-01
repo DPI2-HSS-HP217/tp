@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/Goog r/CEO";
 
 
-    public static final String MESSAGE_DELETE_APPLICATION_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_APPLICATION_SUCCESS = "Deleted Application: %1$s";
 
     private final boolean isIndexDelete;
     private final Index targetIndex;
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for a Delete via Index command.
-     * @param targetIndex
+     * @param targetIndex Application index.
      */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -51,8 +51,8 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for a Delete via Application command.
      *
-     * @param name
-     * @param role
+     * @param name Company Name.
+     * @param role Company Job Role.
      */
     public DeleteCommand(Name name, Role role) {
         this.targetIndex = null;

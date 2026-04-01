@@ -35,26 +35,18 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DATE);
+        ArgumentMultimap argMultimap = tokenizeArguments(args);
+        checkRequiredPrefixes(argMultimap);
+        checkNoDuplicatePrefixes(argMultimap);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE,
-                    PREFIX_ROLE, PREFIX_STATUS)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DATE,
-                PREFIX_ROLE, PREFIX_STATUS);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-        Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
+        Name name = parseName(argMultimap);
+        Phone phone = parsePhone(argMultimap);
+        Email email = parseEmail(argMultimap);
+        Address address = parseAddress(argMultimap);
+        Set<Tag> tagList = parseTags(argMultimap);
+        Date date = parseDate(argMultimap);
+        Status status = parseStatus(argMultimap);
+        Role role = parseRole(argMultimap);
 
         Application application = new Application(name, phone, email, address, tagList, date, role, status);
 
@@ -69,4 +61,53 @@ public class AddCommandParser implements Parser<AddCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    private ArgumentMultimap tokenizeArguments(String args) {
+        return ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_TAG, PREFIX_ROLE, PREFIX_STATUS, PREFIX_DATE);
+    }
+
+    private void checkRequiredPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE,
+                    PREFIX_ROLE, PREFIX_STATUS)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private void checkNoDuplicatePrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DATE,
+                PREFIX_ROLE, PREFIX_STATUS);
+    }
+
+    private Name parseName(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+    }
+
+    private Role parseRole(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
+    }
+
+    private Date parseDate(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+    }
+
+    private Email parseEmail(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+    }
+
+    private Address parseAddress(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+    }
+
+    private Set<Tag> parseTags(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+    }
+
+    private Status parseStatus(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+    }
+
+    private Phone parsePhone(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+    }
 }

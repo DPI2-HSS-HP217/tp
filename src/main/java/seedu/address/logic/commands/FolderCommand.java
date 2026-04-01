@@ -14,11 +14,11 @@ public class FolderCommand extends Command {
     public static final String COMMAND_WORD_TOGGLE = "toggle";
 
     public static final String MESSAGE_USAGE_FOLDER = COMMAND_WORD_FOLDER
-                                    + ": Creates a new empty address book saved under data/<FOLDER_NAME>.json.\n"
+                                    + ": Creates a new empty OfferFlow folder saved under data/<FOLDER_NAME>.json.\n"
                                     + "Example: " + COMMAND_WORD_FOLDER + " Y1S2";
 
     public static final String MESSAGE_USAGE_TOGGLE = COMMAND_WORD_TOGGLE
-                                    + ": Switches to an existing address book at data/<FOLDER_NAME>.json.\n"
+                                    + ": Switches to an existing OfferFlow folder at data/<FOLDER_NAME>.json.\n"
                                     + "Example: " + COMMAND_WORD_TOGGLE + " Y1S2";
 
     private final String folderName;

@@ -25,17 +25,20 @@ public class PhoneTest {
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
 
         // invalid phone numbers
-        assertFalse(Phone.isValidPhone("")); // empty string
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
-        assertFalse(Phone.isValidPhone("phone")); // non-numeric
-        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("")); // empty string (equivalence paritioning)
+        assertFalse(Phone.isValidPhone(" ")); // spaces only (equivalence paritioning)
+        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers (boundary value analysis)
+        assertFalse(Phone.isValidPhone("phone")); // non-numeric (equivalence paritioning)
+        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits (equivalence paritioning)
+        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits (equivalence paritioning)
+        assertFalse(Phone.isValidPhone("1")); // exactly 1 number (boundary value analysis)
+        assertFalse(Phone.isValidPhone("984$%890")); // number with invalid symbols (equivalence paritioning)
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers (boundary value analysis)
+        assertTrue(Phone.isValidPhone("9114")); // 1 more than the minimum numbers (boundary value analysis)
+        assertTrue(Phone.isValidPhone("93121534")); // (equivalence paritioning)
+        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers (equivalence paritioning)
     }
 
     @Test

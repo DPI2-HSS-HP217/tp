@@ -12,6 +12,7 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
@@ -22,28 +23,34 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Application[] getSamplePersons() {
         return new Application[] {
-            new Application(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), new Date("2025-11-11"), new Role("CEO"), new Status("Applied")),
-            new Application(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), new Date("2025-11-11"), new Role("CEO"), new Status("Applied")),
-            new Application(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), new Date("2025-11-11"), new Role("CEO"), new Status(
-                                "Applied")),
-            new Application(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), new Date("2025-11-11"), new Role("CEO"), new Status(
-                                "Applied")),
-            new Application(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), new Date("2025-11-11"), new Role("CEO"), new Status(
-                                "Applied")),
-            new Application(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), new Date("2025-11-11"), new Role("CEO"), new Status(
-                                "Applied"))
+            new Application(new Name("Google"), new Phone("6502530000"), new Email("careers@google.com"),
+                new Address("1600 Amphitheatre Parkway, Mountain View, CA 94043"),
+                getTagSet("tech", "remote"), new Date("2024-03-15"), new Role("Software Engineer"),
+                new Status("interested"),
+                new Reminder("Technical Interview", "2024-04-10")),
+            new Application(new Name("Microsoft"), new Phone("4258828080"), new Email("jobs@microsoft.com"),
+                new Address("One Microsoft Way, Redmond, WA 98052"),
+                getTagSet("tech", "hybrid"), new Date("2024-03-18"), new Role("Product Manager"),
+                new Status("interviewing"),
+                new Reminder("Final Interview", "2024-04-12")),
+            new Application(new Name("Amazon"), new Phone("2062661000"), new Email("jobs@amazon.com"),
+                new Address("410 Terry Ave N, Seattle, WA 98109"),
+                getTagSet("tech", "cloud"), new Date("2024-03-22"), new Role("Cloud Architect"),
+                new Status("pending"),
+                new Reminder("Follow up Email", "2024-04-05")),
+            new Application(new Name("Stripe"), new Phone("6282187000"), new Email("jobs@stripe.com"),
+                new Address("510 Townsend Street, San Francisco, CA 94103"),
+                getTagSet("startup", "fintech"), new Date("2024-04-08"), new Role("Backend Engineer"),
+                new Status("applied")),
+            new Application(new Name("Meta"), new Phone("6505434800"), new Email("careers@meta.com"),
+                new Address("1 Hacker Way, Menlo Park, CA 94025"),
+                getTagSet("tech", "social"), new Date("2024-03-25"), new Role("Frontend Engineer"),
+                new Status("offered"),
+                new Reminder("Final Interview", "2024-04-12")),
+            new Application(new Name("JPMorgan Chase"), new Phone("2122706000"), new Email("recruiting@jpmchase.com"),
+                new Address("383 Madison Ave, New York, NY 10179"),
+                getTagSet("finance", "analytics"), new Date("2024-03-30"), new Role("Quantitative Analyst"),
+                new Status("rejected")),
         };
     }
 

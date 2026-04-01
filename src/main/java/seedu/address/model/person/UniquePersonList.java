@@ -44,7 +44,7 @@ public class UniquePersonList implements Iterable<Application> {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateApplicationException(
-                    "This application already exists. Use /OverWrite to replace existing application");
+                    "This application already exists. Use overwrite to replace existing application");
         }
         internalList.add(toAdd);
     }
@@ -64,7 +64,7 @@ public class UniquePersonList implements Iterable<Application> {
 
         if (!target.isSameApplication(editedPerson) && contains(editedPerson)) {
             throw new DuplicateApplicationException(
-                    "This application already exists. Use /OverWrite to replace existing application");
+                    "This application already exists. Use overwrite to replace existing application");
         }
 
         internalList.set(index, editedPerson);
@@ -94,7 +94,7 @@ public class UniquePersonList implements Iterable<Application> {
         requireAllNonNull(persons);
         if (!personsAreUnique(persons)) {
             throw new DuplicateApplicationException(
-                    "This application already exists. Use /OverWrite to replace existing application");
+                    "This application already exists. Use overwrite to replace existing application");
         }
 
         internalList.setAll(persons);
