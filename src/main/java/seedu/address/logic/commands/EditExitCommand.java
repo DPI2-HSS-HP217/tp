@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
-import java.util.Objects;
 
 import seedu.address.logic.ParserMode;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,7 +19,7 @@ public class EditExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Objects.requireNonNull(model);
+        requireNonNull(model);
         List<Application> lastShownList = model.getFilteredPersonList();
         IsBeingEditedPredicate predicate = new IsBeingEditedPredicate();
         lastShownList.stream().filter(predicate).findFirst().ifPresent((i) -> i.setBeingEdited(false));

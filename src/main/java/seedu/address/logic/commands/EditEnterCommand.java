@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
-import java.util.Objects;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -39,7 +40,7 @@ public class EditEnterCommand extends Command {
      * @param index
      */
     public EditEnterCommand(Index index) {
-        Objects.requireNonNull(index);
+        requireNonNull(index);
         this.targetIndex = index;
         this.name = null;
         this.role = null;
@@ -52,8 +53,8 @@ public class EditEnterCommand extends Command {
      * @param role
      */
     public EditEnterCommand(Name name, Role role) {
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(role);
+        requireNonNull(name);
+        requireNonNull(role);
         this.targetIndex = null;
         this.name = name;
         this.role = role;
@@ -63,7 +64,7 @@ public class EditEnterCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Objects.requireNonNull(model);
+        requireNonNull(model);
         List<Application> lastShownList = model.getFilteredPersonList();
 
         Application applicationToEdit;
