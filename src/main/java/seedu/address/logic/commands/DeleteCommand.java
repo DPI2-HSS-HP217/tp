@@ -15,7 +15,7 @@ import seedu.address.model.person.Role;
 import seedu.address.model.person.SameCompanySameRolePredicate;
 
 /**
- * Deletes an application identified using it's displayed index from the address book.
+ * Deletes an Application via it's displayed index in the address book or via it's Company Name and Role.
  */
 public class DeleteCommand extends Command {
 
@@ -38,7 +38,8 @@ public class DeleteCommand extends Command {
     private final Role role;
 
     /**
-     * Constructor for a Delete via Index command.
+     * Constructs a DeleteCommand via Index.
+     *
      * @param targetIndex Application index.
      */
     public DeleteCommand(Index targetIndex) {
@@ -49,7 +50,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Constructor for a Delete via Application command.
+     * Constructs a DeleteCommand via Company Name and Role or Application.
      *
      * @param name Company Name.
      * @param role Company Job Role.
@@ -71,11 +72,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Execute a delete via Index command.
+     * Executes a Delete via Index command.
      *
      * @param model current model.
      * @return result of the command execution.
-     * @throws CommandException if command is invalid.
+     * @throws CommandException If specified Application Index is invalid.
      */
     public CommandResult executeDeleteByIndex(Model model) throws CommandException {
         requireNonNull(model);
@@ -90,11 +91,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Execute a delete via Application command.
+     * Executes a delete via Application Name and role command.
      *
-     * @param model current model.
-     * @return result of the command execution.
-     * @throws CommandException if command is invalid.
+     * @param model Current model.
+     * @return Result of the command execution.
+     * @throws CommandException If Target Application is invalid or cannot be found.
      */
     public CommandResult executeDeleteByApplication(Model model) throws CommandException {
         requireNonNull(model);

@@ -100,7 +100,6 @@ class JsonAdaptedApplication {
         for (JsonAdaptedTag tag : tags) {
             applicationTags.add(tag.toModelType());
         }
-
         checkMandatoryFields();
         final Name modelName = new Name(name);
         final Role modelRole = new Role(role);
@@ -153,7 +152,7 @@ class JsonAdaptedApplication {
                         Reminder.class.getSimpleName()));
             }
             if (!Reminder.isValidReminder(reminderEvent)) {
-                throw new IllegalValueException(Reminder.MESSAGE_CONSTRAINTS);
+                throw new IllegalValueException(Reminder.REMINDER_MESSAGE_CONSTRAINTS);
             }
             if (!Date.isValidDate(reminderDate)) {
                 throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
@@ -187,5 +186,4 @@ class JsonAdaptedApplication {
         }
         return constructor.apply(value);
     }
-
 }

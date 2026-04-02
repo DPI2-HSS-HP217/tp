@@ -8,24 +8,30 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Event class to represent reminder tasks of an application.
+ * Represents a Reminder if an Application has one.
  */
 public class Reminder {
     public static final String VALIDATION_REGEX = "[A-Za-z][A-Za-z ]*";
-    public static final String MESSAGE_CONSTRAINTS = "Reminder should be letters, and it should not be blank";
+    public static final String REMINDER_MESSAGE_CONSTRAINTS =
+            "Reminder should be letters, and it should not be blank";
+    public static final String DATE_MESSAGE_CONSTRAINTS =
+            "Date should follow the format YYYY-MM-DD (e.g., 2024-12-25), and it should be a valid date.";
+
 
     private final String reminderName;
     private final Date reminderDate;
 
     /**
-     * Event with a deadline.
-     * @param reminderName event Description.
-     * @param reminderDate event date.
+     * Constructs a Reminder.
+     * Reminder must have Both Name description and Date.
+     *
+     * @param reminderName Reminder Description.
+     * @param reminderDate Reminder Date.
      */
     public Reminder(String reminderName, String reminderDate) {
         requireNonNull(reminderName, reminderDate);
-        checkArgument(isValidReminder(reminderName), MESSAGE_CONSTRAINTS);
-        checkArgument(isValidDate(reminderDate), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidReminder(reminderName), REMINDER_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDate(reminderDate), DATE_MESSAGE_CONSTRAINTS);
         this.reminderName = reminderName;
         this.reminderDate = new Date(reminderDate);
     }
@@ -56,6 +62,9 @@ public class Reminder {
         return isNotOverdue && isWithinRange;
     }
 
+    /**
+     * Returns String representation of a whether a reminder is due or not.
+     */
     public String getStyleClass() {
         boolean isDue = isByDate(new Date(LocalDate.now()));
         return isDue ? "due" : "notDue";
