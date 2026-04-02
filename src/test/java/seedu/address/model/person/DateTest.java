@@ -8,8 +8,6 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-
 public class DateTest {
 
 
@@ -50,12 +48,12 @@ public class DateTest {
     }
 
     @Test
-    public void checkNotFutureDate() throws CommandException {
+    public void checkNotFutureDate() {
         LocalDate today = LocalDate.now();
 
         // Date in the future by 1 day (boundary value analysis)
         Date futureDate = new Date(today.plusDays(1).toString());
-        assertThrows(CommandException.class, () -> futureDate.checkNotFutureDate());
+        assertFalse(futureDate.checkNotFutureDate());
 
         // Date in the past by 1 day (boundary value analysis)
         Date pastDate = new Date(today.minusDays(1).toString());

@@ -10,6 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -45,7 +48,7 @@ public class AddCommand extends Command {
             + "Use `overwrite` to replace existing application";
     public static final String INVALID_DATE = "OOPS! Invalid date format, use the format (YYYY-MM-DD)";
 
-
+    private final Logger logger = LogsCenter.getLogger(AddCommand.class);
     private final Application toAdd;
 
     /**
@@ -53,6 +56,10 @@ public class AddCommand extends Command {
      */
     public AddCommand(Application person) {
         requireNonNull(person);
+
+        assert person.getName() != null : "company name cannot be null";
+        assert person.getRole() != null : "role cannot be null";
+
         toAdd = person;
     }
 
@@ -64,22 +71,38 @@ public class AddCommand extends Command {
         model.addPerson(toAdd);
         clearStoredDuplicate();
 
+        assert model.hasPerson(toAdd) : "failed to add application to model";
+        logger.info("New application added: " + toAdd);
         return successResult();
     }
 
+    /**
+     * Checks and stores if application with same role and name already exists.
+     *
+     * @param model the model to check for duplicates in
+     * @throws CommandException if a duplicate application is found
+     */
     private void checkForDuplicate(Model model) throws CommandException {
         if (model.hasPerson(toAdd)) {
             Application existingApplication = model.getFilteredPersonList().stream()
                     .filter(application -> application.isSameApplication(toAdd))
                     .findAny()
                     .orElse(null);
+
+            assert existingApplication != null : "should have found existing application";
+
             DuplicateApplicationStore.setLastDuplicateApplication(this);
 
             String existingMessage = String.format(MESSAGE_DUPLICATE_PERSON, formatApplication(existingApplication));
             throw new CommandException(existingMessage);
         }
+
+        logger.info("No duplicate application found for: " + toAdd);
     }
 
+    /**
+     * Clears stored duplicate application
+     */
     private void clearStoredDuplicate() {
         DuplicateApplicationStore.clear();
     }
@@ -92,6 +115,12 @@ public class AddCommand extends Command {
         return toAdd;
     }
 
+    /**
+     * Formats existing duplicate application for display in error message
+     *
+     * @param existingApplication the existing application to format
+     * @return a formatted string representation of the existing application
+     */
     private String formatApplication(Application existingApplication) {
         if (existingApplication == null) {
             return "No existing application found.";

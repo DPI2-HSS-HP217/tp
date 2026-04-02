@@ -23,7 +23,13 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindCommand to find application with company names that contain any of the specified keywords.
+     *
+     * @param predicate the predicate to determine which applications to find
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
+        assert predicate != null : "predicate should not be null";
         this.predicate = predicate;
     }
 
