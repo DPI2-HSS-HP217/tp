@@ -60,7 +60,7 @@ public class Status {
         String statusVal = this.value.toLowerCase();
         return switch (statusVal) {
         case "applied" -> "Applied";
-        case "interviewing" -> "Interviewing";
+        case "interview" -> "Interview";
         case "rejected" -> "Rejected";
         case "offered" -> "Offered";
         case "pending" -> "Pending";
