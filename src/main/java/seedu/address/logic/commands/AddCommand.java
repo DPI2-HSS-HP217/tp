@@ -77,8 +77,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Checks if application with same role and name already exists.
-     * If it does, stores the new application for poential overwriting
+     * Checks and stores if application with same role and name already exists.
      *
      * @param model the model to check for duplicates in
      * @throws CommandException if a duplicate application is found
