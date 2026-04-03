@@ -23,11 +23,11 @@ public class StatusCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsStatusCommand() throws Exception {
-        StatusCommand command = parser.parse(" n/Alex Yeoh r/Data Analyst s/Interviewing");
+        StatusCommand command = parser.parse(" n/Alex Yeoh r/Data Analyst s/Interview");
 
         assertEquals("Alex Yeoh", command.getName());
         assertEquals("Data Analyst", command.getRole());
-        assertEquals(new Status("Interviewing"), command.getStatus());
+        assertEquals(new Status("Interview"), command.getStatus());
     }
 
     @Test

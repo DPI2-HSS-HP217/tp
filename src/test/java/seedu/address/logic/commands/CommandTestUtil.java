@@ -44,7 +44,7 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_AMY = "Software Engineer";
     public static final String VALID_ROLE_BOB = "Project Manager";
     public static final String VALID_STATUS_AMY = "pending";
-    public static final String VALID_STATUS_BOB = "interviewed";
+    public static final String VALID_STATUS_BOB = "interview";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

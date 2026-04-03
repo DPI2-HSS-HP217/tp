@@ -6,7 +6,7 @@
     "address": "4th street",
     "date": "2024-03-15",
     "role": "Software Engineer",
-    "status": "applied"
+    "status": "Applied"
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
@@ -14,6 +14,6 @@
     "address": "4th street",
     "date": "2024-03-15",
     "role": "Software Engineer",
-    "status": "applied"
+    "status": "Applied"
   } ]
 }

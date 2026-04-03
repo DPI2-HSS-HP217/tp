@@ -36,7 +36,7 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withDate("2024-01-15")
             .withRole("Software Engineer")
-            .withStatus("applied")
+            .withStatus("")
             .withTags("friends")
             .build();
 
@@ -46,7 +46,7 @@ public class TypicalPersons {
             .withPhone("98765432")
             .withDate("2024-02-20")
             .withRole("Project Manager")
-            .withStatus("interviewed")
+            .withStatus("interview")
             .withTags("owesMoney", "friends")
             .build();
 
@@ -56,7 +56,7 @@ public class TypicalPersons {
             .withPhone("98765432")
             .withDate("2024-02-20")
             .withRole("Project Manager")
-            .withStatus("interviewed")
+            .withStatus("interview")
             .withTags("owesMoney", "friends")
             .withReminder("second interview", "2026-12-12")
             .buildWithReminder();
@@ -67,7 +67,7 @@ public class TypicalPersons {
             .withPhone("98765432")
             .withDate("2024-02-20")
             .withRole("Project Manager")
-            .withStatus("interviewed")
+            .withStatus("interview")
             .withTags("owesMoney", "friends")
             .withReminder("second interview", LocalDate.now().toString())
             .buildWithReminder();
@@ -115,7 +115,7 @@ public class TypicalPersons {
             .withAddress("4th street")
             .withDate("2024-02-28")
             .withRole("QA Engineer")
-            .withStatus("interviewed")
+            .withStatus("interview")
             .build();
 
     // Manually added
@@ -125,7 +125,7 @@ public class TypicalPersons {
             .withAddress("little india")
             .withDate("2024-05-01")
             .withRole("Frontend Developer")
-            .withStatus("pending")
+            .withStatus("interview")
             .build();
 
     public static final Application IDA = new PersonBuilder().withName("Ida Mueller")

@@ -7,7 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "date" : "2024-01-15",
     "role" : "Software Engineer",
-    "status" : "applied",
+    "status" : "interested",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -16,7 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "date" : "2024-02-20",
     "role" : "Project Manager",
-    "status" : "interviewed",
+    "status" : "Interview",
     "tags" : [ "owesMoney", "friends" ],
     "hasReminder" : true,
     "reminderEvent" : "second interview",
@@ -28,7 +28,7 @@
     "address" : "wall street",
     "date" : "2024-03-10",
     "role" : "Data Scientist",
-    "status" : "pending",
+    "status" : "Pending",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -37,7 +37,7 @@
     "address" : "10th street",
     "date" : "2024-01-05",
     "role" : "UX Designer",
-    "status" : "rejected",
+    "status" : "Rejected",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -46,7 +46,7 @@
     "address" : "michegan ave",
     "date" : "2024-04-12",
     "role" : "Product Manager",
-    "status" : "offered",
+    "status" : "Offered",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -55,7 +55,7 @@
     "address" : "little tokyo",
     "date" : "2024-03-22",
     "role" : "DevOps Engineer",
-    "status" : "applied",
+    "status" : "Applied",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -64,7 +64,7 @@
     "address" : "4th street",
     "date" : "2024-02-28",
     "role" : "QA Engineer",
-    "status" : "interviewed",
+    "status" : "Interview",
     "tags" : [ ]
   } ]
 }

@@ -145,7 +145,7 @@ public class AddressBookParserTest {
         String possibleAddCommand =
                 "add n/Meta p/6505434800 e/facebook.careers@meta.com "
                 + "a/1 Hacker Way, Menlo Park, CA d/2024-03-19 "
-                + "r/Frontend Engineer s/interviewed t/tech";
+                + "r/Frontend Engineer s/interview t/tech";
 
         String[] nonOverwriteCommand = {
             ListCommand.COMMAND_WORD,
