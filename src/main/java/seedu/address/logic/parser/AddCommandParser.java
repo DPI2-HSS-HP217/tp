@@ -226,10 +226,12 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private void validateReminderFields(String reminderName, String reminderDate) throws ParseException {
         if (reminderName == null || reminderName.isEmpty()) {
-            throw new ParseException("Reminder name cannot be empty");
+            throw new ParseException("Reminder name cannot be empty, both reminder name and "
+                    + "valid date must be provided");
         }
         if (reminderDate == null || reminderDate.isEmpty()) {
-            throw new ParseException("Reminder date cannot be empty");
+            throw new ParseException("Reminder date cannot be empty, both reminder name and "
+                    + "valid date must be provided");
         }
     }
 
