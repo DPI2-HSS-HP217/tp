@@ -49,6 +49,7 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        assert trimmedName != null : "trimmed name can never be null";
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -138,6 +139,7 @@ public class ParserUtil {
         String trimmedDate = date.trim();
         validateDateFormat(trimmedDate);
         Date parsedDate = new Date(trimmedDate);
+        assert parsedDate != null : "date can never be null";
         validateNotFutureDate(parsedDate);
         return parsedDate;
     }
@@ -175,6 +177,7 @@ public class ParserUtil {
     public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
         String trimmedRole = role.trim();
+        assert trimmedRole != null : "trimmed role can never be null";
         if (!Role.isValidJobRole(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
