@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -28,6 +30,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company application.\n"
+            + "Required fields: n/NAME r/ROLE and the other fields are optional\n"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -35,12 +38,16 @@ public class AddCommand extends Command {
             + PREFIX_ROLE + "ROLE "
             + PREFIX_DATE + "DATE "
             + PREFIX_STATUS + "STATUS "
-            + PREFIX_TAG + "[TAGS...]\n"
+            + PREFIX_TAG + "[TAGS...] "
+            + PREFIX_REMINDER + "REMINDER "
+            + PREFIX_REMINDER_DATE + "REMINDER_DATE\n"
             + "Example:\n"
             + "add n/Microsoft p/4258828080 e/jobs@microsoft.com "
             + "a/One Microsoft Way, Redmond, WA "
             + "d/2024-03-16 r/Product Manager "
-            + "s/interviewed t/tech";
+            + "s/interview t/tech "
+            + "u/final interview ud/2024-03-14\n"
+            + "Note: both reminder and reminder date must be provided to add a reminder\n";
 
     public static final String MESSAGE_SUCCESS = "New application added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON =

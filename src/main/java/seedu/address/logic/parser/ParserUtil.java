@@ -25,6 +25,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String DEFAULT_STATUS = "";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -48,6 +49,7 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        assert trimmedName != null : "trimmed name can never be null";
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -108,6 +110,9 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+        if (trimmedTag.isEmpty()) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -121,7 +126,11 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            String trimmedTag = tagName.trim();
+            if (trimmedTag.isEmpty()) {
+                continue;
+            }
+            tagSet.add(parseTag(trimmedTag));
         }
         return tagSet;
     }
@@ -130,25 +139,40 @@ public class ParserUtil {
      * Parses a {@code String date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code date} is invalid.
+     * @throws ParseException if the given {@code date} is invalid format or future date.
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-        }
-
-        return new Date(trimmedDate);
+        validateDateFormat(trimmedDate);
+        Date parsedDate = new Date(trimmedDate);
+        assert parsedDate != null : "date can never be null";
+        validateNotFutureDate(parsedDate);
+        return parsedDate;
     }
 
     /**
-     * Returns true if the given {@code date} is a valid date in YYYY-MM-DD format after trimming.
+     * Checks that date follows YYYY-MM-DD and is a valid date
+     *
+     * @param date the date to check
+     * @throws ParseException if invalid format for date
      */
-    public static boolean isParsableDate(String date) {
-        requireNonNull(date);
-        return Date.isValidDate(date.trim());
+    private static void validateDateFormat(String date) throws ParseException {
+        if (!Date.isValidDate(date)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Checks that date is not a future date
+     *
+     * @param date the date to check
+     * @throws ParseException if date is a future date
+     */
+    private static void validateNotFutureDate(Date date) throws ParseException {
+        if (!date.checkNotFutureDate()) {
+            throw new ParseException(Date.MESSAGE_FUTURE_DATE);
+        }
     }
 
     /**
@@ -160,6 +184,7 @@ public class ParserUtil {
     public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
         String trimmedRole = role.trim();
+        assert trimmedRole != null : "trimmed role can never be null";
         if (!Role.isValidJobRole(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
@@ -167,13 +192,16 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String status} into a {@code Status}.
+     * Parses a {@code String status} into a {@code Status} or default status if not present.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param status is the status to be parsed
      * @throws ParseException if the given {@code status} is invalid.
      */
     public static Status parseStatus(String status) throws ParseException {
-        requireNonNull(status);
+        if (status == null || status.trim().isEmpty()) {
+            return new Status(DEFAULT_STATUS);
+        }
         String trimmedStatus = status.trim();
         if (!Status.isValidStatus(trimmedStatus)) {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
@@ -182,27 +210,84 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String reminderReminderName and reminderReminderDate} into a {@code reminder}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses reminder name and date if both present and valid.
      *
-     * @throws ParseException if the given {@code reminderReminderName and reminderReminderDate} is invalid.
+     * @param reminderName reminder name to parse
+     * @param reminderDate reminder date to parse
+     * @return Reminder object if both provided and valid, null if both absent
+     * @throws ParseException if only reminder name or reminder date provided
      */
-    public static Reminder parseReminder(String reminderReminderName, String reminderReminderDate)
-            throws ParseException {
-        requireNonNull(reminderReminderName);
-        requireNonNull(reminderReminderDate);
-        String trimmedReminderName = reminderReminderName.trim();
-        String trimmedReminderDate = reminderReminderDate.trim();
-
-        if (!Reminder.isValidReminder(trimmedReminderName)) {
-            throw new ParseException(Reminder.REMINDER_MESSAGE_CONSTRAINTS);
+    public static Reminder parseReminder(String reminderName, String reminderDate) throws ParseException {
+        if (isReminderInvalid(reminderName, reminderDate)) {
+            return null;
         }
 
-        if (!Date.isValidDate(trimmedReminderDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-        }
-        return new Reminder(trimmedReminderName, trimmedReminderDate);
+        checkBothFieldPresent(reminderName, reminderDate);
+        String trimmedName = validateReminderName(reminderName);
+        String trimmedDate = validateReminderDate(reminderDate);
+
+        return new Reminder(trimmedName, trimmedDate);
     }
 
+    /**
+     * Checks that both reminder name and reminder date is not given/absent
+     *
+     * @param reminderName check is reminder name is not present
+     * @param reminderDate check is reminder date is not present
+     * @return true is both reminder name and reminder date not present
+     */
+    private static boolean isReminderInvalid(String reminderName, String reminderDate) {
+        boolean hasName = reminderName != null && !reminderName.trim().isEmpty();
+        boolean hasDate = reminderDate != null && !reminderDate.trim().isEmpty();
+        return !hasName && !hasDate;
+    }
 
+    /**
+     * Checks to throw exception if only one of the 2 fields are present
+     *
+     * @param reminderName reminder name
+     * @param reminderDate reminder date
+     * @throws ParseException if either field is empty
+     */
+    private static void checkBothFieldPresent(String reminderName, String reminderDate) throws ParseException {
+        boolean hasName = reminderName != null && !reminderName.trim().isEmpty();
+        boolean hasDate = reminderDate != null && !reminderDate.trim().isEmpty();
+
+        if (!hasName) {
+            throw new ParseException("Reminder name cannot be empty when reminder date is provided.");
+        }
+        if (!hasDate) {
+            throw new ParseException("Reminder date cannot be empty when reminder name is provided.");
+        }
+    }
+
+    /**
+     * Validates that the reminder name is valid
+     *
+     * @param reminderName is the reminder name to check
+     * @return the valid reminder name
+     * @throws ParseException if reminder name is invalid
+     */
+    private static String validateReminderName(String reminderName) throws ParseException {
+        String trimmedName = reminderName.trim();
+        if (!Reminder.isValidReminder(trimmedName)) {
+            throw new ParseException(Reminder.REMINDER_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedName;
+    }
+
+    /**
+     * Validates that the reminder date is valid
+     *
+     * @param reminderDate is the reminder date to check
+     * @return the valid reminder date
+     * @throws ParseException if reminder date is invalid
+     */
+    private static String validateReminderDate(String reminderDate) throws ParseException {
+        String trimmedDate = reminderDate.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedDate;
+    }
 }

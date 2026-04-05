@@ -198,11 +198,6 @@ public class ParserUtilTest {
         assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
     }
 
-    @Test
-    public void parseStatus_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus((String) null));
-    }
-
     //    @Test
     //    public void parseStatus_invalidValue_throwsParseException() {
     //        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_STATUS));
