@@ -75,7 +75,7 @@ Shows you a message explaining how to access the help page.
 
 Format: `help`
 
-### Internship Application
+### Application
 
 An internship application must include a company name and the role applied for. All other fields are optional.  
 Each application supports the following parameters:
@@ -117,10 +117,10 @@ Notes:
 * Only the `n/NAME` and `r/ROLE` fields are compulsory, other fields are optional
 
 #### Examples:
-* `add n/Google r/Software Engineer p/12345678 e/careers@google.com a/1600 Amphitheatre Parkway, Mountain View, CA d/2024-03-15 s/applied t/tech t/remote u/Interview ud/2026-04-06`
-* `add n/Google p/12345678 e/careers@google.com a/123 Silicon Valley d/2025-06-01 r/QA Engineer s/pending`
 * `add n/Meta r/ML engineer`
 * `add n/Tiktok r/data analyst p/99999999 s/interview`
+* `add n/Google r/Software Engineer p/12345678 e/careers@google.com a/1600 Amphitheatre Parkway, Mountain View, CA d/2024-03-15 s/applied t/tech t/remote u/Interview ud/2026-04-06`
+* `add n/Google p/12345678 e/careers@google.com a/123 Silicon Valley d/2025-06-01 r/QA Engineer s/pending`
 
 #### Expected Outcome:
 
@@ -185,6 +185,7 @@ Notes:
 - `r/ROLE` → job position applied for
 - `s/STATUS` → application progress
 - `t/TAGS` → optional fields
+- `u/REMINDER ud/DATE` → Reminder description and Date of reminder
 
 #### Examples:
 * `editmode 1` or `editmode n/Google r/Software Engineer`
@@ -251,14 +252,15 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 - `s/STATUS` → New status
 
 #### Valid Statuses
-| Status | When to use |
-|:-------|:------------|
-| **Interested** | Found the role, planning to apply |
-| **Applied** | Submitted your application |
-| **Interview** | Interviews scheduled (congrats, halfway there!) |
-| **Rejected** | Didn't get it (we've all been there) |
-| **Offered** | 🎉 You got the offer! |
-| **Accepted** | You accepted the offer (your hardwork has paid off!) |
+| Status         | When to use                                                                     |
+|:---------------|:--------------------------------------------------------------------------------|
+| **Interested** | Found the role, planning to apply                                               |
+| **Applied**    | Submitted your application                                                      |
+| **Interview**  | Interviews scheduled (congrats, halfway there!)                                 |
+| **Pending**    | Waiting for Application outcome                                                 |
+| **Rejected**   | Didn't get it (we've all been there)                                            |
+| **Offered**    | 🎉 You got the offer!                                                           |
+| **Accepted**   | You accepted the offer (your hardwork has paid off!)                            |
 
 #### Examples
 
