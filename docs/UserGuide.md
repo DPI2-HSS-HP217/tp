@@ -74,42 +74,48 @@ Shows you a message explaining how to access the help page.
 
 Format: `help`
 
+### Internship Application
 
-### Adding an internship application: `add`
-
-Adds the internship application you have applied for, to help you keep track of all your applications.
-
-<box type="warning" seamless>
-
-**Caution:**
-OfferFlow by default does not allow duplicate application with same name and role. Hence, if you choose to add application with duplicate name and role, you can choose whether or not to [overwrite](#overwrite-duplicate-application--overwrite) it (ie: replace the pre-existing application with the new application)
-</box>
-
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...`
-
-<box type="tip" seamless>
-
-**Tip:** An application can have any number of tags (including 0)
-</box>
+An internship application must include a company name and the role applied for. All other fields are optional.  
+Each application supports the following parameters:
 
 #### Parameters
 - `n/NAME` → Name of the company
+- `r/ROLE` → job position applied for
 - `p/PHONE` → company telephone number
 - `e/EMAIL` → company email
 - `a/ADDRESS` → company location
 - `d/DATE` → date when you applied
-- `r/ROLE` → job position applied for
 - `s/STATUS` → application progress
 - `t/TAGS` → optional fields
+- `u/REMINDER ud/DATE` → Reminder description and Date of reminder
+
+### Adding an internship application: `add`
+
+Adds the internship application you have applied for, to help track all your applications.
+
+<box type="warning" seamless>
+
+**Caution:**
+OfferFlow does not allow duplicate application with same name and role. Hence, if you choose to add application with duplicate name and role, you can choose whether or not to [overwrite](#overwrite-duplicate-application--overwrite) it (ie: replace the pre-existing application with the new application)
+</box>
+
+Format: `add n/NAME r/ROLE ...`
+
+<box type="tip" seamless>
+
+**Tip:** Application can be added with only name and role, other fields are optional
+</box>
 
 Notes:
 * name and role is case insensitive
 * Email must use `@` symbol
 * Applied dates must use `YYYY-MM-DD`
+* Reminder must have both reminder name and date
 
 #### Examples:
-* `add n/Google p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 r/Backend Developer s/interviewed t/java`
-* `add n/Google p/12345678 e/careers@google.com a/123 qSilicon Valley d/2025-06-01 r/Software Engineer s/pending`
+* `add n/Google r/Engineer`
+* `add n/Google r/Engineer e/careers@google.com s/Applied d/2026-12`
 
 #### Expected Outcome:
 
@@ -329,7 +335,7 @@ Examples:
 
 ### Deleting an application : `delete`
 
-You can delete a specified application from OfferFlow via index or reference via Company name and Role.
+Delete an application in OfferFlow via index or reference via Company name and Role.
 
 Format: `delete INDEX`
 
