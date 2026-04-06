@@ -66,8 +66,7 @@ public class Reminder {
      * Returns String representation of a whether a reminder is due or not.
      */
     public String getStyleClass() {
-        boolean isDue = isByDate(new Date(LocalDate.now()));
-        return isDue ? "due" : "notDue";
+        return !reminderDate.getLocalDate().isAfter(LocalDate.now()) ? "due" : "notDue";
     }
 
     @Override

@@ -107,7 +107,7 @@ public class PersonCard extends UiPart<Region> {
         if (person.hasReminder()) {
             Reminder u = person.getReminder();
             this.reminder.setVisible(true);
-            String text = "Reminder\n" + u.getReminderName() + "\n" + u.getReminderDate().value;
+            String text = u.getReminderName() + "\n" + u.getReminderDate().value;
             reminderBox.getStyleClass().removeIf(s -> s.startsWith("reminder-"));
             reminderBox.getStyleClass().add("reminder-" + person.getReminder().getStyleClass());
             this.reminder.setText(text);

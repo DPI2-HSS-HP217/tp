@@ -37,11 +37,14 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
     </VBox>
-    <VBox fx:id = "reminderBox"  alignment="CENTER_RIGHT" minHeight="105" GridPane.columnIndex="1">
+    <VBox fx:id="reminderBox" alignment="CENTER"
+          prefWidth="140" maxWidth="140"
+          GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.valignment="CENTER">
       <padding>
-        <Insets right="20"  left="20" />
+        <Insets top="10" bottom="10" right="10" left="10" />
       </padding>
-      <Label fx:id="reminder" styleClass="cell_big_label" text="\$reminder"/>
+      <Label fx:id="reminder" styleClass="cell_small_label" text="\$reminder"
+             wrapText="true" maxWidth="120" alignment="CENTER"/>
     </VBox>
 
   </GridPane>

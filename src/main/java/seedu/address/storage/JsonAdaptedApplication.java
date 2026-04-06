@@ -149,28 +149,31 @@ class JsonAdaptedApplication {
      * @throws IllegalValueException If reminder fields are invalid or missing.
      */
     private Reminder parseOptionalReminder() throws IllegalValueException {
+        logger.info("JsonAdaptedApplication: Parsing reminder");
         if (hasReminder) {
             if (reminderEvent == null || reminderDate == null) {
+                logger.info("Should never reach here, check Code!");
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                         Reminder.class.getSimpleName()));
             }
-            logger.info("Parsing reminder");
-            logger.warning("Invalid reminder: " + reminderEvent);
             if (!Reminder.isValidReminder(reminderEvent)) {
+                logger.warning("Invalid reminder: " + reminderEvent);
                 throw new IllegalValueException(Reminder.REMINDER_MESSAGE_CONSTRAINTS);
             }
             if (!Date.isValidDate(reminderDate)) {
+                logger.warning("Invalid reminder: " + reminderDate);
                 throw new IllegalValueException(Reminder.DATE_MESSAGE_CONSTRAINTS);
             }
             return new Reminder(reminderEvent, reminderDate);
         }
-        logger.info("No reminder");
         if (reminderEvent == null ^ reminderDate == null) {
+            logger.info("Should never reach here, check Code!");
             if (reminderEvent == null) {
                 throw new IllegalValueException(Reminder.REMINDER_MESSAGE_CONSTRAINTS);
             }
             throw new IllegalValueException(Reminder.DATE_MESSAGE_CONSTRAINTS);
         }
+        logger.info("No reminder");
         return null;
     }
 
