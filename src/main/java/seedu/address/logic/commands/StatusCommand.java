@@ -21,7 +21,7 @@ public class StatusCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates an application's status.\n"
                                     + "Parameters: n/NAME r/ROLE s/STATUS\n"
-                                    + "Example: status n/Google r/CEO s/Interviewing";
+                                    + "Example: status n/Google r/Software Engineer s/Interview";
 
     public static final String MESSAGE_SUCCESS = "Updated status: %1$s";
 
@@ -74,14 +74,13 @@ public class StatusCommand extends Command {
 
         if (target.hasReminder()) {
             updatedApplication = new Application(target.getName(), target.getPhone(), target.getEmail(),
-                    target.getAddress(), target.getTags(), target.getDate(), target.getRole(),
-                    status, target.getReminder());
+                                            target.getAddress(), target.getTags(), target.getDate(), target.getRole(),
+                                            status, target.getReminder());
         } else {
             updatedApplication = new Application(target.getName(), target.getPhone(), target.getEmail(),
-                    target.getAddress(), target.getTags(), target.getDate(), target.getRole(),
-                    status);
+                                            target.getAddress(), target.getTags(), target.getDate(), target.getRole(),
+                                            status);
         }
-
 
         model.setPerson(target, updatedApplication);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -100,17 +99,12 @@ public class StatusCommand extends Command {
         }
 
         StatusCommand otherStatusCommand = (StatusCommand) other;
-        return name.equals(otherStatusCommand.name)
-                && role.equals(otherStatusCommand.role)
-                && status.equals(otherStatusCommand.status);
+        return name.equals(otherStatusCommand.name) && role.equals(otherStatusCommand.role)
+                                        && status.equals(otherStatusCommand.status);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("role", role)
-                .add("status", status)
-                .toString();
+        return new ToStringBuilder(this).add("name", name).add("role", role).add("status", status).toString();
     }
 }

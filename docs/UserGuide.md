@@ -223,14 +223,14 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 |:-------|:------------|
 | **Interested** | Found the role, planning to apply |
 | **Applied** | Submitted your application |
-| **Interviewing** | Interviews scheduled (congrats, halfway there!) |
+| **Interview** | Interviews scheduled (congrats, halfway there!) |
 | **Rejected** | Didn't get it (we've all been there) |
 | **Offered** | 🎉 You got the offer! |
 
 #### Examples
 
 * `status n/Tiktok r/Data Analyst s/Applied`
-* `status n/Google r/Software Engineer s/Interviewing`
+* `status n/Google r/Software Engineer s/Interview`
 * `status n/Meta r/ML Engineer s/Rejected`
 
 #### Expected Outcome
@@ -280,7 +280,7 @@ filter for applications with reminders due within the specified number of days o
 Format: `upcoming [DAYS]`
 
 #### Parameters
-- `[DAYS]` → An integer X from 0 to 7 inclusive, such that applications with reminders due within X days from today are returned. 
+- `[DAYS]` → An integer X from 0 to 7 inclusive, such that applications with reminders due within X days from today are returned.
 
 * Applications with no reminders at all will not be returned.
 * Applications with reminders that are overdue (e.g due prior to the current date) will not be returned.
