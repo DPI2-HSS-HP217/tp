@@ -3,6 +3,12 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeFontColor #FFFFFF
+
+Class Reminder {
+    reminderName: String
+    reminderDate: Date
+}
 
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-right-> "1" UniqueTagList
@@ -10,12 +16,16 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
-UniquePersonList -right-> Person
+UniquePersonList -right-> Application
 
-Person -up-> "*" Tag
+Application -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Application *--> "1" Name
+Application *--> "1" Role
+Application *--> "0...1" Phone
+Application *--> "0...1" Email
+Application *--> "0...1" Address
+Application *--> "1" Status
+Application *--> "0...1" Date
+Application *--> "0...1" Reminder
 @enduml

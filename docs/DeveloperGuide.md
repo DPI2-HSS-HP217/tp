@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -123,14 +123,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Application` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Appliction` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in `OfferFlow`, which `Application` references. This allows `OfferFlow` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -144,7 +144,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both OfferFlow data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -290,14 +290,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                               | So that I can…​                                                       |
-|----------|-------------------|-------------------------------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | student           | add contacts with names, roles, company                                            | keep track of my applications                                        |
-| `* * *`  | user              | update or remove contact                                          | update my application status                                         |
-| `* * *`  | careless user     | look for specific contacts                                        | avoid applying twice to the same job.                                |
-| `* * *`  | impatient user    | filter the contacts by features                                   | view only the relevant information easily                            |
-| `* *`    | user              | enable and customise notification settings                        | be reminded of the relevant task nearing the date                    |
-| `*`      | user              | buttons, tabs, and statuses to look consistent throughout the app | avoid getting confused while navigating                              |
+| Priority | As a …​           | I want to …​                                              | So that I can…​                                                  |
+|----------|-------------------|-----------------------------------------------------------|------------------------------------------------------------------|
+| `* * *`  | student           | add application with company name, job position and other details                   | keep track of my applications                                    |
+| `* * *`  | lazy student              | be able to edit my application                                  | update my application if there are any changes without having to delete and create a new one for scratch                                     |
+| `* * *`  | student              | be able to delete any application quickly                                | remove any redundant application                                     |
+| `* * *`  | careless student    | look for specific applications easily                                | avoid applying twice to the same job position and/or company                             |
+| `* * *`  | impatient student    | be able to filter out my applications                          | view only the relevant information I want                        |
+| `* * *`  | busy student applying for many internships    | be able to ensure the app can load all of my applications quickly                          | log all my applications without slowing down my workflow                        |
+| `* * *`  | busy student    | be able to track the progress/stages of all my applications                          | remember/ be updated on what is my application status for each of my applications                         |
+| `* *`    | forgetful student              | be able to set reminders for any deadlines                | be reminded of relevant tasks nearing their date                  |
+| `* *`  | potential user    | see some sample application on the app so that I can                        | see how the app will look and explore how the app works before using it myself |
+| `*`      | user              | ensure buttons, tabs, and statuses look consistent        | avoid getting confused while navigating                          |
+| `*`      | user with different accessibility needs             | ensure the app can support accessibility standards (e.g., screen readers, adjustable text size, dark mode),         | use it more conveniently                         |
+| `*`      | busy student             | see a visual diagram of all the statuses of my applications            | quickly get an overview of my progress                |
+
 
 *{More to be added}*
 
@@ -397,28 +404,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 7.
 
-**Use case: Create Contact**
+**Use case: UC4 - Add application**
 
 **MSS**
 
-1. User request to add new job application.
-2. OfferFlow prompts for the required job application details.
-3. User enters the job application details.
-4. OfferFlow creates the new job application.
+1. User enters the new job application that they want to add, minimally the company name and job position they applied but can also choose to add other details like date of application, contact details like email, phone number, address, status of application, reminders.
+2. OfferFlow creates and adds the application with the given details
 
    Use case ends.
 
 **Extensions**
 
-   * 3a. The user enters details in an invalid format.
+   * 1a. The user enters an application which has the same company name and job position as a previously added application.
 
-      * 3a1. OfferFlow shows an error message.
+      *1a1. OfferFlow saves the incoming duplicate application incase the user would like to overwrite the previously added application with the new application
 
-      * 3a2. User re-enters the details.
+      * 1a2. OfferFlow shows an error message stating that a duplication application has been found and displays the string format of the previously existing application for user to see.
 
-         Use case resumes at step 3.
+      * 1a3. OfferFlow also tells user that if they can overwrite the previously added duplicate application with the saved new application using the `overwrite` command else the saved new application would be discarded.
 
-**Use case: Delete Contact**
+      * 1a4. User <u>chooses to overwrite the previously added application with the new application. (UC5)</u>
+
+         Use case ends.
+
+   * 1b. The user enters an application with invalid company name format.
+
+      * 1b1. OfferFlow shows an error message stating that the name format is invalid and shows the valid format for adding company name.
+
+         Use case resumes from step 1 if user trys to add an application again.
+
+   * 1c. If the user enters an application with invalid format for any detail field (job position, date, reminder, status, address, email, or phone number)
+
+      * 1c1. the process follows step 1b extension. However, the error message will be specific to each invalid field, showing either the valid format or the specific error reason.
+
+   * 1d. The user enters the wrong command format when trying to add an application
+
+      * 1d1. OfferFlows shows an error message stating the valid command format together with an example
+
+         Use case resumes from step 1 if user trys to add an application again.
+
+
+**Use case: UC5 - Overwrite an application**
+
+**MSS**
+
+1. User enters the `overwrite` command
+2. OfferFlow deletes the existing duplicate application and adds the stored new application
+3. OfferFlow clears the storage of the new application
+
+**Extensions**
+
+* 1a. There is no new duplicate application stored.
+
+    * 1a1. OfferFlow shows an error message stating that there is no duplicate application to overwrite.
+
+      Use case ends.
+
+**Use case: Delete an application**
 
 **MSS**
 

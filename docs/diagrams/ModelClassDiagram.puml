@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeFontColor #FFFFFF
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
@@ -22,6 +23,10 @@ Class Tag
 Class Role
 Class Date
 Class Status
+Class Reminder {
+    reminderName: String
+    reminderDate: Date
+}
 
 Class I #FFFFFF
 }
@@ -40,14 +45,15 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Application
-Application *--> Name
-Application *--> Role
-Application *--> Phone
-Application *--> Email
-Application *--> Address
-Application *--> Status
-Application *--> Date
+Application *--> "1" Name
+Application *--> "1" Role
+Application *--> "0...1" Phone
+Application *--> "0...1" Email
+Application *--> "0...1" Address
+Application *--> "1" Status
+Application *--> "0...1"Date
 Application *--> "*" Tag
+Application *--> "0...1" Reminder
 
 Application -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -59,6 +65,7 @@ Email -[hidden]right-> Tag
 Tag -[hidden]right-> Role
 Role -[hidden]right-> Status
 Status -[hidden]right-> Date
+Date -[hidden]right-> Reminder
 
 ModelManager --> "~* filtered" Application
 @enduml
