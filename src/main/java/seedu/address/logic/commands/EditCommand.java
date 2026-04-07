@@ -58,7 +58,7 @@ public class EditCommand extends Command {
             + "To exit editing mode, enter \"editexit\".";
     public static final String MESSAGE_NO_APPLICATION_EDITED = "No application is marked for editing "
             + "- this is likely due to an internal error.";
-    public static final String MESSAGE_DATE_NOT_ALLOWED = "Date cannot be a date later than today. To exit editing " 
+    public static final String MESSAGE_DATE_NOT_ALLOWED = "Date cannot be a date later than today. To exit editing "
             + "mode, enter \"editexit\"";
 
     private final EditPersonDescriptor editPersonDescriptor;
