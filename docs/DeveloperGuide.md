@@ -290,14 +290,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                               | So that I can…​                                                       |
-|----------|-------------------|-------------------------------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | student           | add contacts with names, roles, company                                            | keep track of my applications                                        |
-| `* * *`  | user              | update or remove contact                                          | update my application status                                         |
-| `* * *`  | careless user     | look for specific contacts                                        | avoid applying twice to the same job.                                |
-| `* * *`  | impatient user    | filter the contacts by features                                   | view only the relevant information easily                            |
-| `* *`    | user              | enable and customise notification settings                        | be reminded of the relevant task nearing the date                    |
-| `*`      | user              | buttons, tabs, and statuses to look consistent throughout the app | avoid getting confused while navigating                              |
+| Priority | As a …​           | I want to …​                                              | So that I can…​                                                  |
+|----------|-------------------|-----------------------------------------------------------|------------------------------------------------------------------|
+| `* * *`  | student           | add application with company name, job position and other details                   | keep track of my applications                                    |
+| `* * *`  | lazy student              | be able to edit my application                                  | update my application if there are any changes without having to delete and create a new one for scratch                                     |
+| `* * *`  | student              | be able to delete any application quickly                                | remove any redundant application                                     |
+| `* * *`  | careless student    | look for specific applications easily                                | avoid applying twice to the same job position and/or company                             |
+| `* * *`  | impatient student    | be able to filter out my applications                          | view only the relevant information I want                        |
+| `* * *`  | busy student applying for many internships    | be able to ensure the app can load all of my applications quickly                          | log all my applications without slowing down my workflow                        |
+| `* * *`  | busy student    | be able to track the progress/stages of all my applications                          | remember/ be updated on what is my application status for each of my applications                         |
+| `* *`    | forgetful student              | be able to set reminders for any deadlines                | be reminded of relevant tasks nearing their date                  |
+| `* *`  | potential user    | see some sample application on the app so that I can                        | see how the app will look and explore how the app works before using it myself |
+| `*`      | user              | ensure buttons, tabs, and statuses look consistent        | avoid getting confused while navigating                          |
+| `*`      | user with different accessibility needs             | ensure the app can support accessibility standards (e.g., screen readers, adjustable text size, dark mode),         | use it more conveniently                         |
+| `*`      | busy student             | see a visual diagram of all the statuses of my applications            | quickly get an overview of my progress                |
+
 
 *{More to be added}*
 
