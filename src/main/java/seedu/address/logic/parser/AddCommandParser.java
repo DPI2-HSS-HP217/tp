@@ -14,6 +14,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
@@ -37,13 +39,19 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     private static final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
     private static final Status DEFAULT_STATUS = new Status("");
+    private static final Set<String> VALID_PREFIX = Set.of("n/", "r/", "p/", "a/", "u/", "ud/",
+            "e/", "d/", "s/", "t/");
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        if (hasInvalidPrefix(args)) {
+            throw new ParseException("Invalid prefix(es):\n " + AddCommand.MESSAGE_USAGE);
+        }
         ArgumentMultimap argMultimap = tokenizeArguments(args);
         validatePrefixes(argMultimap);
         Application application = buildApplication(argMultimap);
@@ -81,6 +89,26 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DATE,
                                         PREFIX_ROLE, PREFIX_STATUS, PREFIX_REMINDER, PREFIX_REMINDER_DATE);
+    }
+
+    /**
+     * Checks if there is any invalid prefix
+     *
+     * @return true if there is invalid prefix, else return false
+     */
+    // Solution below adapted from our tp section of
+    // FilterCommandParser::containsUnsupportedPrefix
+    private boolean hasInvalidPrefix(String args) {
+        Pattern pattern = Pattern.compile("(?<=\\s|^)(\\S+/)");
+        Matcher matcher = pattern.matcher(args);
+
+        while (matcher.find()) {
+            String check = matcher.group(1);
+            if (!VALID_PREFIX.contains(check)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
