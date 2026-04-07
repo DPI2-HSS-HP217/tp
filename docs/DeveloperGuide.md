@@ -609,20 +609,54 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding an application
 
-1. Deleting a person while all persons are being shown
+1. Add different applications with different parameters 
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Test case: `add n/NUS r/tester`<br>
+       Expected: Application to NUS for tester role added into list. Status should show `Interested`.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `add n/NUS r/QA s/Interview u/Interview ud/2026-12-12`<br>
+       Expected: Application to NUS for QA role added into list. Status shows `Interview`. Yellow Reminder Box appears.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `add n/NUS s/Applied`<br>
+       Expected: Application not added. Error details appear.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. _{ more test cases …​ }_
+
+### Overwriting an application
+
+1. Add different applications with different parameters
+
+   1. Prerequisites: Performed the testcases under "Adding an Application".
+   
+   2. Test case: `add n/NUS r/tester s/Applied`<br>
+       Expected: `Overwrite` warning appears, replace command with `overwrite`. Status would now show `Applied`.
+
+1. _{ more test cases …​ }_
+
+### Deleting an application
+
+1. Deleting an Application via Name and Role 
+    
+    1. Test case: `delete n/NUS r/tester`<br>
+       Expected: Specified application is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+    2. Testcase: `delete n/NUS r/tester`<br>
+       Expected: Delete failed. Application not found.
+
+2. Deleting an application via index
+
+    1. Prerequisites: List all application using the `list` command. Multiple application in the list.
+
+    1. Test case: `delete 1`<br>
+       Expected: First application is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `delete 0`<br>
+       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
