@@ -64,7 +64,7 @@ public class Date {
             return true;
         }
 
-        if (!matchesRegex(test)) {
+        if (!hasMatchingRegex(test)) {
             return false;
         }
 
@@ -87,7 +87,7 @@ public class Date {
      * @param test the string to test
      * @return true if the string matches the date format regex else false
      */
-    private static boolean matchesRegex(String test) {
+    private static boolean hasMatchingRegex(String test) {
         String trimmedTest = test.trim();
         return trimmedTest.matches(VALIDATION_REGEX);
     }
@@ -133,7 +133,7 @@ public class Date {
      *
      * @return true if the date is not in the future
      */
-    public boolean checkNotFutureDate() {
+    public boolean hasNoFutureDate() {
         if (localDate == null) {
             return true;
         }

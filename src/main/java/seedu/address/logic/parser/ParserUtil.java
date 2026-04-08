@@ -170,7 +170,7 @@ public class ParserUtil {
      * @throws ParseException if date is a future date
      */
     private static void validateNotFutureDate(Date date) throws ParseException {
-        if (!date.checkNotFutureDate()) {
+        if (!date.hasNoFutureDate()) {
             throw new ParseException(Date.MESSAGE_FUTURE_DATE);
         }
     }

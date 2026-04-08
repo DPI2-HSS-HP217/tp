@@ -28,23 +28,26 @@ If you can type fast, OfferFlow will manage your internship pipeline faster than
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-F10-4/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-F10-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your OfferFlow.
+3. Copy the file to the folder you want to use as the _home folder_ for your OfferFlow.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar OfferFlow.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar OfferFlow.jar` command to run the application.<br>
+   The GUI always shows all applications with upcoming reminders due within the next 7 days at start-up. When you type `list` you will note that the app contains some sample data as shown below.<br>
 
    ![Ui](images/Ui.png)
+
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-
    * `list` : Lists all internship applications.
    * `add n/Google p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 r/Backend Developer s/interview t/java` : Adds your internship application to Offerflow.
    * `delete 3` : Deletes the 3rd contact shown in the current list.
    * `clear` : Deletes all applications.
    * `exit` : Exits the app.
-6. Refer to the [Features](#features) below for details of each command.
+
+6. Type the `clear` command to clear all the sample data and start adding your own applications that you wish to track!
+
+7. Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -66,6 +69,7 @@ If you can type fast, OfferFlow will manage your internship pipeline faster than
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
+
 
 ### Viewing help : `help`
 
@@ -109,7 +113,6 @@ Format: `add n/NAME r/ROLE ...`
 
 </box>
 
-Notes:
 ⚠️ Note:
 * name and role is case insensitive
 * Emails should be of the format `local-part@domain`
@@ -310,7 +313,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 ### Locating applications with upcoming deadlines: `upcoming`
 
 Helps you finds applications with upcoming reminders. Moreover, OfferFlow automatically
-filters for applications with reminders due within the specified number of days on start-up.
+filters for applications with reminders due within one week on start-up.
 
 Format: `upcoming DAYS`
 

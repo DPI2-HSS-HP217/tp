@@ -100,7 +100,7 @@ public class EditCommand extends Command {
     private static Application createEditedApplication(Application applicationToEdit,
                                     EditApplicationDescriptor editApplicationDescriptor) throws CommandException {
         assert applicationToEdit != null;
-        boolean isFutureDate = editApplicationDescriptor.getDate().map(x -> !x.checkNotFutureDate()).orElse(false);
+        boolean isFutureDate = editApplicationDescriptor.getDate().map(x -> !x.hasNoFutureDate()).orElse(false);
         if (isFutureDate) {
             throw new CommandException(MESSAGE_DATE_NOT_ALLOWED);
         }

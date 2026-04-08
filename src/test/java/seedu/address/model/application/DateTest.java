@@ -53,15 +53,15 @@ public class DateTest {
 
         // Date in the future by 1 day (boundary value analysis)
         Date futureDate = new Date(today.plusDays(1).toString());
-        assertFalse(futureDate.checkNotFutureDate());
+        assertFalse(futureDate.hasNoFutureDate());
 
         // Date in the past by 1 day (boundary value analysis)
         Date pastDate = new Date(today.minusDays(1).toString());
-        assertTrue(pastDate.checkNotFutureDate());
+        assertTrue(pastDate.hasNoFutureDate());
 
         // Today's date (boundary value analysis)
         Date todayDate = new Date(today.toString());
-        assertTrue(todayDate.checkNotFutureDate());
+        assertTrue(todayDate.hasNoFutureDate());
 
     }
 }
