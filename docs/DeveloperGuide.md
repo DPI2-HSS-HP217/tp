@@ -229,7 +229,7 @@ Dynamic UI allows different visual styles to be applied based on the states of a
 
 The sequence diagram below shows how dynamic UI is generated for an application's status:
 
-<puml src="diagrams/DynamicStyleSequence.puml" alt="Sequence diagram for dynamic" width="760" />
+<puml src="diagrams/DynamiceStyleSequence.puml" alt="Sequence diagram for dynamic" width="760" />
 
 Additional changes to UI styling may be performed in `ApplicationCard` without modifying other components:
 
