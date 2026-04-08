@@ -310,7 +310,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 ### Locating applications with upcoming deadlines: `upcoming`
 
 Helps you finds applications with upcoming reminders. Moreover, OfferFlow automatically
-filters for applications with reminders due within the specified number of days on start-up.
+filters for applications with reminders due within one week on start-up.
 
 Format: `upcoming DAYS`
 
