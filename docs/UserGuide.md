@@ -8,14 +8,18 @@ pageNav: 3
 
 ## 🎯 For the Internship-Hunting CS Student
 
-Let's be honest applying for internships can be a nightmare. Between grinding LeetCode questions, projects and actually attending classes, tracking internship applications can itself become a full-time job.
+Applying for internships is complex and time-consuming — balancing technical
+interviews, projects, and academic commitments makes tracking applications overwhelming.
 
-Hence, **OfferFlow** was built by CS students by CS students as we understand the struggle. OfferFlow is a desktop app that helps you:
-- Track every internship application without the spreadsheet and calender reminder chaos
-- Update and moniter application statuses in seconds unlike spreadsheet which can be very time-consuming
-- Keep all your opportunities organised with minimal overhead!
+**OfferFlow** is designed to simplify this process. Built by CS students who understand
+these challenges firsthand, OfferFlow is a desktop application that helps CS students:
 
-If you can type fast, OfferFlow will manage your internship pipeline faster than any GUI-focused application!
+- Track all internship applications in one place, replacing scattered spreadsheets and reminders
+- Update and monitor application statuses quickly and easily
+- Stay organised with minimal effort
+
+OfferFlow is optimised for speed and efficiency, letting keyboard-focused users manage
+their internship pipeline faster than traditional GUI-based tools.
 
 <!-- * Table of Contents -->
 
@@ -497,18 +501,20 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 
 ## Command summary
 
-| Action | Format | Example |
-|:-------|:-------|:--------|
-| **Add** | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...` | `add n/Google p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 r/Backend Developer s/interviewed t/java` |
-| **Overwrite** | `overwrite` | `overwrite` |
-| **Delete** | `delete INDEX` or `delete n/NAME r/ROLE` | `delete 3` or `delete n/Google r/Backend Developer` |
-| **Edit** | `editmode INDEX` or `editmode n/NAME r/ROLE` | `editmode 1` then `a/Mapletree Business City II, Pasir Panjang area` then `editexit`  |
-| **Status** | `status n/COMPANY r/ROLE s/STATUS` | `status n/Tiktok r/Data Analyst s/Rejected` |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` |
-| **Filter** | `filter n/NAME` or `filter r/ROLE` or `filter d/YYYY-MM-DD` or `filter s/STATUS` or `filter t/TAG` | `filter n/Tiktok` or `filter r/Software Engineer` or `filter d/2024-06-18` or `filter s/Rejected t/java` |
-| **Folder** | `folder FOLDER_NAME` | `folder Y1S2` |
-| **Toggle** | `toggle FOLDER_NAME` | `toggle Y1S2` |
-| **List Folders** | `folders` | `folders` |
-| **List** | `list` | `list` |
-| **Clear** | `clear` | `clear` |
-| **Help** | `help` | `help` |
+| Action           | Format                                                                                             | Example                                                                                                                          |
+|:-----------------|:---------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...`                           | `add n/Google p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 r/Backend Developer s/interviewed t/java` |
+| **Overwrite**    | `overwrite`                                                                                        | `overwrite`                                                                                                                      |
+| **Delete**       | `delete INDEX` or `delete n/NAME r/ROLE`                                                           | `delete 3` or `delete n/Google r/Backend Developer`                                                                              |
+| **Enter Edit**   | `editmode INDEX` or `editmode n/NAME r/ROLE`                                                       | `editmode 1` or `editmode n/Nus r/System Engineer`                                                                               |
+| **Edit**         | While in editmode: `n/NAME` or `r/ROLE` or ...                                                     | `a/Mapletree Business City II, Pasir Panjang area` or `s/applied`                                                                |
+| **Exit Edit**    | `editexit`                                                                                         | `exitedit`                                                                                                                       |
+| **Status**       | `status n/COMPANY r/ROLE s/STATUS`                                                                 | `status n/Tiktok r/Data Analyst s/Rejected`                                                                                      |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                                                                                                                |
+| **Filter**       | `filter n/NAME` or `filter r/ROLE` or `filter d/YYYY-MM-DD` or `filter s/STATUS` or `filter t/TAG` | `filter n/Tiktok` or `filter r/Software Engineer` or `filter d/2024-06-18` or `filter s/Rejected t/java`                         |
+| **Folder**       | `folder FOLDER_NAME`                                                                               | `folder Y1S2`                                                                                                                    |
+| **Toggle**       | `toggle FOLDER_NAME`                                                                               | `toggle Y1S2`                                                                                                                    |
+| **List Folders** | `folders`                                                                                          | `folders`                                                                                                                        |
+| **List**         | `list`                                                                                             | `list`                                                                                                                           |
+| **Clear**        | `clear`                                                                                            | `clear`                                                                                                                          |
+| **Help**         | `help`                                                                                             | `help`                                                                                                                           |
