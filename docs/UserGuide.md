@@ -30,9 +30,9 @@ their internship pipeline faster than traditional GUI-based tools.
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-   **Window users:** [Download](https://se-education.org/guides/tutorials/javaInstallationWindows.html) Java `17`
-   **Linux users:** [Download](https://se-education.org/guides/tutorials/javaInstallationLinux.html) Java `17`
+   * **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   * **Window users:** [Download](https://se-education.org/guides/tutorials/javaInstallationWindows.html) Java `17`
+   * **Linux users:** [Download](https://se-education.org/guides/tutorials/javaInstallationLinux.html) Java `17`
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-F10-4/tp/releases).
 
@@ -71,7 +71,7 @@ their internship pipeline faster than traditional GUI-based tools.
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/java`, `t/java t/React` etc.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear` and `overwrite`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `folders` and `overwrite`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -99,7 +99,7 @@ Adds the internship application you have applied for, to help track all your app
 <box type="warning" seamless>
 
 **Caution:**
-OfferFlow by default does not allow duplicate application with same name and role. Hence, if you choose to add application with duplicate name and role, you can choose whether or not to overwrite it (ie: replace the pre-existing application with the new application)
+OfferFlow by default does not allow duplicate application with same name and role. Hence, if you choose to add application with duplicate name and role, you can choose whether or not to [overwrite](#overwrite-duplicate-application--overwrite) it (ie: replace the pre-existing application with the new application)
 </box>
 
 Format: `add n/NAME r/ROLE ...`
@@ -150,7 +150,7 @@ If you choose to overwrite, type `overwrite`. If not, continue using the app as 
 
 Format:
 1. `editmode INDEX` or `editmode n/NAME r/ROLE` to enter edit mode to edit that particular application
-2. Type in any combination of at least one of the internship application parameters above to edit the application
+2. Type in any combination of at least one of the internship application parameters [above](#application) to edit the application
 3. `exitedit` to finish editing and exit the editing mode
 
 ⚠️ Notes:
@@ -177,10 +177,6 @@ Format:
 Use `editmode` command to modify or create new Reminders.
 
 Format: `u/DESCRIPTION ud/DATE`
-
-#### Parameters
-- `u/DESCRIPTION` → name of the reminder
-- `ud/DATE` → deadline of the reminder
 
 ⚠️ Note:
 * both `u/DESCRIPTION ud/DATE` must be provided to modify/create reminders
@@ -264,10 +260,6 @@ Helps you finds applications whose company names contain any of the given keywor
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-#### Parameters
-- `KEYWORD` → Name of the company
-- `[MORE_KEYWORD}` → Name of the company
-
 ⚠️ Note:
 * The search is case-insensitive. e.g `google` will match `Google`
 * The order of the keywords does not matter. e.g. `Google Meta` will match `Meta Google`
@@ -293,16 +285,15 @@ Shows a list of all the applications you have added into OfferFlow
 
 ### Locating applications with upcoming deadlines: `upcoming`
 
-Helps you finds applications with upcoming reminders. Moreover, OfferFlow automatically
+Helps you find applications with upcoming reminders. Moreover, OfferFlow automatically
 filters for applications with reminders due within one week on start-up.
 
 Format: `upcoming DAYS`
 
-#### Parameters
-- `[DAYS]` → An integer X from 0 to 7 inclusive, such that applications with reminders due within X days from today are returned.
-
+⚠️ Note:
 * Applications with no reminders at all will not be returned.
 * Applications with reminders that are overdue (e.g due prior to the current date) will not be returned.
+* `DAYS` is an integer from 0 to 7 inclusive
 
 #### Examples
 * `upcoming 0` returns all applications with reminders due within 0 days of today, ergo by today.
@@ -313,7 +304,7 @@ Format: `upcoming DAYS`
 
 ### Filtering applications: `filter`
 
-Filters applications by company, applied date, role, status, or tag. Allows filtering of multiple fields.
+Filters applications by company, applied date, role, status, and/or tag. Allows filtering of multiple fields.
 
 Format:
 * `filter n/NAME`
@@ -350,9 +341,6 @@ Format: `delete INDEX` or `delete n/NAME r/ROLE`
 * Deletes the application at the specified `INDEX`.
 * Deletes the specific ppplication with the `NAME` and `ROLE`
 
-#### Parameters
-- `INDEX` → the index number shown in the displayed application list
-
 <box type="warning" seamless>
 
 **Caution:**
@@ -372,8 +360,8 @@ Creates a new empty OfferFlow folder saved under `data/FOLDER_NAME.json` and swi
 
 Format: `folder FOLDER_NAME`
 
-#### Parameters
-- `FOLDER_NAME` → Name for the new OfferFlow folder (letters, numbers, underscores, and hyphens only)
+⚠️ Note:
+* `FOLDER_NAME` contains letters, numbers, underscores, and hyphens only
 
 <box type="warning" seamless>
 
@@ -400,9 +388,6 @@ The default folder is called `addressbook`
 Switches to an existing OfferFlow folder saved under `data/FOLDER_NAME.json`.
 
 Format: `toggle FOLDER_NAME`
-
-#### Parameters
-- `FOLDER_NAME` → Name of the existing OfferFlow folder to switch to
 
 <box type="warning" seamless>
 
@@ -496,7 +481,7 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 | **Overwrite**       | `overwrite`                                                                                        | `overwrite`                                                                                                                      |
 | **Delete**          | `delete INDEX` or `delete n/NAME r/ROLE`                                                           | `delete 3` or `delete n/Google r/Backend Developer`                                                                              |
 | **Enter Edit**      | `editmode INDEX` or `editmode n/NAME r/ROLE`                                                       | `editmode 1` or `editmode n/Nus r/System Engineer`                                                                               |
-| **Edit**            | While in editmode: `n/NAME` or `r/ROLE` or ...                                                     | `a/Mapletree Business City II, Pasir Panjang area` or `s/applied`                                                                |
+| **Edit**            | While in editmode: `a/ADDRESS` or `s/STATUS` or ...                                                   | `a/Mapletree Business City II, Pasir Panjang area` or `s/applied`                                                                |
 | **Exit Edit**       | `editexit`                                                                                         | `exitedit`                                                                                                                       |
 | **Remove Reminder** | `rmr INDEX` or `rmr n/NAME r/ROLE`                                                                 | `rmr 3` or `rmr n/Google r/Backend Developer`                                                                                    |
 | **Status**          | `status n/COMPANY r/ROLE s/STATUS`                                                                 | `status n/Tiktok r/Data Analyst s/Rejected`                                                                                      |
