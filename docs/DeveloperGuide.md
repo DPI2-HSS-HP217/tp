@@ -798,6 +798,22 @@ testers are expected to do more *exploratory* testing.
        Expected: Application status now changed to `Applied`.
 
 
+### [Removing reminder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#modifying-reminders-reminder)
+
+1. Removing a reminder of an Application via Name and Role
+   
+    1. Prerequisites: Add an application with reminder.
+
+    2. Test case: `rmr n/NAME r/ROLE`<br>
+       Expected: Reminder is removed from the specified Application.
+
+2. Deleting a reminder of an application via index
+
+    1. Prerequisites: Add an application with reminder.
+
+    2. Test case: `rmr INDEX`<br>
+       Expected: Reminder is removed from the Application at specified `INDEX`. 
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
