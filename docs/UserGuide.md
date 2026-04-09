@@ -230,11 +230,9 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 
 </box>
 
-#### Parameters
-
-- `n/COMPANY_NAME` → Name of the company
-- `r/JOB_ROLE` → Role applied for (must match exactly)
-- `s/STATUS` → New status
+⚠️ Note:
+* Application with the name and role must exist in order to update status
+* Status to change to must be a valid status (see below)
 
 #### Valid Statuses
 | Status         | When to use                                                                     |
@@ -322,7 +320,7 @@ Format: `upcoming DAYS`
 
 ### Filtering applications: `filter`
 
-Filters applications by company, applied date, role, status, or tag.
+Filters applications by company, applied date, role, status, or tag. Allows filtering of multiple fields.
 
 Format:
 * `filter n/NAME`
@@ -331,12 +329,6 @@ Format:
 * `filter s/STATUS`
 * `filter t/TAG`
 
-#### Parameters
-- `n/KEYWORD` → Name of the company
-- `d/YYYY-MM-DD` → date
-- `r/ROLE` → job role
-- `s/STATUS` → application progress
-- `t/TAG` → tag in the application
 
 ⚠️ Note:
 * Filter matching is case-insensitive.
@@ -348,8 +340,8 @@ Examples:
 * `filter n/Google`
 * `filter d/2025-11-11`
 * `filter r/Software Engineer`
-* `filter s/Applied`
-* `filter t/java`
+* `filter s/Applied t/java`
+
 
 #### Expected Outcome (eg: filter n/Google)
 
@@ -379,8 +371,7 @@ Format: `delete INDEX` or `delete n/NAME r/ROLE`
 application for Google as QA engineer
 
 #### Expected Outcome:
-
-  ![Delete_ref](images/Delete_ref.png)
+* Removes the specified application from the list
 
 ### Creating a new OfferFlow folder : `folder`
 
@@ -406,8 +397,6 @@ Format: `folder FOLDER_NAME`
 #### Expected Outcome:
 - A new empty OfferFlow folder is created and you are switched to it immediately.
 - The status bar at the bottom of the window updates to show the current file path (e.g. `./data/Y1S2.json`).
-
-  ![folder](images/folder.png)
 
 
 ### Switching to an existing OfferFlow folder : `toggle`
@@ -439,8 +428,6 @@ Format: `toggle FOLDER_NAME`
 #### Expected Outcome:
 - You are switched to the OfferFlow folder and its applications are loaded if any.
 - The status bar at the bottom of the window updates to show the current file path (e.g. `./data/addressbook.json`).
-
-  ![toggle](images/toggle.png)
 
 
 ### Listing all address books : `folders`
@@ -483,7 +470,7 @@ OfferFlow data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-OfferFlow data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+OfferFlow data are saved automatically as a JSON file depending on the folder the user is in, eg. `[JAR file location]/data/addressbook.json` or `[JAR file location]/data/Y1S1.json` etc. Advanced users are welcome to update data directly by editing these data files.
 
 <box type="warning" seamless>
 
@@ -506,12 +493,6 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
----
-
-## Glossary
-
-1. **GUI:** Graphical User Interface (GUI) is a visual way to interact with a computer, using icons, menus, and pointers rather than typed commands.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -524,7 +505,7 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 | **Edit** | `editmode INDEX` or `editmode n/NAME r/ROLE` | `editmode 1` then `a/Mapletree Business City II, Pasir Panjang area` then `editexit`  |
 | **Status** | `status n/COMPANY r/ROLE s/STATUS` | `status n/Tiktok r/Data Analyst s/Rejected` |
 | **Find** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` |
-| **Filter** | `filter n/NAME` or `filter r/ROLE` or `filter d/YYYY-MM-DD` or `filter s/STATUS` or `filter t/TAG` | `filter n/Tiktok` or `filter r/Software Engineer` or `filter d/2024-06-18` or `filter s/Rejected` or `filter t/java` |
+| **Filter** | `filter n/NAME` or `filter r/ROLE` or `filter d/YYYY-MM-DD` or `filter s/STATUS` or `filter t/TAG` | `filter n/Tiktok` or `filter r/Software Engineer` or `filter d/2024-06-18` or `filter s/Rejected t/java` |
 | **Folder** | `folder FOLDER_NAME` | `folder Y1S2` |
 | **Toggle** | `toggle FOLDER_NAME` | `toggle Y1S2` |
 | **List Folders** | `folders` | `folders` |
