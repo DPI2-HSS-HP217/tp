@@ -384,12 +384,13 @@ Format: `folder FOLDER_NAME`
 </box>
 
 #### Examples
-* `folder Y1S2` creates and switches to the new OfferFlow folder at `data/Y1S2.json`
+* `folder Y1S2` creates and switches to the new OfferFlow folder at `data/y1s2.json`
 * `folder internships-2025` creates and switches to `data/internships-2025.json`
 
 #### Expected Outcome:
 - A new empty OfferFlow folder is created and you are switched to it immediately.
-- The status bar at the bottom of the window updates to show the current file path (e.g. `./data/Y1S2.json`).
+- Folder names are always stored in lowercase (e.g. `folder Y1S2` creates `data/y1s2.json`).
+- The status bar at the bottom of the window updates to show the current file path (e.g. `./data/y1s2.json`).
 
 
 ### Switching to an existing OfferFlow folder : `toggle`
@@ -410,17 +411,17 @@ Format: `toggle FOLDER_NAME`
 - Folder name cannot be empty
 - Folder name cannot contain spaces or special characters
 - The address book file must already exist at `data/FOLDER_NAME.json`
-- Folder names are case insensitive
+- Folder names are case-insensitive — `toggle Y1S2` and `toggle y1s2` switch to the same file `data/y1s2.json`
 </box>
 
 #### Examples
 * `toggle addressbook` switches to the default starting folder at `data/addressbook.json`
-* `toggle Y1S2` switches to the OfferFlow folder at `data/Y1S2.json`
+* `toggle Y1S2` switches to the OfferFlow folder at `data/y1s2.json`
 * `toggle internships-2025` switches to `data/internships-2025.json`
 
 #### Expected Outcome:
 - You are switched to the OfferFlow folder and its applications are loaded if any.
-- The status bar at the bottom of the window updates to show the current file path (e.g. `./data/addressbook.json`).
+- The status bar at the bottom of the window updates to show the current file path (e.g. `./data/y1s2.json`).
 
 
 ### Listing all address books : `folders`

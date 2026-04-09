@@ -15,7 +15,7 @@ public class FolderCommandParser implements Parser<FolderCommand> {
     @Override
     public FolderCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String name = args.trim();
+        String name = args.trim().toLowerCase();
         if (name.isEmpty()) {
             throw new ParseException("Folder name cannot be empty.\n" + FolderCommand.MESSAGE_USAGE);
         }

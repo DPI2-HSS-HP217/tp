@@ -15,7 +15,7 @@ public class ToggleCommandParser implements Parser<ToggleCommand> {
     @Override
     public ToggleCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String name = args.trim();
+        String name = args.trim().toLowerCase();
         if (name.isEmpty()) {
             throw new ParseException("Folder name cannot be empty.\n" + ToggleCommand.MESSAGE_USAGE);
         }
