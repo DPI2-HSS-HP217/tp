@@ -866,7 +866,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Specified application is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
     2. Testcase: `delete n/NUS r/tester`<br>
-       Expected: Delete failed. Application not found.
+       Expected: Delete failed. Error warning that application not found.
 
 2. Deleting an application via index
 
@@ -893,6 +893,12 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `s/Applied`<br>
        Expected: Application status now changed to `Applied`.
 
+    4. Test case: `d/abcde`<br>
+       Expected: Edit failed, error details appear.
+    
+    5. Test case: `editexit`<br>
+       Expected: Application exits editing mode.
+
 ### [Removing reminder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#modifying-reminders-reminder)
 
 1. Removing a reminder of an Application via Name and Role
@@ -908,6 +914,10 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `rmr INDEX`<br>
        Expected: Reminder is removed from the Application at specified `INDEX`.
+
+3. Removing a reminder of a non-existing application.
+   1. Test case: `rmr 1000` or `rmr n/invalidwrongname r/nosuchrole`<br>
+      Expected: Error warning that application is not found.
 
 ### [Creating a new folder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#creating-a-new-offerflow-folder--folder)
 
