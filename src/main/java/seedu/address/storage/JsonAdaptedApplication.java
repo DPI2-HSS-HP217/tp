@@ -104,11 +104,10 @@ class JsonAdaptedApplication {
 
         final Phone modelPhone = parseOptional(phone, Phone::isValidPhone, Phone.MESSAGE_CONSTRAINTS, Phone::new);
         final Email modelEmail = parseOptional(email, Email::isValidEmail, Email.MESSAGE_CONSTRAINTS, Email::new);
-        final Date modelDate = parseOptional(date, Date::isValidDate, Date.MESSAGE_CONSTRAINTS, Date::new);
+        final Date modelDate = parseOptionalDate(date);
         final Address modelAddress = parseOptional(address, Address::isValidAddress, Address.MESSAGE_CONSTRAINTS,
                                         Address::new);
-        final Status modelStatus = parseOptional(status, Status::isValidStatus, Status.MESSAGE_CONSTRAINTS,
-                                        Status::new);
+        final Status modelStatus = parseOptionalStatus(status);
         final Set<Tag> modelTags = new HashSet<>(applicationTags);
         final Reminder modelReminder = parseOptionalReminder();
 
@@ -169,6 +168,49 @@ class JsonAdaptedApplication {
         }
         logger.info("No reminder");
         return null;
+    }
+
+    /**
+     * Parses the date if present
+     *
+     * @param dateString date string to check and parse
+     * @return Date object, or null if date does not exist.
+     * @throws IllegalValueException if invalid date or if future date
+     */
+    private Date parseOptionalDate(String dateString) throws IllegalValueException {
+        if (dateString == null || dateString.isEmpty()) {
+            logger.info("no date");
+            return null;
+        }
+        if (!Date.isValidDate(dateString)) {
+            logger.warning("Invalid date: " + dateString);
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        }
+        Date date = new Date(dateString);
+        if (!date.hasNoFutureDate()) {
+            logger.warning("Future date: " + dateString);
+            throw new IllegalValueException(Date.MESSAGE_FUTURE_DATE);
+        }
+        return date;
+    }
+
+    /**
+     * Parses status if present else default is "Interested".
+     *
+     * @param status status to check and parse
+     * @return Status object
+     * @IllegalValueException if invalid status
+     */
+    private Status parseOptionalStatus(String status) throws IllegalValueException {
+        if (status == null || status.isEmpty()) {
+            logger.info("default status: Interested");
+            return new Status("");
+        }
+        if (!Status.isValidStatus(status)) {
+            logger.warning("Invalid status: " + status);
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return new Status(status);
     }
 
     /**
