@@ -801,11 +801,20 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Manually change a status of an application in `[JAR file location]/data/addressbook.json` to `""`
+      Expected: When user reopens the app, the status gets automatically updated to `"Interested"`
 
-1. _{ more test cases …​ }_
+   2. Manually change other fields in `[JAR file location]/data/addressbook.json` to `""`
+      Testcase: change name field to `""`
+      Expected: OfferFlow would clear all the applications and start with an empty file
+
+2. Dealing with corrupt data files
+
+   1. Manually change fields in `[JAR file location]/data/addressbook.json` to invalid values
+      Testcase: change phone number field to `12` (phone number must be atleast 3 digits)
+      Expected: OfferFlow would clear all the applications and start with an empty file
 
 --------------------------------------------------------------------------------------------------------------------
 
