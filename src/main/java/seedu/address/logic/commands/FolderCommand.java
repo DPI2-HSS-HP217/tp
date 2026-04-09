@@ -20,6 +20,7 @@ public class FolderCommand extends Command {
     /** Creates a {@code FolderCommand} with the given {@code folderName}. */
     public FolderCommand(String folderName) {
         requireNonNull(folderName);
+        assert !folderName.isEmpty() : "Folder name should not be empty";
         this.folderName = folderName;
     }
 

@@ -33,4 +33,12 @@ public class FolderCommandTest {
         assertEquals("Created and switched to folder: Y1S2", result.getFeedbackToUser());
     }
 
+    @Test
+    public void execute_folder_signalsFolderNameAndCreateNew() {
+        FolderCommand command = new FolderCommand("Y1S2");
+        CommandResult result = command.execute(model);
+        assertEquals("Y1S2", result.getFolderName());
+        assertTrue(result.isCreateNew());
+    }
+
 }

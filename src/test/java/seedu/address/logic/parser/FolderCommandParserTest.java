@@ -31,17 +31,27 @@ public class FolderCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFolderCommand() {
-        assertParseSuccess(parser, "Y1S2", new FolderCommand("Y1S2"));
+        assertParseSuccess(parser, "Y1S2", new FolderCommand("y1s2"));
     }
 
     @Test
     public void parse_validArgsWithWhitespace_returnsFolderCommand() {
-        assertParseSuccess(parser, "  Y1S2  ", new FolderCommand("Y1S2"));
+        assertParseSuccess(parser, "  Y1S2  ", new FolderCommand("y1s2"));
     }
 
     @Test
     public void parse_validArgsWithHyphen_returnsFolderCommand() {
-        assertParseSuccess(parser, "Y1-S2", new FolderCommand("Y1-S2"));
+        assertParseSuccess(parser, "Y1-S2", new FolderCommand("y1-s2"));
+    }
+
+    @Test
+    public void parse_validArgsWithUnderscore_returnsFolderCommand() {
+        assertParseSuccess(parser, "Y1_S2", new FolderCommand("y1_s2"));
+    }
+
+    @Test
+    public void parse_validArgsNumericOnly_returnsFolderCommand() {
+        assertParseSuccess(parser, "123", new FolderCommand("123"));
     }
 
 }

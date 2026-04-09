@@ -35,6 +35,7 @@ public class RoleTest {
         assertFalse(Role.isValidJobRole("job1")); // numeric not allowed (equivalence partitioning)
         assertFalse(Role.isValidJobRole("1job")); // numeric not allowed (equivalence partitioning)
         assertTrue(Role.isValidJobRole("software engineering")); // spaces allowed (equivalence partitioning)
+        assertFalse(Role.isValidJobRole("software  eng")); // double spaces not allowed (equivalence partitioning)
     }
 
     @Test

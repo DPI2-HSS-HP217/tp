@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.testutil.TypicalApplications.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +26,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.application.Application;
+import seedu.address.model.application.Name;
+import seedu.address.model.application.Role;
+import seedu.address.model.application.Status;
 import seedu.address.testutil.ApplicationBuilder;
 
 public class AddCommandTest {
@@ -55,6 +61,36 @@ public class AddCommandTest {
         assertTrue(exception.getMessage().contains("This application already exists"));
         assertTrue(exception.getMessage().contains(validApplication.getName().fullName));
         assertTrue(exception.getMessage().contains(validApplication.getRole().value));
+    }
+
+    // add command with only name and role
+    @Test
+    public void execute_minimalApplication_addSuccessful() throws Exception {
+        ModelStubAcceptingApplicationAdded modelStub = new ModelStubAcceptingApplicationAdded();
+        Application minimalApplication = new Application(
+                new Name(VALID_NAME_BOB),
+                null, null, null,
+                Collections.emptySet(),
+                null,
+                new Role(VALID_ROLE_BOB),
+                new Status(""),
+                null);
+
+        CommandResult commandResult = new AddCommand(minimalApplication).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(minimalApplication)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(minimalApplication), modelStub.applicationsAdded);
+    }
+
+    @Test
+    public void execute_duplicateApplication_errorMessageContainsExistingDetails() {
+        Application validApplication = new ApplicationBuilder().build();
+        AddCommand addCommand = new AddCommand(validApplication);
+        ModelStub modelStub = new ModelStubWithApplication(validApplication);
+
+        CommandException exception = assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+        assertTrue(exception.getMessage().contains("overwrite"));
     }
 
     @Test

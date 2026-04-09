@@ -20,6 +20,7 @@ public class ToggleCommand extends Command {
     /** Creates a {@code ToggleCommand} with the given {@code folderName}. */
     public ToggleCommand(String folderName) {
         requireNonNull(folderName);
+        assert !folderName.isEmpty() : "Folder name should not be empty";
         this.folderName = folderName;
     }
 

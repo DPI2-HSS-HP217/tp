@@ -11,7 +11,7 @@ import java.util.Objects;
  * Represents a Reminder if an Application has one.
  */
 public class Reminder {
-    public static final String VALIDATION_REGEX = "[A-Za-z][A-Za-z ]*";
+    public static final String VALIDATION_REGEX = "(?!.* {2})[A-Za-z][A-Za-z ]*";
     public static final String REMINDER_MESSAGE_CONSTRAINTS =
             "Reminder should be letters, and it should not be blank";
     public static final String DATE_MESSAGE_CONSTRAINTS =

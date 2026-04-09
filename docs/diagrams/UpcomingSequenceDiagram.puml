@@ -1,0 +1,84 @@
+@startuml UpcomingSequenceDiagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UpcomingCommandParser" as UpcomingCommandParser LOGIC_COLOR
+participant "f:UpcomingCommand" as UpcomingCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant "s:Storage" as Storage STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("upcoming 5")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("upcoming 5")
+activate AddressBookParser
+
+create UpcomingCommandParser
+AddressBookParser -> UpcomingCommandParser
+activate UpcomingCommandParser
+
+UpcomingCommandParser --> AddressBookParser
+deactivate UpcomingCommandParser
+
+AddressBookParser -> UpcomingCommandParser : parse("5")
+activate UpcomingCommandParser
+
+create UpcomingCommand
+UpcomingCommandParser -> UpcomingCommand
+activate UpcomingCommand
+
+UpcomingCommand --> UpcomingCommandParser
+deactivate UpcomingCommand
+
+UpcomingCommandParser --> AddressBookParser : f
+deactivate UpcomingCommandParser
+UpcomingCommandParser -[hidden]-> AddressBookParser
+destroy UpcomingCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> UpcomingCommand : execute(m)
+activate UpcomingCommand
+UpcomingCommand -> Model : updateFilteredApplicationList(predicate)
+activate Model
+Model --> UpcomingCommand
+deactivate Model
+
+UpcomingCommand -> Model : getFilteredApplicationList()
+activate Model
+Model --> UpcomingCommand
+deactivate Model
+
+UpcomingCommand -> Model : setReminderOffset(offset)
+activate Model
+Model -> UserPrefs : setReminderOffset(reminderOffset)
+activate UserPrefs
+UserPrefs --> Model
+deactivate UserPrefs
+Model --> UpcomingCommand
+deactivate Model
+
+create CommandResult
+UpcomingCommand -> CommandResult
+activate CommandResult
+CommandResult --> UpcomingCommand
+deactivate CommandResult
+
+UpcomingCommand --> LogicManager : r
+deactivate UpcomingCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

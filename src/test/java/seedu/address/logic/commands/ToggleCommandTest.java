@@ -33,4 +33,12 @@ public class ToggleCommandTest {
         assertEquals("Switched to folder: Y1S2", result.getFeedbackToUser());
     }
 
+    @Test
+    public void execute_toggle_signalsFolderNameAndNotCreateNew() {
+        ToggleCommand command = new ToggleCommand("Y1S2");
+        CommandResult result = command.execute(model);
+        assertEquals("Y1S2", result.getFolderName());
+        assertFalse(result.isCreateNew());
+    }
+
 }

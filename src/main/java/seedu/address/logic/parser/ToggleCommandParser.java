@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.ToggleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -12,7 +14,8 @@ public class ToggleCommandParser implements Parser<ToggleCommand> {
 
     @Override
     public ToggleCommand parse(String args) throws ParseException {
-        String name = args.trim();
+        requireNonNull(args);
+        String name = args.trim().toLowerCase();
         if (name.isEmpty()) {
             throw new ParseException("Folder name cannot be empty.\n" + ToggleCommand.MESSAGE_USAGE);
         }

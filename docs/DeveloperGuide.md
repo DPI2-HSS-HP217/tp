@@ -147,7 +147,7 @@ The `Storage` component,
 * can save both OfferFlow data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
-* supports folder management operations — creating a new data folder (`createFolder`), switching between existing folders (`toggleFolder`), and listing all available folders (`getAvailableFolders`) — allowing multiple separate address book files to be managed under the `data/` directory.
+* supports folder management operations: creating a new data folder (`createFolder`), switching between existing folders (`toggleFolder`), and listing all available folders (`getAvailableFolders`), allowing multiple separate address book files to be managed under the `data/` directory.
 
 ### Common classes
 
@@ -325,6 +325,78 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
+
+### Folder feature
+
+The `folder` command creates a new empty address book saved as a JSON file under the `data/` directory and immediately switches to it.
+
+The sequence diagram below shows how a folder command is parsed and executed:
+
+<puml src="diagrams/FolderSequenceDiagram.puml" alt="Sequence diagram for folder command" width="760" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FolderCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
+</box>
+
+`AddressBookParser` routes `folder ...` input to `FolderCommandParser`. The parser:
+
+* rejects an empty folder name
+* only accepts names containing letters, numbers, underscores, and hyphens
+
+Unlike most commands, `FolderCommand#execute(model)` does not perform the actual work. Because `Command` only has access to `Model` and not `Storage`, the command instead signals `LogicManager` via `CommandResult` with `folderName` and `isCreateNew=true`. `LogicManager` then:
+
+1. calls `Storage#createFolder(folderName)` to create the new JSON file
+2. loads the newly created empty address book into `Model` via `Model#setAddressBook()`
+3. updates the active file path via `Model#setAddressBookFilePath()`
+
+### Toggle feature
+
+The `toggle` command switches the active address book to an existing folder under the `data/` directory.
+
+The sequence diagram below shows how a toggle command is parsed and executed:
+
+<puml src="diagrams/ToggleSequenceDiagram.puml" alt="Sequence diagram for toggle command" width="760" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ToggleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
+</box>
+
+`AddressBookParser` routes `toggle ...` input to `ToggleCommandParser`. The parser applies the same validation as `FolderCommandParser`: rejecting empty names and names with invalid characters.
+
+The execution follows the same delegation pattern as `folder`. `ToggleCommand#execute(model)` signals `LogicManager` via `CommandResult` with `folderName` and `isCreateNew=false`. `LogicManager` then:
+
+1. calls `Storage#toggleFolder(folderName)` which loads the existing JSON file, throwing an error if it does not exist
+2. loads the returned address book into `Model` via `Model#setAddressBook()`
+3. updates the active file path via `Model#setAddressBookFilePath()`
+
+After every command, `MainWindow` calls `Logic#getAddressBookFilePath()` and updates the status bar footer, so the currently active folder is always reflected in the GUI.
+
+### Upcoming feature
+
+The `upcoming` command is responsible for first narrowing the currently displayed application list similar to `filter`, 
+and secondly saving the parameter to disk so that the application may re-apply the same operation on start-up. 
+
+The sequence diagram below shows how an upcoming command is parsed and executed:
+
+<puml src="diagrams/UpcomingSequenceDiagram.puml" alt="Sequence diagram for upcoming command" width="760" />
+
+`AddressBookParser` routes `upcoming ...` input to `UpcomingCommandParser`. The parser then:
+
+* rejects malformed commands such as empty values, non-integer values, or invalid integer values 
+* constructs a predicate `ReminderWithinOffsetPredicate`, which is used similarly to the predicate constructed
+  by the `filter` command
+
+When the resulting `UpcomingCommand` executes, it calls `Model#updateFilteredApplicationList(predicate)` to a similar
+effect as the `filter` command. 
+In addition, the command will save the parameter given to disk. Due to similar restrictions in accessing storage as in `folder` command, 
+the command instead updates this value by calling `Model#setReminderOffset(offset)` which in turn calls `UserPrefs#setReminderOffset(reminderOffset)`. This will set
+the value of a variable which will be saved to disk via `preferences.json` upon closure of the application. 
+
+
 
 ### \[Proposed\] Data archiving
 
@@ -629,7 +701,8 @@ but can also choose to add other optional details (date of application, contact 
 * **Application**: A job or internship application submitted by the user to a company.
 * **Duplicate**:  A repeated Application with the same <Company_Name> and <Job_Role>.
 * **Contact**: A record containing information about a company or recruiter, including name, role, and company.
-* **Application Status**:  The current stage of a job application (e.g., Plan to Apply, Applied, Interview, Rejected, Offered).
+* **Application Status**:  The current stage of a job application (e.g., Plan to Apply, Applied, Interview, Pending, Rejected, Offered).
+* **Reminder**: An Event created by user, containing the Event description and date of event.
 * **Notification**:  A reminder sent by OfferFlow to alert the user about upcoming deadlines or interview dates.
 * **Folder**:  A storage group that allows users to archive past job search sessions.
 * **Interaction**:   Any recorded communication or follow-up with a recruiter or company (e.g., email reply or interview invitation).
@@ -711,6 +784,19 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### [Editing an application](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#editing-an-application-editmode)
+
+1. Edit different applications with [different parameters](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#application)
+
+    1. Prerequisites: Add at least one application.
+
+    2. Test case: `editmode 1`<br>
+       Expected: Application enters `editing mode`.
+
+    3. Test case: `s/Applied`<br>
+       Expected: Application status now changed to `Applied`.
+
 
 ### Saving data
 

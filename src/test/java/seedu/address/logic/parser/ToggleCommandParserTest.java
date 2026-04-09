@@ -31,17 +31,27 @@ public class ToggleCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsToggleCommand() {
-        assertParseSuccess(parser, "Y1S2", new ToggleCommand("Y1S2"));
+        assertParseSuccess(parser, "Y1S2", new ToggleCommand("y1s2"));
     }
 
     @Test
     public void parse_validArgsWithWhitespace_returnsToggleCommand() {
-        assertParseSuccess(parser, "  Y1S2  ", new ToggleCommand("Y1S2"));
+        assertParseSuccess(parser, "  Y1S2  ", new ToggleCommand("y1s2"));
     }
 
     @Test
     public void parse_validArgsWithHyphen_returnsToggleCommand() {
-        assertParseSuccess(parser, "Y1-S2", new ToggleCommand("Y1-S2"));
+        assertParseSuccess(parser, "Y1-S2", new ToggleCommand("y1-s2"));
+    }
+
+    @Test
+    public void parse_validArgsWithUnderscore_returnsToggleCommand() {
+        assertParseSuccess(parser, "Y1_S2", new ToggleCommand("y1_s2"));
+    }
+
+    @Test
+    public void parse_validArgsNumericOnly_returnsToggleCommand() {
+        assertParseSuccess(parser, "123", new ToggleCommand("123"));
     }
 
 }

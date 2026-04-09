@@ -22,17 +22,21 @@ public class ReminderTest {
         String validReminderDate = "2026-12-12";
 
         String invalidReminderName1 = " ";
-        String invalidReminderName2 = "";
+        String invalidReminderName3 = "te  st";
+        String invalidReminderName2 = "22";
         String invalidReminderDate1 = "lol";
         String invalidReminderDate2 = "2026-32-01";
         String invalidReminderDate3 = "2026-32-1";
 
+        // invalid date inputs from letters to wrong date format or invalid date
         assertThrows(IllegalArgumentException.class, () -> new Reminder(validReminderName, invalidReminderDate1));
         assertThrows(IllegalArgumentException.class, () -> new Reminder(validReminderName, invalidReminderDate2));
         assertThrows(IllegalArgumentException.class, () -> new Reminder(validReminderName, invalidReminderDate3));
 
+        // invalid reminder Name, should be letters only
         assertThrows(IllegalArgumentException.class, () -> new Reminder(invalidReminderName1, validReminderDate));
         assertThrows(IllegalArgumentException.class, () -> new Reminder(invalidReminderName2, validReminderDate));
+        assertThrows(IllegalArgumentException.class, () -> new Reminder(invalidReminderName3, validReminderDate));
 
         assertThrows(IllegalArgumentException.class, () -> new Reminder(invalidReminderName2, invalidReminderDate1));
         assertThrows(IllegalArgumentException.class, () -> new Reminder(invalidReminderName2, invalidReminderDate2));

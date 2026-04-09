@@ -49,6 +49,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalApplications.AMY;
 import static seedu.address.testutil.TypicalApplications.BOB;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -59,6 +61,7 @@ import seedu.address.model.application.Email;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
 import seedu.address.model.application.Role;
+import seedu.address.model.application.Status;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ApplicationBuilder;
 
@@ -161,6 +164,52 @@ public class AddCommandParserTest {
                 NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + DATE_DESC_AMY + ROLE_DESC_AMY + STATUS_DESC_AMY,
                 new AddCommand(expectedApplication));
+    }
+
+    @Test
+    public void parse_onlyRequiredFields_success() {
+        // only name and role
+        Application expectedApplication = new Application(
+                new Name(VALID_NAME_BOB), null, null, null,
+                Collections.emptySet(), null, new Role(VALID_ROLE_BOB), new Status(""), null);
+        assertParseSuccess(parser, NAME_DESC_BOB + ROLE_DESC_BOB,
+                new AddCommand(expectedApplication));
+    }
+
+    @Test
+    public void parse_invalidPrefix_failure() {
+        // z/ is not a valid prefix
+        assertParseFailure(parser,
+                NAME_DESC_BOB + ROLE_DESC_BOB + " z/somevalue",
+                "Invalid prefix(es):\n " + AddCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_invalidReminder_failure() {
+        // no date
+        assertParseFailure(parser,
+                NAME_DESC_BOB + ROLE_DESC_BOB + " u/Interview",
+                "Both reminder (u/) and reminder date (ud/) must be provided together.");
+        // no reminder description
+        assertParseFailure(parser,
+                NAME_DESC_BOB + ROLE_DESC_BOB + " ud/2024-01-01",
+                "Both reminder (u/) and reminder date (ud/) must be provided together.");
+    }
+
+    @Test
+    public void parse_preambleWhitespace_success() {
+        Application expectedApplication = new ApplicationBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        assertParseSuccess(parser,
+                PREAMBLE_WHITESPACE + NAME_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATE_DESC_BOB + STATUS_DESC_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedApplication));
+    }
+
+    @Test
+    public void parse_futureDateInvalid_failure() {
+        assertParseFailure(parser,
+                NAME_DESC_BOB + ROLE_DESC_BOB + INVALID_FUTUREDATE_DESC,
+                Date.MESSAGE_FUTURE_DATE);
     }
 
     @Test

@@ -1,0 +1,91 @@
+@startuml ToggleSequenceDiagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ToggleCommandParser" as ToggleCommandParser LOGIC_COLOR
+participant "t:ToggleCommand" as ToggleCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant "s:Storage" as Storage STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("toggle Y1S2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("toggle Y1S2")
+activate AddressBookParser
+
+create ToggleCommandParser
+AddressBookParser -> ToggleCommandParser
+activate ToggleCommandParser
+
+ToggleCommandParser --> AddressBookParser
+deactivate ToggleCommandParser
+
+AddressBookParser -> ToggleCommandParser : parse("Y1S2")
+activate ToggleCommandParser
+
+create ToggleCommand
+ToggleCommandParser -> ToggleCommand
+activate ToggleCommand
+
+ToggleCommand --> ToggleCommandParser
+deactivate ToggleCommand
+
+ToggleCommandParser --> AddressBookParser : t
+deactivate ToggleCommandParser
+ToggleCommandParser -[hidden]-> AddressBookParser
+destroy ToggleCommandParser
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+LogicManager -> ToggleCommand : execute(m)
+activate ToggleCommand
+
+create CommandResult
+ToggleCommand -> CommandResult
+activate CommandResult
+
+note right of CommandResult
+  CommandResult signals:
+  folderName="Y1S2", isCreateNew=false
+end note
+
+CommandResult --> ToggleCommand
+deactivate CommandResult
+
+ToggleCommand --> LogicManager : r
+deactivate ToggleCommand
+
+
+LogicManager -> Storage : toggleFolder("Y1S2")
+activate Storage
+
+Storage --> LogicManager : loadedBook
+deactivate Storage
+
+LogicManager -> Model : setAddressBook(loadedBook)
+activate Model
+
+Model --> LogicManager
+deactivate Model
+
+LogicManager -> Model : setAddressBookFilePath(path)
+activate Model
+
+Model --> LogicManager
+deactivate Model
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

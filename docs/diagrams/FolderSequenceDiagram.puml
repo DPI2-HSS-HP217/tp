@@ -1,0 +1,97 @@
+@startuml FolderSequenceDiagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FolderCommandParser" as FolderCommandParser LOGIC_COLOR
+participant "f:FolderCommand" as FolderCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant "s:Storage" as Storage STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("folder Y1S2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("folder Y1S2")
+activate AddressBookParser
+
+create FolderCommandParser
+AddressBookParser -> FolderCommandParser
+activate FolderCommandParser
+
+FolderCommandParser --> AddressBookParser
+deactivate FolderCommandParser
+
+AddressBookParser -> FolderCommandParser : parse("Y1S2")
+activate FolderCommandParser
+
+create FolderCommand
+FolderCommandParser -> FolderCommand
+activate FolderCommand
+
+FolderCommand --> FolderCommandParser
+deactivate FolderCommand
+
+FolderCommandParser --> AddressBookParser : f
+deactivate FolderCommandParser
+FolderCommandParser -[hidden]-> AddressBookParser
+destroy FolderCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FolderCommand : execute(m)
+activate FolderCommand
+
+create CommandResult
+FolderCommand -> CommandResult
+activate CommandResult
+
+note right of CommandResult
+  CommandResult signals:
+  folderName="Y1S2", isCreateNew=true
+end note
+
+CommandResult --> FolderCommand
+deactivate CommandResult
+
+FolderCommand --> LogicManager : r
+deactivate FolderCommand
+
+
+LogicManager -> Storage : createFolder("Y1S2")
+activate Storage
+
+Storage --> LogicManager
+deactivate Storage
+
+LogicManager -> Storage : readAddressBook()
+activate Storage
+
+Storage --> LogicManager : newBook
+deactivate Storage
+
+LogicManager -> Model : setAddressBook(newBook)
+activate Model
+
+Model --> LogicManager
+deactivate Model
+
+LogicManager -> Model : setAddressBookFilePath(path)
+activate Model
+
+Model --> LogicManager
+deactivate Model
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
