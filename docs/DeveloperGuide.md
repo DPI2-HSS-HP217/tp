@@ -549,11 +549,10 @@ but can also choose to add other optional details (date of application, contact 
 
 **MSS**
 
-1. User requests to edit a particular company application
+1. User requests to edit a particular application
 2. OfferFlow shows the company's current application details
-3. User edits application details such as adding reminder interviews and/or update application date
-4. User confirms all changes made to the application
-5. OfferFlow updates the application details to reflect the new changes if any
+3. User creates or edits both reminder description and reminder date
+4. OfferFlow updates the application details to reflect the new changes if any
 
    Use case ends.
 
@@ -565,13 +564,13 @@ but can also choose to add other optional details (date of application, contact 
 
       Use case ends.
 
-* 3a. The given interview date/time is invalid.
+* 3a. The given reminder description or reminder date is invalid.
 
    * 3a1. OfferFlow shows an error message.
 
       Use case resumes at step 3.
 
-* 3b. The given application date is invalid.
+* 3b. The reminder description or reminder date is not inputted.
 
    * 3b1. OfferFlow shows an error message.
 
