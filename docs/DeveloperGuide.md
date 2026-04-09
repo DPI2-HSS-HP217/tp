@@ -521,7 +521,8 @@ but can also choose to add other optional details (date of application, contact 
 2. OfferFlow shows the company's current application details
 3. User edits application details such as changing the email and/or phone number
 4. OfferFlow updates the company application details to reflect the new changes if any
-   Steps 3-4 are repeated until user is satisfied
+
+Steps 3-4 are repeated until user is satisfied
 5. User requests to finish editing the application
 
    Use case ends.
