@@ -125,7 +125,7 @@ Format: `add n/NAME r/ROLE ...`
 
 #### Expected Outcome:
 
-  ![Output](images/AddCommand.png)
+  <img src="images/AddCommand.png" width="500" height="400"/>
 
 
 ### Overwrite duplicate application : `overwrite`
@@ -135,7 +135,7 @@ Overwrites pre-existing application in OfferFlow that has the same name and role
 #### Example:
 * `add n/Google r/QA Engineer d/2025-12-12`
 
-  ![DuplicateApplication](images/DuplicateApplication.png)
+  <img src="images/DuplicateApplication.png" width="500" height="400"/>
 
 Format: `overwrite`
 
@@ -143,7 +143,7 @@ If you choose to overwrite, type `overwrite`. If not, continue using the app as 
 
 #### Expected Outcome (overwrite):
 
-  ![Overwrite](images/Overwrite.png)
+  <img src="images/Overwrite.png" width="500" height="400"/>
 
 
 ### Editing an application : `editmode`
@@ -170,7 +170,7 @@ Format:
 
 #### Expected outcome:
 
-  ![Edit](images/Edit.png)
+  <img src="images/Edit.png" width="500" height="400"/>
 
 ### Modifying Reminders: `Reminder`
 
@@ -189,7 +189,7 @@ Format: `u/DESCRIPTION ud/DATE`
 
 #### expected outcome:
 
-  ![Reminder](images/AddReminder.png)
+  <img src="images/AddReminder.png" width="500" height="400"/>
 
 * Creates a new upcoming interview Reminder on 12 December 2026.
 
@@ -242,7 +242,7 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 
 #### Expected Outcome
 
-  ![UpdateStatus](images/Update_Status.png)
+  <img src="images/Update_Status.png" width="500" height="400"/>
 
 <box type="warning" seamless>
 
@@ -274,7 +274,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 #### Expected Outcome:
 
-  ![result for 'find Google Meta'](images/Find.png)
+  <img src="images/Find.png" width="500" height="400"/>
 
 ### Listing all internship applications : `list`
 
@@ -329,7 +329,7 @@ Examples:
 
 #### Expected Outcome (eg: filter n/Google)
 
-  ![Filter](images/Filter.png)
+  <img src="images/Filter.png" width="500" height="400"/>
 
 
 ### Deleting an application : `delete`
@@ -419,7 +419,7 @@ Format: `folders`
 - All available OfferFlow folder names are displayed (one per line), sorted alphabetically.
 - By default, the OfferFlow folder named `addressbook` always exists
 
-  ![folders](images/folders.png)
+  <img src="images/folders.png" width="500" height="400"/>
 
 ### Clearing all entries : `clear`
 
@@ -439,7 +439,7 @@ Format: `exit`
 
 Shows you a message explaining how to access the help page.
 
-  ![help message](images/helpMessage.png)
+  <img src="images/helpMessage.png" width="500" height="400"/>
 
 Format: `help`
 
