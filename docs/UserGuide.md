@@ -27,6 +27,8 @@ If you can type fast, OfferFlow will manage your internship pipeline faster than
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Window users:** [Download](https://se-education.org/guides/tutorials/javaInstallationWindows.html) Java `17`
+   **Linux users:** [Download](https://se-education.org/guides/tutorials/javaInstallationLinux.html) Java `17`
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-F10-4/tp/releases).
 
@@ -63,21 +65,12 @@ If you can type fast, OfferFlow will manage your internship pipeline faster than
   e.g `n/NAME [t/TAG]` can be used as `n/Google t/java` or as `n/Google`.
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/java`, `t/java t/React` etc.
-* Parameters can be in any order.`<br>
+* Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear` and `overwrite`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
-
-
-### Viewing help : `help`
-
-Shows you a message explaining how to access the help page.
-
-  ![help message](images/helpMessage.png)
-
-Format: `help`
 
 ### Application
 
@@ -149,15 +142,6 @@ If you choose to overwrite, type `overwrite`. If not, continue using the app as 
   ![Overwrite](images/Overwrite.png)
 
 
-### Listing all internship applications : `list`
-
-Shows a list of all the internship applications you have added on OfferFlow.
-
-Format: `list`
-
-#### Expected Outcome:
-Shows a list of all the applications you have added into OfferFlow
-
 ### Editing an application : `editmode`
 
 Format:
@@ -165,7 +149,7 @@ Format:
 2. Type in any combination of at least one of the parameters below to edit the application
 3. `exitedit` to finish editing and exit the editing mode
 
-Notes:
+⚠️ Notes:
 * Enters editing mode for the application at the specified `INDEX` or with the specified `NAME` and `ROLE`. The index refers to the index number shown in the displayed application list. The index **must be a positive integer** 1, 2, 3, …
 * Once editing mode is entered, *all commands* except for *editexit* and *editing commands* will be disabled.
 * Edit the application in edit mode by typing in at least one of the optional fields.
@@ -232,8 +216,7 @@ Format: `rmr INDEX` or `rmr n/NAME r/ROLE`
 * `rmr 2` or `rmr n/Tiktok r/data analyst`
 
 #### expected outcome:
-
-  ![Remove](images/Remove.png)
+* Removes the reminder for the application at index 2 or the application with the specified company name and job role.
 
 ### Updating application status: `status`
 
@@ -310,6 +293,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
   ![result for 'find Google Meta'](images/Find.png)
 
+### Listing all internship applications : `list`
+
+Format: `list`
+
+#### Expected Outcome:
+Shows a list of all the applications you have added into OfferFlow
+
 ### Locating applications with upcoming deadlines: `upcoming`
 
 Helps you finds applications with upcoming reminders. Moreover, OfferFlow automatically
@@ -328,9 +318,7 @@ Format: `upcoming DAYS`
 * `upcoming 7` returns all applications with reminders due within 7 days of today, ergo within a week.
 
 #### Expected Outcome:
-
-  ![result for 'upcoming 7'](images/Upcoming.png)
-
+* Displays all the applications with reminders due within the specified number of DAYS
 
 ### Filtering applications: `filter`
 
@@ -481,6 +469,14 @@ Closes OfferFlow.
 
 Format: `exit`
 
+### Viewing help : `help`
+
+Shows you a message explaining how to access the help page.
+
+  ![help message](images/helpMessage.png)
+
+Format: `help`
+
 ### Saving the data
 
 OfferFlow data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -524,7 +520,6 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 |:-------|:-------|:--------|
 | **Add** | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...` | `add n/Google p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 r/Backend Developer s/interviewed t/java` |
 | **Overwrite** | `overwrite` | `overwrite` |
-| **Clear** | `clear` | `clear` |
 | **Delete** | `delete INDEX` or `delete n/NAME r/ROLE` | `delete 3` or `delete n/Google r/Backend Developer` |
 | **Edit** | `editmode INDEX` or `editmode n/NAME r/ROLE` | `editmode 1` then `a/Mapletree Business City II, Pasir Panjang area` then `editexit`  |
 | **Status** | `status n/COMPANY r/ROLE s/STATUS` | `status n/Tiktok r/Data Analyst s/Rejected` |
@@ -534,4 +529,5 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 | **Toggle** | `toggle FOLDER_NAME` | `toggle Y1S2` |
 | **List Folders** | `folders` | `folders` |
 | **List** | `list` | `list` |
+| **Clear** | `clear` | `clear` |
 | **Help** | `help` | `help` |
