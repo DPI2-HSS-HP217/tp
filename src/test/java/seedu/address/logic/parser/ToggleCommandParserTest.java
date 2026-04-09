@@ -44,4 +44,14 @@ public class ToggleCommandParserTest {
         assertParseSuccess(parser, "Y1-S2", new ToggleCommand("Y1-S2"));
     }
 
+    @Test
+    public void parse_validArgsWithUnderscore_returnsToggleCommand() {
+        assertParseSuccess(parser, "Y1_S2", new ToggleCommand("Y1_S2"));
+    }
+
+    @Test
+    public void parse_validArgsNumericOnly_returnsToggleCommand() {
+        assertParseSuccess(parser, "123", new ToggleCommand("123"));
+    }
+
 }

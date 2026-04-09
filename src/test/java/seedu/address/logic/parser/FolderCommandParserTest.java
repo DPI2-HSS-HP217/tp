@@ -44,4 +44,14 @@ public class FolderCommandParserTest {
         assertParseSuccess(parser, "Y1-S2", new FolderCommand("Y1-S2"));
     }
 
+    @Test
+    public void parse_validArgsWithUnderscore_returnsFolderCommand() {
+        assertParseSuccess(parser, "Y1_S2", new FolderCommand("Y1_S2"));
+    }
+
+    @Test
+    public void parse_validArgsNumericOnly_returnsFolderCommand() {
+        assertParseSuccess(parser, "123", new FolderCommand("123"));
+    }
+
 }

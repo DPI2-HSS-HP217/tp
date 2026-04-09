@@ -20,7 +20,7 @@ public class AddressBookEditingParser extends AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final Logger logger = LogsCenter.getLogger(AddressBookEditingParser.class);
 
     /**
      * Parses user input into command for execution. Overrides parent class

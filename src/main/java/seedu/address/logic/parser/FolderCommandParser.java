@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.FolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -12,6 +14,7 @@ public class FolderCommandParser implements Parser<FolderCommand> {
 
     @Override
     public FolderCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         String name = args.trim();
         if (name.isEmpty()) {
             throw new ParseException("Folder name cannot be empty.\n" + FolderCommand.MESSAGE_USAGE);
