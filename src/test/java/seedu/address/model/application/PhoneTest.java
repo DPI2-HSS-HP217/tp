@@ -42,7 +42,8 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("9312 1534")); // 1 space within digits (equivalence paritioning)
         assertTrue(Phone.isValidPhone("+65111111")); // + symbol allowed (equivalence paritioning)
         assertTrue(Phone.isValidPhone("+1 (123) 456-7890")); // hyphens, parentheses, plus and spaces allowed
-        assertTrue(Phone.isValidPhone("1234567890123456 7890123 45 67 2")); //exactly 32 character (boundary value analysis)
+         //exactly 32 character (boundary value analysis)
+        assertTrue(Phone.isValidPhone("1234567890123456 7890123 45 67 2"));
     }
 
     @Test
