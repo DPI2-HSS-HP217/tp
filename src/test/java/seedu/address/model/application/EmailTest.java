@@ -92,14 +92,14 @@ public class EmailTest {
         // hyphen in local part (equivalence paritioning)
         assertTrue(Email.isValidEmail("PeterJack-1190@example.com"));
 
-        // minimal (equivalence paritioning)
-        assertTrue(Email.isValidEmail("a@bc"));
+        // "." missing in domain (equivalence paritioning)
+        assertFalse(Email.isValidEmail("a@bc"));
 
         // alphabets only (equivalence paritioning)
-        assertTrue(Email.isValidEmail("test@localhost"));
+        assertTrue(Email.isValidEmail("test@localhost.com"));
 
         // numeric local part and domain name (equivalence paritioning)
-        assertTrue(Email.isValidEmail("123@145"));
+        assertTrue(Email.isValidEmail("123@145.com"));
 
         // mixture of alphanumeric and special characters (equivalence paritioning)
         assertTrue(Email.isValidEmail("a1+be.d@example1.com"));
@@ -116,10 +116,10 @@ public class EmailTest {
 
     @Test
     public void equals() {
-        Email email = new Email("valid@email");
+        Email email = new Email("valid@email.com");
 
         // same values -> returns true
-        assertTrue(email.equals(new Email("valid@email")));
+        assertTrue(email.equals(new Email("valid@email.com")));
 
         // same object -> returns true
         assertTrue(email.equals(email));
@@ -131,6 +131,6 @@ public class EmailTest {
         assertFalse(email.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(email.equals(new Email("other.valid@email")));
+        assertFalse(email.equals(new Email("other.valid@email.com")));
     }
 }
