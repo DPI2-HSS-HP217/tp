@@ -472,7 +472,7 @@ but can also choose to add other optional details (date of application, contact 
 
       * 1a1. OfferFlow shows an error message stating that another application with the same name and role is already present
 
-      * 1a2. User <u>chooses to overwrite the previously added application with the new application. (UC5)</u>
+      * 1a2. User <u>chooses to overwrite the previously added application with the new application. (UC2)</u>
 
          Use case ends.
 
