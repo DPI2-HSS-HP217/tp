@@ -2,11 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
@@ -43,8 +45,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = "Edits the details of the application identified "
             + "by the index number used in the displayed application list / combination of "
             + "Company Name and Job Role. Existing values will be overwritten by the input values.\n"
-            + "Parameters: [" + PREFIX_NAME + "NAME] [" + PREFIX_PHONE + "PHONE] ["
-            + PREFIX_EMAIL + "EMAIL] [" + PREFIX_ADDRESS + "ADDRESS] [" + PREFIX_TAG + "TAG]...\n"
+            + "Parameters: [" + PREFIX_NAME + "COMPANY NAME] [" + PREFIX_PHONE + "PHONE] ["
+            + PREFIX_ROLE + "ROLE] [" + PREFIX_DATE + "DATE] ["
+            + PREFIX_EMAIL + "EMAIL] [" + PREFIX_ADDRESS + "ADDRESS] [" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_REMINDER + "REMINDER] " + "[" + PREFIX_REMINDER_DATE + "REMINDER DATE]\n"
             + "Note that [" + PREFIX_REMINDER + " REMINDER] must be paired with ["
             + PREFIX_REMINDER_DATE + " REMINDER_DATE]. \n"
             + "Example: " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com"
