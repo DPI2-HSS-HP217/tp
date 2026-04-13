@@ -40,6 +40,7 @@ public class RemoveReminderCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/Google r/CEO";
 
     public static final String MESSAGE_REMOVE_REMINDER_SUCCESS = "Removed Reminder: %1$s";
+    public static final String NO_REMINDER_ERROR_MSG = "Target Application has no reminder!";
     private final Logger logger = LogsCenter.getLogger(RemoveReminderCommand.class);
 
     private final boolean isIndexDelete;
@@ -81,6 +82,9 @@ public class RemoveReminderCommand extends Command {
         } else {
             logger.info("Application Name and Role reminder removal");
             applicationToEdit = getTargetApplicationByApplication(model);
+        }
+        if (!applicationToEdit.hasReminder()) {
+            throw new CommandException(NO_REMINDER_ERROR_MSG);
         }
         EditCommand.EditApplicationDescriptor editApplicationDescriptor = new EditCommand.EditApplicationDescriptor();
         Application removedReminder = createEditedApplication(applicationToEdit, editApplicationDescriptor);

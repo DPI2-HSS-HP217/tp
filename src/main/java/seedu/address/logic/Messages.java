@@ -15,9 +15,9 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX =
-            "The application index provided is invalid";
+            "Application index is invalid. Please select a valid index from the list.";
     public static final String MESSAGE_INVALID_APPLICATION_IDENTIFIER =
-            "The application name and role provided is invalid";
+            "No application found with the given name and role.";
     public static final String MESSAGE_APPLICATIONS_LISTED_OVERVIEW = "%1$d applications listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
