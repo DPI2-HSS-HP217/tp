@@ -47,7 +47,8 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "EMAIL] [" + PREFIX_ADDRESS + "ADDRESS] [" + PREFIX_TAG + "TAG]...\n"
             + "Note that [" + PREFIX_REMINDER + " REMINDER] must be paired with ["
             + PREFIX_REMINDER_DATE + " REMINDER_DATE]. \n"
-            + "Example: " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
+            + "Example: " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com"
+            + "\nTo exit editing mode, enter \"editexit\".";
 
     public static final String MESSAGE_EDIT_APPLICATION_SUCCESS = "Edited Application: %1$s. \nTo exit editing mode, "
                                     + "enter \"editexit\".";
