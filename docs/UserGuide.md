@@ -242,9 +242,15 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 
 </box>
 
-⚠️ Note:
+<box type="info" seamless>
+
+**⚠️ Note:**
 * Application with the name and role must exist in order to update status
 * Status to change to must be a valid status (see below)
+* Default status is `Interested` if no status provided
+  (eg: `status n/google r/software engineer s/` changes the application status to `Interested`)
+
+</box>
 
 #### Valid Statuses
 | Status         | When to use                                                                     |
