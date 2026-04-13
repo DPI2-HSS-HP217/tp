@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.function.Predicate;
 
+import javafx.collections.FXCollections;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -206,6 +207,12 @@ public class AddCommandTest {
         @Override
         public void updateFilteredApplicationList(Predicate<Application> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        // placeholder
+        @Override
+        public boolean appNotInFullList(Predicate<Application> predicate) {
+            return true;
         }
     }
 
