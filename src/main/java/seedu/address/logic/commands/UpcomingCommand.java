@@ -12,7 +12,7 @@ import seedu.address.model.application.ReminderWithinOffsetPredicate;
 public class UpcomingCommand extends Command {
 
     public static final int MIN_OFFSET = 0;
-    public static final int MAX_OFFSET = 30;
+    public static final int MAX_OFFSET = 31;
 
     public static final String COMMAND_WORD = "upcoming";
 
