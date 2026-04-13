@@ -66,7 +66,7 @@ their internship pipeline faster than traditional GUI-based tools.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Google`.
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/Google t/java` or as `n/Google`.
+  e.g `n/NAME r/ROLE [t/TAG]` can be used as `n/Google r/Software Engineer t/java` or as `n/Google r/Software Engineer`.
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/java`, `t/java t/React` etc.
 * Parameters can be in any order.<br>
@@ -110,12 +110,19 @@ Format: `add n/NAME r/ROLE ...`
 
 </box>
 
-⚠️ Note:
+<box type="info" seamless>
+
+**⚠️ Note:**
 * name and role is case insensitive
+* name does not allow some special character like /
 * Emails should be of the format `local-part@domain`
-* Applied dates must use `YYYY-MM-DD` and cannot be a future date
+* If applied dates must use `YYYY-MM-DD` and cannot be a future date
 * Reminder can only be added if both reminder name (`u/`) and reminder date (`ud/`) is provided
 * Reminder due today or earlier will be displayed in red, others will be displayed in orange
+* Multiple tags allowed
+* Default status is `Interested`
+
+</box>
 
 #### Examples:
 * `add n/Meta r/ML engineer`
@@ -141,7 +148,13 @@ Overwrites pre-existing application in OfferFlow that has the same name and role
 
 Format: `overwrite`
 
-If you choose to overwrite, type `overwrite`. If not, continue using the app as per normal and the new duplication application you were trying to add will be automatically discarded
+If you choose to overwrite, type `overwrite`. If not, continue using the app as per normal and the new duplication application you were trying to add will be **automatically discarded**
+
+<box type="warning" seamless>
+
+**Caution:** If you do not choose to `overwrite`, the duplication application gets automatically discarded and this action is irreversible
+
+</box>
 
 #### Expected Outcome (overwrite):
 
@@ -163,6 +176,14 @@ Format:
 * When editing tags, the existing tags of the application will be removed i.e adding of tags is not cumulative.
 * You can remove all the application’s tags by typing `t/` without
   specifying any tags after it.
+
+<box type="tip" seamless>
+
+**Tip:**
+* you can remove and add tags add the same time by typing `t/` to remove the tag and `t/TAG` to specific any tag you want to add
+* you can remove any optional fields by simply typing the prefix without any parameter (ie: typing `a/` removes the current address)
+
+</box>
 
 #### Examples:
 * `editmode 1` or `editmode n/Google r/Software Engineer`
@@ -481,7 +502,7 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 
 | Action              | Format                                                                                             | Example                                                                                                                          |
 |:--------------------|:---------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...`                           | `add n/Google p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 r/Backend Developer s/interviewed t/java` |
+| **Add**             | `add n/NAME r/ROLE p/[PHONE] e/[EMAIL] a/[ADDRESS] d/[DATE] s/[STATUS] t/[TAG...] u/[REMINDER] ud/[DATE]`                           | `add n/Google r/Backend Developer p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 s/interview t/java` |
 | **Overwrite**       | `overwrite`                                                                                        | `overwrite`                                                                                                                      |
 | **Delete**          | `delete INDEX` or `delete n/NAME r/ROLE`                                                           | `delete 3` or `delete n/Google r/Backend Developer`                                                                              |
 | **Enter Edit**      | `editmode INDEX` or `editmode n/NAME r/ROLE`                                                       | `editmode 1` or `editmode n/Nus r/System Engineer`                                                                               |
